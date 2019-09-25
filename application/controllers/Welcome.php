@@ -20,10 +20,27 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('home');
 	}
-	public function prueba()
-	{
-		echo base_url();
+
+	public function dashboard(){
+
+		$this->load->view('template/main_template');
 	}
+
+	public function login(){
+
+		$this->load->view('login');
+	}
+
+	public function registro(){
+
+		$this->load->view('registro');
+	}
+
+	public function reestablecer_contraseña(){
+
+		$this->load->view('reestablecer_pass');
+	}
+	
 }
