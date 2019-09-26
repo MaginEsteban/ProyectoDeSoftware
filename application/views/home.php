@@ -62,7 +62,7 @@
         </div>
         <div class="col-lg-8 align-self-baseline">
           <p class="text-white-75 font-weight-light mb-5">Sistema de gestion de tickets, comedores, menús, turnos, programaciones y todo lo relacionado con la administracion de los comedores universiarios de la UNRN (Universidad Nacional de Rio Negro)</p>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="<?= base_url('welcome')?>/login">Ingresar</a>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="<?= base_url('login')?>">Ingresar</a>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
           <h2 class="text-white mt-0">Ya está aqui!</h2>
           <hr class="divider light my-4">
           <p class="text-white-50 mb-4">El sistema que todos los estudiantes, docente y no docentes de la Universidad Nacional de Rio Negro estaban esperando!</p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="<?= base_url('welcome')?>/registro">Registrarse!</a>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="<?= base_url('register')?>">Registrarse!</a>
         </div>
       </div>
     </div>
