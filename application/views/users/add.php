@@ -17,23 +17,42 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-8 mx-auto card">
+            <div class="col-6 mx-auto card">
+
                 <form class="m-2">
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Ingrese su nombre...">
+                        
+                    </div>
+
+                    <!-- Apellido -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Apellido </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Ingrese su apellido...">
+                       
+                    </div>
+
+                    <!-- Email -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email </label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese su email...">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
+                            placeholder="Ingrese su email...">  
                     </div>
+
+                    
                     <div class="form-group">
-                        <label for="exampleInputPassword1"></label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="exampleFormControlSelect1">Rol en la Universidad</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>NO-DOCENTE</option>
+                            <option>DOCENTE</option>
+                            <option>ESTUDIANTE</option>
+                        </select>
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+                   
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
@@ -44,7 +63,7 @@
 
     </section>
 </div>
-    <?php
+<?php
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');
     $this->load->view('dashboard/footer');

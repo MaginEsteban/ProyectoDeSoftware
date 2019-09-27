@@ -32,17 +32,14 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
          <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Usuarios</span>
+          <a href="#"><i class="fa fa-user-circle-o"></i> <span>Usuarios</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php base_url("user/add"); ?>"><i class="fa fa-remove"></i> <span>Agregar Usuario</span></a></li>
-            <li class="active"><a href="#"><i class="fa fa-remove"></i> <span>Eliminar Usuario</span></a></li>
-            <li class="active"><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Actualizar Informacion de usuario</span></a></li>
+            <li class="active"><a href="<?php base_url("user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
             <li class="active"><a href="<?php base_url("user/list"); ?>" ><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
-
           </ul>
         </li>
 
