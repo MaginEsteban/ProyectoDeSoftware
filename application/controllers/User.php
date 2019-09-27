@@ -18,12 +18,9 @@ class User extends CI_Controller {
     public function list()
 	{
         $data = $this->user_model->findAll();
-        if( isset( $data ) ){
-            echo "error";
-        }
-        else{
-            $this->load->view('users/list',$data);
-        }
+        
+        $this->load->view('users/list',$data);
+        
     }
 
 }
