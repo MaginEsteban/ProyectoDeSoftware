@@ -1,13 +1,5 @@
-<?php   $this->load->view('dashboard/header');  ?>
 
-<!--------------------------
-     | Your Page Content Here |
-     -------------------------->
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-
-    <a href="<?= site_url('user/add'); ?>" role="button" class="btn btn-success m-3">Agregar</a>
+    <a class="user-menu" href="<?= base_url('index.php/user/add'); ?>" class="menu-users btn btn-success m-3">Agregar</a>
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
@@ -47,9 +39,3 @@
 
         </div>
     </section>
-</div>
-<?php
-    $this->load->view('dashboard/aside');
-    $this->load->view('dashboard/sidebar');
-    $this->load->view('dashboard/footer');
-?>

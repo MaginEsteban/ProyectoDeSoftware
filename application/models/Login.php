@@ -10,6 +10,7 @@ class Login extends CI_Model{
     }
     
     public function find(){
+      
         return $this->db->get('persona');
     }
 

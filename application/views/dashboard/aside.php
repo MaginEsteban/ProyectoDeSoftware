@@ -38,8 +38,8 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php base_url("user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
-            <li class="active"><a href="<?php base_url("user/list"); ?>" ><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("index.php/user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("index.php/user/list"); ?>" ><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
           </ul>
         </li>
 

@@ -21,6 +21,8 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
+<script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script>
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

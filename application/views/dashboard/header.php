@@ -67,4 +67,10 @@
 </header>
 
 
+  <!-- Contenido dinamico -->
+<div id="content" class="content-wrapper">
+
+</div>
+
+
    
