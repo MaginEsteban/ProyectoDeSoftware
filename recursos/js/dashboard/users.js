@@ -1,11 +1,12 @@
 $('.user-menu').on('click',function(event) {
     
     event.preventDefault();
+    
+    var $menu = $(this);
 
-    var $userAdd = $(this);
-
-    var url = $userAdd.attr("href");
+    var url = $menu.attr("href");
    
+    
     //realiza el request
     var sendData = $.post(url);
 
@@ -13,7 +14,7 @@ $('.user-menu').on('click',function(event) {
     sendData.done(function(html) {
            
         $('#content').empty().append(html);
-                
+        history.pushState({},'',url);        
     });
 });
 
