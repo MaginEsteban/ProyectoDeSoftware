@@ -8,13 +8,15 @@ $('.user-menu').on('click',function(event) {
    
     
     //realiza el request
-    var sendData = $.post(url);
+    var sendData = $.get(url);
 
     //muesta el resultado
     sendData.done(function(html) {
            
         $('#content').empty().append(html);
-        history.pushState({},'',url);        
+        
+        //utilizado para manupular las url dinamicamente
+        //history.pushState({},'',url);        
     });
 });
 

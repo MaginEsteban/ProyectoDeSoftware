@@ -1,5 +1,4 @@
 
-    <a href="<?= base_url("index.php/user/add"); ?>" class="user-menu btn btn-success m-3">Agregar</a>
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
