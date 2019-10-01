@@ -1,4 +1,6 @@
-
+<?php   
+    $this->load->view('dashboard/header');  
+?>
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
@@ -38,3 +40,9 @@
 
         </div>
     </section>
+    </div>
+<?php   
+    $this->load->view('dashboard/aside');
+    $this->load->view('dashboard/sidebar');
+    $this->load->view('dashboard/footer');
+?>
