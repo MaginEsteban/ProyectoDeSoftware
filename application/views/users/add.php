@@ -15,12 +15,12 @@
         <div class="row">
             <div class="col-6 mx-auto card">
 
-                <form class="m-2">
+                <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese su nombre...">
+                            placeholder="Ingrese su nombre..." name="nombre">
                         
                     </div>
 

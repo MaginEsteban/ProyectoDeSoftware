@@ -9,6 +9,7 @@ class User extends Security {
     public function __construct(){
         parent::__construct();
         $this->load->helper('url_helper');
+        $this->load->model('User_model');
     }
 
     /**
@@ -20,14 +21,8 @@ class User extends Security {
         $this->load->view('users/add');
     }
 
-    /**
-     * Lista todos los usuarios en el sistema
-    */
-    public function list()
-	{
-        
+    public function list(){
         $this->load->view('users/list');
-        
     }
 
     /**
@@ -36,4 +31,15 @@ class User extends Security {
     public function restore_password(){
         $this->load->view('users/restore_password');
     }
+    /*
+     public function store(){
+
+        $name_user = $this->input->post('nombre');
+        $this->User_model->insert(name);
+        
+     }
+
+*/
+
+
 }
