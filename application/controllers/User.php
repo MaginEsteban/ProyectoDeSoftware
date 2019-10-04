@@ -1,8 +1,11 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'controllers/Security.php'; 
 
-class User extends CI_Controller {
+class User extends Security {
+
+
 
     public function __construct(){
         parent::__construct();
@@ -12,7 +15,8 @@ class User extends CI_Controller {
    
     public function add()
 	{
-		$this->load->view('users/add');
+        
+        $this->load->view('users/add');
     }
 
     public function list(){
