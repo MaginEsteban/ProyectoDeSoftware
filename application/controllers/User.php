@@ -7,18 +7,27 @@ class User extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->helper('url_helper');
+        $this->load->model('User_model');
     }
-
+   
     public function add()
 	{
 		$this->load->view('users/add');
     }
 
-    public function list()
-	{
-        
+    public function list(){
         $this->load->view('users/list');
-        
     }
+
+    /*
+     public function store(){
+
+        $name_user = $this->input->post('nombre');
+        $this->User_model->insert(name);
+        
+     }
+
+*/
+
 
 }
