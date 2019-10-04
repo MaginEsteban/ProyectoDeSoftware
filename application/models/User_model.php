@@ -5,6 +5,7 @@ class User_model extends CI_Model{
    
     public function __construct()
     {
+        $this->load->database();
         $this->load->helper('url');
     }
     
@@ -50,7 +51,7 @@ class User_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('persona');
         $this->db->where(array('id_persona'=>$id));
-        $query =this->db->get();
+        $query = $this->db->get();
         return $query->result();
     }
       

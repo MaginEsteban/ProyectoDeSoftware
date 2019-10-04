@@ -4,9 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . 'controllers/Security.php'; 
 
 class User extends Security {
-
-
-
+    
     public function __construct(){
         parent::__construct();
         $this->load->helper('url_helper');
@@ -23,7 +21,7 @@ class User extends Security {
         $this->load->view('users/list');
     }
 
-    /*
+    
      public function store(){
 
         $name_user = $this->input->post('nombre');
@@ -31,7 +29,7 @@ class User extends Security {
         
      }
 
-*/
+
 
 
 }
