@@ -16,9 +16,7 @@ class User extends CI_Controller {
 
     public function list()
 	{
-        
         $this->load->view('users/list');
-        
     }
 
 }
