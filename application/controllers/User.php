@@ -21,12 +21,8 @@ class User extends Security {
         $this->load->view('users/add');
     }
 
-<<<<<<< HEAD
     public function list()
 	{
-=======
-    public function list(){
->>>>>>> ec580d8d50eb7714c178064c47b2ee0e9954372a
         $this->load->view('users/list');
     }
 
