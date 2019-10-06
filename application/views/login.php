@@ -48,16 +48,16 @@
                     </div>
                 </div>
 
-                <form id="form" action="<?= base_url("index.php/login/check") ?>" class="login100-form validate-form">
+                <form id="form" action="<?= base_url("login/check") ?>" class="login100-form validate-form">
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Email o username requerido">
                         <span class="label-input100">Nombre de usuario</span>
-                        <input class="input100" type="text" name="username" placeholder="Ingrese su email o username">
+                        <input class="input100" type="text" name="name_user" placeholder="Ingrese su email o username">
                         <span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Contraseña requerida">
                         <span class="label-input100">Contraseña</span>
-                        <input class="input100" type="password" name="pass" placeholder="Ingrese su contraseña">
+                        <input class="input100" type="password" name="pass_user" placeholder="Ingrese su contraseña">
                         <span class="focus-input100"></span>
                     </div>
 
@@ -106,36 +106,39 @@
 
 
     <script>
-		$("#form").submit(function(event) {
-			event.preventDefault();
+    $("#form").submit(function(event) {
+        event.preventDefault();
 
-			//informacion del formulario
-			var $form = $(this);
-			var dataForm = $form.serialize();
-			var url = $form.attr("action");
+        //informacion del formulario
+        var $form = $(this);
+        
+        //url control
+        var url = $form.attr("action");
 
-			console.log(url);
-			//realiza el request
-			var sendData = $.post(url, {
-				datos: dataForm
-			});
+        //realiza el request
+        var sendData = $.ajax({
+            url: url,
+            data: $form.serialize(),
+            type: 'post',
+            success: function(response) {
 
-			//muesta el resultado
-			sendData.done(function(response) {
-				console.log("ingresa");
-				//se realiza la redirecion
-				if (response.redirecTo) {
-					location.href = response.url;
-				} else {
-					$('#resultMessage').empty().show();
-					$('#resultMessage').append(response.message);
-					$('#resultMessage').delay(3500).hide(600);
-					//limpia los campos
-					$form[0].reset();
-				}
-			});
-		});
-	</script>
+                if (response.redirecTo) {
+                    //redireccion
+                   location.href = response.url;
+                 } else {
+                     //muestra el mensaje de error
+                     $('#resultMessage').empty().show();
+                     $('#resultMessage').append(response.message);
+                     $('#resultMessage').delay(3500).hide(600);
+                     //limpia los campos
+                     $form[0].reset();
+                 }
+            }
+        });
+
+       
+    });
+    </script>
 </body>
 
 </html>
