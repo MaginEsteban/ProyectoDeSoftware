@@ -16,7 +16,7 @@ class Comedor extends CI_Controller {
 		$this->load->view('comedores/add', $data);
     }
 
-    public function list()
+    public function listing()
 	{
         $this->load->view('comedores/list');
 

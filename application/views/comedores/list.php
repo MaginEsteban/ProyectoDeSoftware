@@ -18,7 +18,6 @@
                             <th scope="row">1</th>
                             <td>Mark</td>
                             <td>Otto</td>
-                            <td>@mdo</td>
                             <td>
                                 <a href="" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 

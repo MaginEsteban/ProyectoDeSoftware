@@ -40,9 +40,9 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a class="user-menu" href="<?= base_url("user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("user/list"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("user/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
             <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("comedor/list"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
           </ul>
         </li>
 
