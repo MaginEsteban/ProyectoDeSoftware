@@ -21,7 +21,8 @@ class User extends Security {
         $this->load->view('users/add');
     }
 
-    public function list(){
+    public function listing()
+	{
         $this->load->view('users/list');
     }
 
