@@ -14,14 +14,23 @@ class Comedor extends Security {
     public function add()
 	{
         $data['ciudades'] = $this->Comedor_model->findAllCiudades();
-      
         $this->load->view('comedores/add',$data);
     }
 
     public function listing()
 	{
-        $data = $this->Comedor_model->findAll();
+        $data['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('comedores/list',$data);
+    }
+
+    public function crearComedor(){
+        $nombreCiudad = $this->input->post('nombre');
+        $idCiudad = $this->input->post('ciudades');
+        $this->Comedor_model->insert($nombreCiudad,$idCiudad);
+    }
+
+    public function modificarComedor(){
+        
 
     }
 
