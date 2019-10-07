@@ -41,9 +41,18 @@
           <ul class="treeview-menu">
             <li class="active"><a class="user-menu" href="<?= base_url("user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
             <li class="active"><a class="user-menu" href="<?= base_url("user/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
+            
+          </ul>
+          <a href="#"><i class="fa fa-home"></i> <span>Comedores</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
             <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
           </ul>
+          
         </li>
 
         <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-link"></i> <span>Reestablecer Contraseña</span></a></li>

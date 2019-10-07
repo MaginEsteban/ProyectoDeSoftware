@@ -1,15 +1,5 @@
 <?php   
     $this->load->view('dashboard/header');  
-
-    $mysqli = new mysqli("localhost","root","","sistema_ticket"); 
-	
-	if(mysqli_connect_errno()){
-		echo 'Conexion Fallida : ', mysqli_connect_error();
-		exit();
-	}
-
-    $query = "SELECT * FROM ciudad";
-	$resultado=$mysqli->query($query);
 ?>
 
     <!-- Content Header (Page header) -->
@@ -25,23 +15,26 @@
         <div class="row">
             <div class="col-6 mx-auto card">
 
-                <form action="<?= base_url('comedores/add'); ?>" method="POST" class="m-2">
+                <form action="<?= base_url('comedor/add'); ?>" method="POST" class="m-2">
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese el nombre de la ciudad..." name="nombre">
+                            placeholder="Ingrese el nombre del comedor..." name="nombre">
                         
                     </div>
 
                     <!-- Ciudad -->
-                    <div>Selecciona Ciudad: <select name="cbx_ciudad" id="cbx_ciudad">
-				        <option value="0">Seleccionar Ciudad</option>
-				        <?php while($row = $resultado->fetch_assoc()) { ?>
-					    <option value="<?php echo $row['id_ciudad']; ?>"><?php echo $row['ciudad']; ?></option>
-				        <?php } ?>
-			        </select></div>
-                   
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Ciudad</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                        <option value="0">...</option>
+                            <?php foreach ($data as $row): ?>
+                            <option value="<?php echo $row['id_ciudad']; ?>"><?php echo $row['nombre']; ?></option> 
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
@@ -53,6 +46,7 @@
     </section>
 
     </div>
+
 <?php   
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');

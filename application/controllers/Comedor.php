@@ -1,24 +1,27 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'controllers/Security.php'; 
 
-class Comedor extends CI_Controller {
+class Comedor extends Security {
 
     public function __construct(){
         parent::__construct();
-        
-        $this->load->helper('url_helper');
         $this->load->model('Comedor_model');
+        $this->load->helper('url_helper');
     }
 
     public function add()
 	{
-		$this->load->view('comedores/add', $data);
+        $data['ciudades'] = $this->Comedor_model->findAllCiudades();
+      
+        $this->load->view('comedores/add',$data);
     }
 
     public function listing()
 	{
-        $this->load->view('comedores/list');
+        $data = $this->Comedor_model->findAll();
+        $this->load->view('comedores/list',$data);
 
     }
 

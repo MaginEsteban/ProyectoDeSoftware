@@ -41,6 +41,17 @@ class Comedor_model extends CI_Model {
         return $query->result();
     }
 
+    public function findAllCiudades(){
+
+        $this->db->select('*');
+        $this->db->from('ciudad');
+        $this->db->join('sede', 'ciudad.id_sede = sede.id_sede');
+
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+    
     private function find_by_id_ciudad($id){
         $this->db->select('*');
         $this->db->from('ciudad');

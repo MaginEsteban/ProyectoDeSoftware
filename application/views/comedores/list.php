@@ -11,6 +11,7 @@
                             <th scope="col">Nro Comedor</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Ciudad</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
