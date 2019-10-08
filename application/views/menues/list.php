@@ -5,28 +5,31 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-10 mx-auto">
-                <table class="table table-striped"> Aqui se encuentran todos los comedores disponibles
+                <table class="table table-striped"> Aqui se encuentran todos los menues disponibles
                     <thead class="">
                         <tr class="bg-info">
-                            <th scope="col">Nro Comedor</th>
+                            <th scope="col">Nro Menu</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Ciudad</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Tipo de Menu</th>
+                            <th scope="col">Comedor</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($comedores as $comedor): ?>
+                    <?php foreach ($menues as $menu): ?>
                         <tr>
-                            <td scope="row"><?php echo $comedor->id_comedor; ?></th>
-                            <td scope="row"><?php echo $comedor->nombre_comedor; ?></th>
-                            <td scope="row"><?php echo $comedor->nombre; ?></th>
+                            <td scope="row"><?php echo $menu->id_menu; ?></th>
+                            <td scope="row"><?php echo $menu->nombre; ?></th>
+                            <td scope="row"><?php echo $menu->descripcion; ?></th>
+                            <td scope="row"><?php echo $menu->nombre_tipo_menu; ?></th>
+                            <td scope="row"><?php echo $menu->nombre_comedor; ?></th>
                             <td>
-                                <!-- modificar comedor -->
-                                <a href="<?= base_url('comedor/edit/').$comedor->id_comedor; ?>" role="button" class="btn btn-primary m-1">
+                                <a href="" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
-                                <!-- eliminar comedor -->
-                                <a href="<?= base_url('comedor/delete/').$comedor->id_comedor; ?>" role="button" class="btn btn-danger m-1">
+
+                                <a href="" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
