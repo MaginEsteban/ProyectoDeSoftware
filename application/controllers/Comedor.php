@@ -13,6 +13,10 @@ class Comedor extends Security {
 
     public function add()
 	{
+        $data = $this->Comedor_model->findAllCiudades();
+      
+        echo $data;
+        //$this->load->view('comedores/add',$data);
         $data['ciudades'] = $this->Comedor_model->findAllCiudades();
         $this->load->view('comedores/add',$data);
     }

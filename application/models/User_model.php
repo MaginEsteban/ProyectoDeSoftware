@@ -54,7 +54,46 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+    /**
+     * Permite reestablecer la contraseña
+    */
+    public function update_password(){
+        $pass_act =  $this->input->post('pass_act');
+        $pass_act2 =  $this->input->post('pass_act2');
+        $nro_legajo = $this->input->post('nro_legajo');
+        $email =  $this->input->post('email');
+        
+        //compara si las contraseña ingresadas son iguales
+        if(! ( $pass_act == $pass_act2 ) )
+            return false;
+
+        $data = array(
+            'email' => $email,
+            'contraseña' => $pass_act,
+        );
+        //busca la persona en base a al legajo
+      $id_persona = $this->find_person_by_legajo($nro_legajo);
+
+        $this->db->where(   array(
+            'id_persona' => $id_persona,
+            'email' => $email ) );
+
+        $this->db->update('usuario', $data );
+
+        if($this->db->affected_rows() == 0){
+            return false;
+
+        }
+        else
+            return true;
+    }
       
+     private function find_person_by_legajo($legajo){
+         $persona = $this->db->get_where('persona',array('numero_legajo' => $legajo))->row(); 
+         return $persona->id_persona;
+     }
+
 
 }
 

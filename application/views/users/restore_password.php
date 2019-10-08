@@ -17,50 +17,49 @@
             <div class="row">
 
                 <div class="col-md-6 mx-auto">
-                    <h2 class="font-weight-light">Forgot your password?</h2>
-                    Not to worry. Just enter your email address below and we'll send you an instruction email for
-                    recovery.
-                    <form target="_blank" action="https://www.totoprayogo.com" class="mt-3">
+                    <h2 class="font-weight-light">Reestablecer Contraseña</h2>
+                
+                    <form  action="<?=base_url('user/check_password'); ?>" class="mt-3" method="POST">
 
+                        <!-- Legajo del alumno -->
+                        <div class="form-group">
+                        <label for="">Legajo</label>
+                        <input type="text" name="nro_legajo" id="" class="form-control" placeholder="Ingrese el legajo...">
+                        </div>
+                        
                         <div class="form-group">
                             <label for="input_email">Email</label>
                             <input id="input_email" class="form-control" type="email"
-                                placeholder="Ingresa tu email..." />
+                                placeholder="Ingresa tu email..." name="email" />
                             <small id="emailHelp" class="form-text text-muted">El email ingresado lo utilizaremos para
                                 validar tu cuenta...</small>
-                        </div>
-
-                        <!-- Contraseña Actual -->
-                        <div class="form-group">
-                            <label for="pass_act">Contraseña Actual</label>
-                            <input type="password" class="form-control" name="" id="pass_act"
-                                placeholder="Ingrese su contraseña actual...">
                         </div>
 
                         <!-- Contraseña Nueva -->
                         <div class="form-group">
                             <label for="pass_new">Contraseña nueva</label>
-                            <input type="password" class="form-control" name="" id="pass_new"
+                            <input type="password" class="form-control" name="pass_act" id="pass_new"
                                 placeholder="Ingrese su contraseña nueva...">
                         </div>
 
                         <div class="form-group">
                             <label for="">Confirmar Contraseña nueva</label>
-                            <input type="password" class="form-control" name="" id=""
+                            <input type="password" class="form-control" name="pass_act2" id=""
                                 placeholder="Ingrese su contraseña nueva...">
                         </div>
 
                         <div class="text-right my-3">
-                            <button type="submit" class="btn btn-lg btn-success">Reset Password</button>
+                            <button type="submit" class="btn btn-lg btn-success">Cambiar Contraseña</button>
                         </div>
                     </form>
-
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if(isset($mensaje)): ?>
+                        <div class="alert <?=  $class; ?> alert-dismissible fade show" role="alert">
+                            <p> <?= $mensaje; ?></p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

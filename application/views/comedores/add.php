@@ -28,6 +28,7 @@
                     <!-- Ciudad -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Ciudad</label>
+                       
                         <select class="form-control" id="exampleFormControlSelect1" name="ciudades">
                         <option value="0">...</option>
                             <?php foreach ($ciudades as $ciudad): ?>
@@ -38,7 +39,9 @@
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
+                <?php foreach ($cuidades as $cuidad): ?>
+                    <?php echo $cuidad->nombre; ?>
+                <?php endforeach; ?>
             </div>
 
         </div>
