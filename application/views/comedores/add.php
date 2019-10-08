@@ -27,17 +27,14 @@
                     <!-- Ciudad -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Ciudad</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="0">...</option>
-                            <?php foreach ($data as $row): ?>
-                            <option value="<?php echo $row['id_ciudad']; ?>"><?php echo $row['nombre']; ?></option> 
-                            <?php endforeach; ?>
-                        </select>
+                       
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-
+                <?php foreach ($cuidades as $cuidad): ?>
+                    <?php echo $cuidad->nombre; ?>
+                <?php endforeach; ?>
             </div>
 
         </div>
