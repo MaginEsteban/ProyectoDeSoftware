@@ -21,14 +21,14 @@ class User extends Security {
         $this->load->view('users/list');
     }
 
-    
+    /*
      public function store(){
 
         $name_user = $this->input->post('nombre');
-        $this->User_model->insert(name);
+        $this->User_model->insert($name_user);
         
      }
-
+     */
 
 
 

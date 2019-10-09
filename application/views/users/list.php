@@ -1,5 +1,6 @@
 <?php   
-    $this->load->view('dashboard/header');  
+    $this->load->view('dashboard/header');
+    $this->load->database();  
 ?>
     <!-- Main content -->
     <section class="content container-fluid">
@@ -16,13 +17,20 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>
+
+                    <?php foreach ($this->('SELECT p.id_persona , p.numero_legajo ,p.nombre, p.apellido, u.nombre, u.email
+                    FROM persona p JOIN usuario u ON u.id_persona = p.id_persona') as $row){?> 
+                    <tr>
+	                    <td><?php echo $row['numero_legajo']?></td>
+                        <td><?php echo $row['nombre'] ?></td>
+                        <td><?php echo $row['apellido'] ?></td>
+                        <td><?php echo $row['nombre_usuario'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                        <td>
                                 <a href="" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
@@ -30,17 +38,13 @@
                                 <a href="" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
+                        </td>
                 </table>
 
             </div>
 
         </div>
     </section>
-    </div>
 <?php   
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');

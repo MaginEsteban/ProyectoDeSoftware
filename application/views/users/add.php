@@ -16,39 +16,32 @@
             <div class="col-6 mx-auto card">
 
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
-                    <!-- Nombre -->
+                    <!-- Legajo -->
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre </label>
+                        <label for="exampleInputEmail1">Legajo </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese su nombre..." name="nombre">
+                            placeholder="Ingrese el legajo..." name="legajo">
                         
                     </div>
-
-                    <!-- Apellido -->
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Apellido </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese su apellido...">
-                       
-                    </div>
-
+                    
                     <!-- Email -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email </label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese su email...">  
+                            placeholder="Ingrese el email..." name="email">  
                     </div>
 
-                    
+                    <!-- Select tipo usuario -->
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Rol en la Universidad</label>
+                        <label for="exampleFormControlSelect1">Tipo de usuario</label>
                         <select class="form-control" id="exampleFormControlSelect1">
-                            <option>NO-DOCENTE</option>
-                            <option>DOCENTE</option>
-                            <option>ESTUDIANTE</option>
+                            <option>USUARIO</option>
+                            <option>ADMINISTRADOR DE COMEDORES</option>
                         </select>
                     </div>
-                   
+                   <!--Aca utilizar json para hacer la peticion en caso 
+                   de seleccionar ADMINISTRADOR DE COMEDORES
+                   -->
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
