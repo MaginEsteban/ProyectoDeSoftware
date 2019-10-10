@@ -2,6 +2,14 @@
     $this->load->view('dashboard/header');  
 ?>
     <!-- Main content -->
+
+    <section class="content-header">
+        <h1>
+            Comedores
+            <small>Lista Comedores</small>
+        </h1>
+
+    </section>
     <section class="content container-fluid">
         <div class="row">
             <div class="col-10 mx-auto">
@@ -26,9 +34,9 @@
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
                                 <!-- eliminar comedor -->
-                                <a href="<?= base_url('comedor/delete/').$comedor->id_comedor; ?>" role="button" class="btn btn-danger m-1">
+                                <!-- <a href="<?= base_url('comedor/delete/').$comedor->id_comedor; ?>" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                     <?php endforeach; ?>

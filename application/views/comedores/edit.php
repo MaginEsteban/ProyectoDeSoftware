@@ -1,9 +1,6 @@
 <?php
     $this->load->view('dashboard/header');  
-    foreach ($comedor as $com) {
-        $nombre = $com->nombre_comedor;
-        $id = $com->id_comedor;
-    }
+
 ?>
 
     <!-- Content Header (Page header) -->
@@ -20,19 +17,17 @@
             <div class="col-6 mx-auto card">
 
                 <form action="<?= base_url('comedor/modificarComedor'); ?>" method="POST" class="m-2">
-
+                    
                     <!-- Identificador -->
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Id </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            name="id" value="<?php echo $id; ?>" readonly="readonly">
+                        <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            name="id" value="<?php echo $comedor->id_comedor; ?>" readonly="readonly">
                         
-                    </div>
+                    
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            name="nombre" value="<?php echo $nombre; ?>">
+                            name="nombre" value="<?php echo $comedor->nombre_comedor; ?>">
                         
                     </div>
 
@@ -42,7 +37,8 @@
                         <select class="form-control" id="exampleFormControlSelect1" name="ciudades">
                         <option value="0">...</option>
                             <?php foreach ($ciudades as $ciudad): ?>
-                            <option value="<?php echo $ciudad->id_ciudad; ?>"><?php echo $ciudad->nombre; ?></option> 
+                            <option value="<?php echo $ciudad->id_ciudad; ?>" <?php if ($ciudad->id_ciudad == $comedor->id_ciudad)
+                                echo "selected"; ?> ><?php echo $ciudad->nombre; ?></option> 
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -57,7 +53,6 @@
 
     </section>
 
-    </div>
 
 <?php   
     $this->load->view('dashboard/aside');

@@ -21,8 +21,7 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
-<script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script>
-<!-- Cuando recarga la pagina redirecciona a dashboard -->
+<!-- <script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script> -->
 
 
 
@@ -30,5 +29,6 @@
      Both of these plugins are recommended to enhance the
      user experience. -->
 
+    
 </body>
 </html>

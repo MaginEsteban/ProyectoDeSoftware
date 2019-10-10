@@ -3,14 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Security extends CI_Controller {
 
-
-
     protected  $usuario = '';
  
     //Array asociativo de lo que no puede hacer cada rol. Ej: el administrador puede hacer todo pero el vendedor
     //no puede acceder a lo que este en su array.
     public $rol_no_puede = array(
-       'USUARIO_CLIENTE' => array(),
+       'USUARIO_CLIENTE' => array('turno/add','turno/edit'),
        'USUARIO_NO_REGISTRADO' => array(),
        'ADMINISTRADOR_COMEDOR'=> array(),
        'ADMINISTRADOR'=> array()

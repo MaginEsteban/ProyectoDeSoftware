@@ -25,6 +25,22 @@ class Menu extends CI_Controller {
         $this->load->view('menues/list',$data);
     }
 
+    public function edit(){ 
+        $id_menu = $this->uri->segment(3);
+        $data = array(
+            'menu' => $this->Menu_model->findById($id_menu),
+            'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
+            'comedores' => $this->Menu_model->findAllComedores()
+        );
+        $this->load->view('menues/edit',$data);
+    }
+
+    public function delete(){
+        $id_menu = $this->uri->segment(3);
+        $this->Menu_model->delete($id_menu);
+        redirect(base_url('menu/listing'));
+    }
+
     public function crearMenu(){
         $nombreMenu = $this->input->post('nombre');
         $descripcion = $this->input->post('descripcion');
@@ -32,12 +48,17 @@ class Menu extends CI_Controller {
         $idComedor = $this->input->post('comedores');
         $this->Menu_model->insert($nombreMenu,$descripcion,$idTipoMenu,$idComedor);
 
-        redirect(base_url('menues/list'));
+        redirect(base_url('menu/listing'));
     }
 
-
     public function modificarMenu(){
-        
+        $nombreMenu = $this->input->post('nombre');
+        $descripcion = $this->input->post('descripcion');
+        $idTipoMenu = $this->input->post('tiposdemenues');
+        $idComedor = $this->input->post('comedores');
+        $idMenu = $this->input->post('id');
+        $this->Menu_model->update($idMenu,$nombreMenu,$descripcion,$idTipoMenu,$idComedor);
+        redirect(base_url('menu/listing'));
 
     }
 

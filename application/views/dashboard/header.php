@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="<?= base_url('recursos')?>/css/util.css">
 
   <link rel="stylesheet" href="<?= base_url('recursos')?>/css/main.css">
+    
+  <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css">
 
 
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
