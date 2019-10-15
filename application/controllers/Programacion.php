@@ -6,7 +6,7 @@ require_once APPPATH . 'controllers/Security.php';
 class Programacion extends Security {
 
 
-    
+
 
 
     public function index(){
@@ -14,12 +14,12 @@ class Programacion extends Security {
        // busca todos lo turnos del comedor que administrador-comedor
        $usuario =  $this->session->userdata('user');
        
-       print_r($this->session->userdata('user'));
-       die();
+      // print_r($this->session->userdata('user'));
+       //die();
        
-        $data['turnos'] = 
+       // $data['turnos'] = 
 
-        $this->load->view('programacion/dashboard_programacion',$data);
+        $this->load->view('programacion/dashboard_programacion');
     }
 
 }
