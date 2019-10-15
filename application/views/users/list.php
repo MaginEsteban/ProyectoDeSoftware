@@ -1,6 +1,13 @@
 <?php   
     $this->load->view('dashboard/header');  
 ?>
+    <section class="content-header">
+        <h1>
+            Usuarios
+            <small>Lista Usuarios </small>
+        </h1>
+
+    </section>
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
@@ -40,7 +47,7 @@
 
         </div>
     </section>
-    </div>
+
 <?php   
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');

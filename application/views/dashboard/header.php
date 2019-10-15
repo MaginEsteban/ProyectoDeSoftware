@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="<?= base_url('recursos')?>/css/util.css">
 
   <link rel="stylesheet" href="<?= base_url('recursos')?>/css/main.css">
+    
+  <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css">
 
 
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -47,7 +49,7 @@
 <div class="row">
 <div class="col-12">
 
-<a href="<?= base_url("welcome")?>/dashboard" class="logo">
+<a href="<?= base_url("dashboard")?>" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
   <span class="logo-mini"><img src="<?= base_url('recursos')?>/img/unrn.png" alt="" height="40px" style="color:white"></span>
   <!-- logo for regular state and mobile devices -->

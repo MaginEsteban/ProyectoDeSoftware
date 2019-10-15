@@ -9,7 +9,7 @@ class Comedor_model extends CI_Model {
     
     public function insert ($nombre,$id_ciudad){
             $data = array(
-               'nombre' => $nombre,
+               'nombre_comedor' => $nombre,
                'id_ciudad' => $id_ciudad
             );
         $this->db->insert('comedor', $data);
@@ -17,7 +17,8 @@ class Comedor_model extends CI_Model {
 
     public function update($id, $nombre,$id_ciudad){
             $data = array(
-                'nombre' => $nombre,
+                'id_comedor' => $id,
+                'nombre_comedor' => $nombre,
                 'id_ciudad' => $id_ciudad
             );
         $this->db->where('id_comedor', $id);
@@ -25,7 +26,7 @@ class Comedor_model extends CI_Model {
     }
 
     public function delete($id){
-            $this->db->where('id', $id);
+            $this->db->where('id_comedor', $id);
             $this->db->delete('comedor');
         
     }
@@ -49,7 +50,14 @@ class Comedor_model extends CI_Model {
         
         return $query->result();
     }
-    
-     
+
+    public function findById($id){
+        $this->db->select('*');
+        $this->db->from('comedor');
+        $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
+        $this->db->where('id_comedor', $id);
+        $query = $this->db->get();
+        return $query->row(0,'Comedor_model');
+    }
 
 }

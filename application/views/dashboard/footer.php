@@ -20,6 +20,7 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
+<<<<<<< HEAD
 <!-- script de programacion modal -->
 <script src="<?=base_url('recursos/js/programacion.js') ?>"></script>
 
@@ -33,6 +34,9 @@
 
 <!-- script de poper (tooltip) -->
 <script src="<?=base_url('recursos/js/popper.js') ?>"></script>
+=======
+<!-- <script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script> -->
+>>>>>>> c4930e1618c61d62ce290962d314fb696efa9d7c
 
 
 
@@ -40,5 +44,6 @@
      Both of these plugins are recommended to enhance the
      user experience. -->
 
+    
 </body>
 </html>
