@@ -16,13 +16,23 @@
 
 <!-- jQuery 3 -->
 <script src="<?= base_url("recursos/libs")?>/jquery/dist/jquery.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
+
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
-<script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script>
-<!-- Cuando recarga la pagina redirecciona a dashboard -->
+<!-- script de programacion modal -->
+<script src="<?=base_url('recursos/js/programacion.js') ?>"></script>
+
+<!-- script de poper (tooltip) -->
+<script src="<?=base_url('recursos/js/popper.js') ?>"></script>
+
+
+<!-- Bootstrap 3.3.7 -->
+<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
+
+
+<!-- script de poper (tooltip) -->
+<script src="<?=base_url('recursos/js/popper.js') ?>"></script>
 
 
 

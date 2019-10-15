@@ -50,12 +50,13 @@
           </a>
           <ul class="treeview-menu">
           <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
-          </ul>
+          <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
+         </ul>
           
         </li>
 
         <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-key"></i> <span>Reestablecer Contraseña</span></a></li>
+        <li ><a href="<?= base_url('programacion/');?>"><i class="fa fa-tasks"></i> <span>Programacion</span></a></li>
        
       </ul>
       <!-- /.sidebar-menu -->
