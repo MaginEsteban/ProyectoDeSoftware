@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Untitled</title>
+<script>
+function habilitarCombo(valor){
+if(valor==3){
+document.getElementById("departamento").disabled = false;
+document.getElementById("articulo").disabled = false;
+}
+else {
+document.getElementById("departamento").disabled = true;
+document.getElementById("articulo").disabled = true;
+}
+}
+</script>
+</head>
+<body>
+<label>Departamento
+<span class="small">Departamento al que pertenece el equipo</span>
+</label>
+<select name="departamento" id="departamento" disabled="true">
+<option selected="" value="">[Seleccione un departamento]</option>
+<option value="op01">op01</option>
+</select>
+
+<label>Articulo
+<span class="small">Articulo asignado al equipo</span>
+</label>
+<select name="articulo" id="articulo" disabled="true">
+<option selected="" value="">[Seleccione un articulo]</option>
+<option value="op22">op22</option>
+</select>
+
+<label>Estado
+<span class="small">Status del equipo</span>
+</label>
+<select name="estado" id="estado" onchange="habilitarCombo(this.value);">
+<option value="1">[Seleccione estado del equipo]</option>
+<option value="2">En Uso</option>
+<option value="3">Stock</option>
+</select>
+</body>
+</html>

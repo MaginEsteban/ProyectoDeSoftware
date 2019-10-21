@@ -151,8 +151,8 @@
     </div>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="<?= base_url('recursos')?>/vendor/jquery/jquery.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script src="<?= base_url('recursos')?>/vendor/jquery/jquery.min.js"></script>
   <script src="<?= base_url('recursos')?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->

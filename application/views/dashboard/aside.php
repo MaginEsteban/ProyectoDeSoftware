@@ -30,7 +30,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">ACCIONES DISPONIBLES</li>
         <!-- Optionally, you can add icons to the links -->
          <li class="treeview">
           <a href="#"><i class="fa fa-user-circle-o"></i> <span>Usuarios</span>
@@ -40,11 +40,43 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a class="user-menu" href="<?= base_url("user/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("user/list"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("user/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
+            
           </ul>
+
+          <a href="#"><i class="fa fa-home"></i> <span>Comedores</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
+          </ul>
+
+          <a href="#"><i class="fa fa-list-ol"></i> <span>Menues</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a class="user-menu" href="<?= base_url("menu/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Menu</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("menu/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Menues</span></a></li>
+          </ul>
+
+          <a href="#"><i class="fa fa-calendar"></i> <span>Turnos</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a class="user-menu" href="<?= base_url("turno/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Turno</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("turno/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Turnos</span></a></li>
+          </ul>
+          
         </li>
 
-        <li ><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-link"></i> <span>Reestablecer Contraseña</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
        
       </ul>

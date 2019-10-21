@@ -14,7 +14,6 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-6 mx-auto card">
-
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
                     <!-- Legajo -->
                     <div class="form-group">
@@ -34,15 +33,23 @@
                     <!-- Select tipo usuario -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo de usuario</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>USUARIO</option>
-                            <option>ADMINISTRADOR DE COMEDORES</option>
+                        <select class="form-control" id="selectTypeUser" name="tipos"  required>
+                            <option value="0">Seleccione un tipo de usuario </option>
+                            <option value="1">USUARIO</option>
+                            <option value="3">ADMINISTRADOR DE COMEDORES</option>
+                        </select>   
+                    </div>
+                    <!-- Select comedor-->
+                    <div class="form-group" id="comedores_list">
+                        <label for="comedores_list">Comedor </label>
+                        <select class="form-control"   name="comedores" required>
+                            <option value="0">Seleccione un comedor </option>
+                            <?php foreach ($comedores as $comedor): ?>
+                            <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor;?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                   <!--Aca utilizar json para hacer la peticion en caso 
-                   de seleccionar ADMINISTRADOR DE COMEDORES
-                   -->
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                         <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
             </div>
