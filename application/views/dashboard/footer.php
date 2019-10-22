@@ -19,23 +19,10 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?= base_url("recursos/adminlte/")?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<<<<<<< HEAD
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
 <!-- Cuando recarga la pagina redirecciona a dashboard -->
 <script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
-=======
-<script src="<?= base_url("recursos/adminlte/")?>dist/js/adminlte.min.js"></script>
-<!-- jQuery 3 -->
-<!-- FastClick -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/fastclick/lib/fastclick.js"></script>
-<!-- Sparkline -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/chart.js/Chart.js"></script>
->>>>>>> 8db2a5be51ab7a689221d0f9bf944c2b772163c3
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

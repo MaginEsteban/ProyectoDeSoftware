@@ -34,21 +34,7 @@
 
     <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css">
 
-<<<<<<< HEAD
-<!-- Header Navbar -->
-<nav class="navbar navbar-static-top" role="navigation">
-  <!-- Sidebar toggle button-->
-  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-    <span class="sr-only">Toggle navigation</span>
-  </a>
-  
-</nav>
-</div>
-</div>
-</header>
-=======
     <!-- user menu -->
->>>>>>> 8db2a5be51ab7a689221d0f9bf944c2b772163c3
 
 
 

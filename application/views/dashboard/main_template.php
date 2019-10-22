@@ -4,9 +4,9 @@
         Dashboard
         <small>-</small>
     </h1>
-    <h2>
+    <h3>
     Bienvenido
-    </h2>
+    </h3>
 </section>
 <section class="content container-fluid">
     

@@ -8,13 +8,8 @@ class Security extends CI_Controller {
     //Array asociativo de lo que no puede hacer cada rol. Ej: el administrador puede hacer todo pero el vendedor
     //no puede acceder a lo que este en su array.
     public $rol_no_puede = array(
-<<<<<<< HEAD
        'USUARIO_CLIENTE' => array(),
        'USUARIO_NO_REGISTRADO' => array('user'),
-=======
-       'USUARIO_CLIENTE' => array('turno/add','turno/edit'),
-       'USUARIO_NO_REGISTRADO' => array(),
->>>>>>> 8db2a5be51ab7a689221d0f9bf944c2b772163c3
        'ADMINISTRADOR_COMEDOR'=> array(),
        'ADMINISTRADOR'=> array()
       );
