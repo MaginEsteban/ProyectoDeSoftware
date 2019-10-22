@@ -47,6 +47,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<?= base_url('detalle')?>">Conoce Comedores y Menus</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -90,7 +90,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-user-circle-o"></i> <span>Alexander Pierce</span>
+                              <i class="fa fa-user-circle-o"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
