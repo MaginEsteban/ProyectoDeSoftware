@@ -71,7 +71,7 @@ class Menu_model extends CI_Model {
         
         $query = $this->db->get();
         
-        return $query->result();
+        return $query->row(0,'Menu_model');
     }
      
 

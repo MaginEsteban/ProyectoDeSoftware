@@ -1,6 +1,13 @@
 <?php   
     $this->load->view('dashboard/header');  
 ?>
+    <section class="content-header">
+        <h1>
+            Menues
+            <small>Lista Menues</small>
+        </h1>
+
+    </section>
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
@@ -25,11 +32,11 @@
                             <td scope="row"><?php echo $menu->nombre_tipo_menu; ?></th>
                             <td scope="row"><?php echo $menu->nombre_comedor; ?></th>
                             <td>
-                                <a href="" role="button" class="btn btn-primary m-1">
+                                <a href="<?= base_url('menu/edit/').$menu->id_menu; ?>" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
 
-                                <a href="" role="button" class="btn btn-danger m-1">
+                                <a href="<?= base_url('menu/delete/').$menu->id_menu; ?>" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>

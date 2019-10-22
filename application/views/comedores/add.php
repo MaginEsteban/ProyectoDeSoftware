@@ -1,5 +1,4 @@
 <?php
-    
     $this->load->view('dashboard/header');  
 ?>
 
@@ -39,9 +38,6 @@
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-                <?php foreach ($cuidades as $cuidad): ?>
-                    <?php echo $cuidad->nombre; ?>
-                <?php endforeach; ?>
             </div>
 
         </div>
@@ -49,7 +45,6 @@
 
     </section>
 
-    </div>
 
 <?php   
     $this->load->view('dashboard/aside');

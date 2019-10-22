@@ -9,7 +9,7 @@ class Comedor_model extends CI_Model {
     
     public function insert ($nombre,$id_ciudad){
             $data = array(
-               'nombre' => $nombre,
+               'nombre_comedor' => $nombre,
                'id_ciudad' => $id_ciudad
             );
         $this->db->insert('comedor', $data);
@@ -57,12 +57,7 @@ class Comedor_model extends CI_Model {
         $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
         $this->db->where('id_comedor', $id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'Comedor_model');
     }
-    
-     public function modificarComedor(){
-        $comedor = $this->uri->segment(2);
-        
-     }
 
 }
