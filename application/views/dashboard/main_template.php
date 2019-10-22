@@ -4,10 +4,12 @@
         Dashboard
         <small>-</small>
     </h1>
-
+    <h2>
+    Bienvenido
+    </h2>
 </section>
 <section class="content container-fluid">
-    <h1>Bienvenido</h1>
+    
 </section>
 
 <!-- </div> Cierra un tag abierto en el header -->

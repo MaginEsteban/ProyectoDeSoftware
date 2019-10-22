@@ -12,7 +12,7 @@
     </section>
     <!-- Main content -->
     <section class="content container-fluid">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-6 mx-auto card">
 
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
