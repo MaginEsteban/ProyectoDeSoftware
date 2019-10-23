@@ -17,7 +17,10 @@ class User extends Security {
     */
     public function add()
 	{
-        $data ['comedores'] = $this->Comedor_model->findAll();
+        $data = array(
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user')
+        );
         $this->load->view('users/add',$data);
     }
    
@@ -27,7 +30,8 @@ class User extends Security {
             'usuario' => $this->User_model->find_by_id($id_usuario),
             'comedores' => $this->Comedor_model->findAll(),
             'comedor'=> $this->User_model->find_comedor_by_id_user($id_usuario),
-            'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
+            'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
+            'user' => $this->session->userdata('user')
         );
         $this->load->view('users/edit',$data);
     }
@@ -39,7 +43,10 @@ class User extends Security {
     }
     public function listing()
 	{
-        $data['usuarios'] = $this->User_model->findAll();
+        $data = array(
+            'usuarios' => $this->User_model->findAll(),
+            'user' => $this->session->userdata('user')
+        );
         $this->load->view('users/list',$data);
     }
 

@@ -16,14 +16,19 @@ class Menu extends CI_Controller {
 	{
         $data = array (
             'tiposdemenu' => $this->Tipo_menu_model->findAll(),
-            'comedores' => $this->Comedor_model->findAll()
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user'),
         );
         $this->load->view('menues/add',$data);
     }
 
     public function listing()
 	{
-        $data['menues'] = $this->Menu_model->findAll();
+        $data = array (
+            'menues' => $this->Menu_model->findAll(),
+            'user' => $this->session->userdata('user'),
+        );
+       
         $this->load->view('menues/list',$data);
     }
 
@@ -32,7 +37,8 @@ class Menu extends CI_Controller {
         $data = array(
             'menu' => $this->Menu_model->findById($id_menu),
             'tiposdemenu' => $this->Tipo_menu_model->findAll(),
-            'comedores' => $this->Comedor_model->findAll()
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user')
         );
         $this->load->view('menues/edit',$data);
     }

@@ -14,20 +14,27 @@ class Turno extends Security {
 
     public function add()
 	{
-        $data ['comedores'] = $this->Comedor_model->findAll();
+        $data = array(
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user'),
+        );
         $this->load->view('turnos/add',$data);
     }
 
     public function listing()
 	{
-        $data['turnos'] = $this->Turno_model->findAll();
+        $data = array(
+            'turnos' => $this->Turno_model->findAll(),
+            'user' => $this->session->userdata('user')
+        );
         $this->load->view('turnos/list',$data);
     }
 
     public function edit($id_turno){
         $data = array(
             'turno' => $this->Turno_model->findById($id_turno),
-            'comedores' => $this->Comedor_model->findAll();
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user')
         );
         $this->load->view('turnos/edit',$data);
     }
