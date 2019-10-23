@@ -7,14 +7,16 @@ class Menu extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('Menu_model');
+        $this->load->model('Tipo_menu_model');
+        $this->load->model('Comedor_model');
         $this->load->helper('url_helper');
     }
 
     public function add()
 	{
         $data = array (
-            'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
-            'comedores' => $this->Menu_model->findAllComedores()
+            'tiposdemenu' => $this->Tipo_menu_model->findAll(),
+            'comedores' => $this->Comedor_model->findAll()
         );
         $this->load->view('menues/add',$data);
     }
@@ -29,8 +31,8 @@ class Menu extends CI_Controller {
         $id_menu = $this->uri->segment(3);
         $data = array(
             'menu' => $this->Menu_model->findById($id_menu),
-            'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
-            'comedores' => $this->Menu_model->findAllComedores()
+            'tiposdemenu' => $this->Tipo_menu_model->findAll(),
+            'comedores' => $this->Comedor_model->findAll()
         );
         $this->load->view('menues/edit',$data);
     }

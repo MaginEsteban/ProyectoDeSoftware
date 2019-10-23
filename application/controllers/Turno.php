@@ -8,12 +8,13 @@ class Turno extends Security {
     public function __construct(){
         parent::__construct();
         $this->load->model('Turno_model');
+        $this->load->model('Comedor_model');
         $this->load->helper('url_helper');
     }
 
     public function add()
 	{
-        $data ['comedores'] = $this->Turno_model->findAllComedores();
+        $data ['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('turnos/add',$data);
     }
 
@@ -26,7 +27,7 @@ class Turno extends Security {
     public function edit($id_turno){
         $data = array(
             'turno' => $this->Turno_model->findById($id_turno),
-            'comedores' => $this->Turno_model->findAllComedores()
+            'comedores' => $this->Comedor_model->findAll();
         );
         $this->load->view('turnos/edit',$data);
     }

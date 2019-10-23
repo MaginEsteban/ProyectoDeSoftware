@@ -84,32 +84,17 @@
                                     <img src="<?= base_url("recursos")?>/img/user2-160x160.jpg" class="img-circle"
                                         alt="User Image">
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?php echo $user->nombre; ?> - <?php echo $user->tipo; ?>
+                                        <small><?php echo $user->email; ?></small>
                                     </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="#" class="btn btn-default btn-flat">Configuracion</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a onClick="close_session()" class="btn btn-default btn-flat">Logout</a>
                                     </div>
                                 </li>
                             </ul>
@@ -120,3 +105,26 @@
         </header>
         <!-- Contenido dinamico -->
         <div id="content" class="content-wrapper">
+        <script>
+              function close_session() {
+                event.preventDefault();
+                Swal.fire({
+                title: 'Estas seguro?',
+                text: "Usted esta a punto de cerrar su sesion!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, salir!', 
+                cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    $.ajax({
+                        url:"http://localhost/proyectodesoftware/login/cerrar_sesion",
+                        success: function() {
+                            location.href = "http://localhost/proyectodesoftware/login";
+                        }
+                    })
+                })
+              }
+              
+        </script>

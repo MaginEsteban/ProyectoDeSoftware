@@ -1,5 +1,5 @@
 <?php
-class Ciudad_model extends CI_Model {
+class Tipo_Menu_model extends CI_Model {
   
     public function __construct()
     {
@@ -9,11 +9,9 @@ class Ciudad_model extends CI_Model {
     
     public function findAll(){
         $this->db->select('*');
-        $this->db->from('ciudad');
-        $this->db->join('sede', 'ciudad.id_sede = sede.id_sede');
+        $this->db->from('tipo_menu');
         $query = $this->db->get();
         return $query->result();
     }
-
 }
 ?>

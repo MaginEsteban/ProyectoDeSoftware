@@ -60,7 +60,6 @@ class User extends Security {
      }
      
      public function modificarUsuario(){
-    
         $id_pers = $this->input->post('id_persona');
         $email = $this->input->post('email');
         $tipoUser = $this->input->post('tipos');

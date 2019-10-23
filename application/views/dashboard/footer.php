@@ -24,6 +24,7 @@
 <!-- Cuando recarga la pagina redirecciona a dashboard -->
 <script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
