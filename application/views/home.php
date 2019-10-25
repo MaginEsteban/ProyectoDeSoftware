@@ -8,23 +8,17 @@
   <meta name="author" content="">
 
   <title>Sistema de Tickets</title>
-
   <!-- Font Icons -->
   <link rel="icon" href="<?= base_url('recursos')?>/img/icons/favicon.ico"/>
-
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?= base_url('recursos')?>/vendor/fontawesome-free/css/all.min.css" type="text/css">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
   <!-- Plugin CSS -->
   <link href="<?= base_url('recursos')?>/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="<?= base_url('recursos')?>/css/creative.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -38,6 +32,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<?= base_url('detalle_comedores')?>">Conoce Comedores y Menus</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">Acerca de</a>
           </li>
@@ -133,7 +130,7 @@
       <div class="row">
         <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
           <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
-          <div>+54 (2920) 555-01490</div>
+          <div>+54 (2920) 64-1401</div>
         </div>
         <div class="col-lg-4 mr-auto text-center">
           <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>

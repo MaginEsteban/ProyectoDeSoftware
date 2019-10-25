@@ -43,24 +43,6 @@ class Menu_model extends CI_Model {
         
         return $query->result();
     }
-
-    public function findAllTiposDeMenu(){
-
-        $this->db->select('*');
-        $this->db->from('tipo_menu');
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function findAllComedores(){
-
-        $this->db->select('*');
-        $this->db->from('comedor');
-       
-         $query = $this->db->get();
-        
-        return $query->result();
-    }
     
     public function findById($id){
         $this->db->select('*');

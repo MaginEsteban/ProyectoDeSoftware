@@ -1,18 +1,19 @@
-<?php  $this->load->view('dashboard/header');      ?>
+<?php  
+$this->load->view('dashboard/header',$user);      
+?>
 <section class="content-header">
-    <h1>
-        Dashboard
-        <small>-</small>
-    </h1>
-
+    <h2>
+        Bienvenido <?php echo $user->nombre; ?> <br>
+        <small>Usted es <?php echo $user->tipo; ?></small>
+    </h2>
 </section>
 <section class="content container-fluid">
-    <h1>Bienvenido</h1>
+    
 </section>
 
 <!-- </div> Cierra un tag abierto en el header -->
 </div>
 <?php
-    $this->load->view('dashboard/aside');
+    $this->load->view('dashboard/aside',$user);
     $this->load->view('dashboard/footer');
 ?>

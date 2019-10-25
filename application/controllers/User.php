@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . 'controllers/Security.php'; 
 
 class User extends Security {
-
-
+    
     public function __construct(){
         parent::__construct();
+        $this->load->model(array('User_model','Comedor_model'));
         $this->load->helper('url_helper');
-        $this->load->model('User_model');
+        
     }
 
     /**
@@ -17,46 +17,80 @@ class User extends Security {
     */
     public function add()
 	{
-        
-        $this->load->view('users/add');
+        $data = array(
+            'comedores' => $this->Comedor_model->findAll(),
+            'user' => $this->session->userdata('user')
+        );
+        $this->load->view('users/add',$data);
+    }
+   
+    public function edit(){
+        $id_usuario = $this->uri->segment(3);
+        $data = array(
+            'usuario' => $this->User_model->find_by_id($id_usuario),
+            'comedores' => $this->Comedor_model->findAll(),
+            'comedor'=> $this->User_model->find_comedor_by_id_user($id_usuario),
+            'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
+            'user' => $this->session->userdata('user')
+        );
+        $this->load->view('users/edit',$data);
     }
 
+    public function delete (){
+        $id_usuario = $this->uri->segment(3);
+        $this->User_model->delete($id_usuario);
+        redirect(base_url('user/listing'));
+    }
     public function listing()
 	{
-        $this->load->view('users/list');
+        $data = array(
+            'usuarios' => $this->User_model->findAll(),
+            'user' => $this->session->userdata('user')
+        );
+        $this->load->view('users/list',$data);
     }
 
-    /**
-     * Vista reestablecer la contraseña
-    */
-    public function restore_password(){
-        $this->load->view('users/restore_password');
-    }
+    
+     public function store(){
 
-     /**
-     * Permiter reestablecer la contraseña de un usuario
-    */
-    public function check_password(){
-            
-        $ok = $this->User_model->update_password();
-                
-        $response;
+        $legajo = $this->input->post('legajo');
+        $email= $this->input->post('email');
+        $idTipoUsuario = $this->input->post('tipos');
+        $idComedor = $this->input->post('comedores');
+        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$legajo,$legajo,$email,$idComedor);
 
-        if($ok){
-            $response = array(
-                'mensaje' => 'La contraseña se cambio con exito',
-                'class' => 'alert-primary'
-            );  
+        if($_POST['tipos'] == '3'){
+           $this->User_model->insert_usuario_comedor($id_user,$idComedor);     
         }
-        else{
-            $response = array(
-                'mensaje' => 'Los datos ingresado son incorrento...no se reestablecio la contraseña',
-                'class' => 'alert-danger'
-            );                   
+        redirect(base_url('users/list'));
+        
+     }
+     
+     public function modificarUsuario(){
+        $id_pers = $this->input->post('id_persona');
+        $email = $this->input->post('email');
+        $tipoUser = $this->input->post('tipos');
+        $nombre = $this->input->post('nombre');
+        $num = $this->input->post('numero');
+        $id_user_com = $this->input->post('id_user_comedor');
+        $numeroCom = $this->input->post('comedores');
+        $id_user = $this->input->post('id');
+        $this->User_model->update($id_user,$id_pers,$tipoUser,$nombre,$email);
+        //si el tipo seleccionado es distinto al que tenia y selecciono admin. comed
+        if($_POST['tipos'] != $_POST['tipo'] && $_POST['tipos'] == 3){
+            $this->User_model->insert_usuario_comedor($id_user,$numeroCom);     
         }
-       
-        $this->load->view('users/restore_password',$response);
-
+        //si el tipo seleccionado es igual al que tenia y el numero de comedor es distinto al que tenia
+        if($_POST['tipos'] != $_POST['tipo'] && $numeroCom != $num){
+            $this->User_model->update_usuario_comedor($id_user_com,$id_user,$numeroCom);     
+        }
+        //si el tipo seleccionado es distinto al que tenia y selecciono usuario client
+        if($_POST['tipos'] != $_POST['tipo'] && $_POST['tipos'] == 1){
+            $this->User_model->delete_usuario_comedor($id_user_com);
+        }
+        redirect(base_url('user/listing'));
     }
+
+    
 
 }

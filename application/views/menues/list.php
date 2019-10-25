@@ -1,5 +1,5 @@
 <?php   
-    $this->load->view('dashboard/header');  
+    $this->load->view('dashboard/header',$user);  
 ?>
     <section class="content-header">
         <h1>
@@ -50,7 +50,7 @@
         </div>
     </section>
 <?php   
-    $this->load->view('dashboard/aside');
+    $this->load->view('dashboard/aside',$user);
     $this->load->view('dashboard/sidebar');
     $this->load->view('dashboard/footer');
 ?>
