@@ -60,4 +60,15 @@ class Comedor_model extends CI_Model {
         return $query->row(0,'Comedor_model');
     }
 
+    public function findByIdAdminComedor($id_usuario){
+       
+        $this->db->select('*');
+        $this->db->from('comedor');
+        $this->db->where('id_usuario',$id_usuario);
+        
+
+        $query = $this->db->get();
+        
+        return $query->row(0);
+    }
 }

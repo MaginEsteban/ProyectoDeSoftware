@@ -54,10 +54,6 @@
           </a>
           <ul class="treeview-menu">
           <li class="active"><a class="user-menu" href="<?= base_url("comedor/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Comedor</span></a></li>
-<<<<<<< HEAD
-          <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
-         </ul>
-=======
             <li class="active"><a class="user-menu" href="<?= base_url("comedor/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Comedores</span></a></li>
           </ul>
 
@@ -80,7 +76,6 @@
           <li class="active"><a class="user-menu" href="<?= base_url("turno/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Turno</span></a></li>
             <li class="active"><a class="user-menu" href="<?= base_url("turno/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Turnos</span></a></li>
           </ul>
->>>>>>> c4930e1618c61d62ce290962d314fb696efa9d7c
           
         </li>
 

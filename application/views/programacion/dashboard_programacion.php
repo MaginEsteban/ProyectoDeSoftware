@@ -12,6 +12,15 @@ i {
 .modal-backdrop {
     opacity: 0.3 !important;
 }
+
+.menu {
+    margin: -1px -3px 5px -3px;
+    padding: 1px;
+    -webkit-box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
+-moz-box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
+box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
+}
+
 </style>
 
 
@@ -100,278 +109,63 @@ i {
         </tr>
 
         <!-- Datos -->
+       
+       <!-- Recorre todo los turnos -->
+       <?php foreach($turnos as $turno ): ?> 
         <tr>
-            <td class="bg-olive">
-                <p class="h4 text-center text-white">Desayuno</p>
-                <a href="" role="button" data-toggle="tooltip" data-placement="right" title="Tooltip on right"
-                    class="btn mt-4 mb-n2 btn-app bg-purple">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    <p class="text-white">Agregar Menu</p>
+           
+           <!-- Turno -->
+            <td class="bg-info">
+                <p class="h4 text-center text-white text-capitalize"><?= $turno->nombre; ?> </p>
+                <a href="" role="button" class="btn rounded-circle bg-secondary">
+                    <i class="fa fa-plus m-auto" onclick="agregarMenu(<?= $turno->id_turno;  ?>)" aria-hidden="true"></i>
                 </a>
-
-
-
             </td>
-            <td class="">
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </td>
-            <td class="">
             
-              
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
+            <!-- Lunes -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_1">
             </td>
-            <td class="">
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
+            
+            <!-- Martes -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_2">
             </td>
-            <td class="">
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
+            
+            <!-- Miercoles -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_3">  
             </td>
-            <td class="">
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
+            
+            <!-- Jueves -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_4">
             </td>
-            <td class="">
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row m-1 shadow-lg">
-
-                    <!-- Informacion de menu -->
-                    <div class="col-9">
-                        Menu 2
-                    </div>
-
-                    <!-- acciones del menu -->
-                    <div class="col-3">
-                        <button type="button" class="btn m-n1" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-
+            
+            <!-- Viernes -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_5">  
             </td>
+
+            <!-- Sabado -->
+            <td id="turno_<?= $turno->id_turno;?>_dia_6">  
+            </td>
+            
         </tr>
+        <?php endforeach; ?>
     </table>
 
 </div>
+</div>
 
-
-<!-- Modal Para Eliminar un Menu -->
-<div class="modal " tabindex="-1" role="dialog" id="modal_delete">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Eliminar Menu</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>¡¡ Estas seguro de sacar ese menu del turno !!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    Si
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <i class="fa fa-reply-all" aria-hidden="true"></i>
-                    No
-                </button>
-            </div>
-        </div>
-    </div>
+<div class="spinner-grow text-danger" role="status" id="loading">
+  <span class="sr-only">Loading...</span>
 </div>
 
 
-<!-- Modal agregar Menu -->
-<div class="modal " id="modal_add_menu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar menu</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
+<script>
+    var idComedor = <?= $comedor->id_comedor;?>;
 
-                    <!-- Dia de los turnos -->
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Dia</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Lunes</option>
-                            <option>Martes</option>
-                            <option>Jueves</option>
-                            <option>viernes</option>
-                            <option>Sabado</option>
-                        </select>
-                    </div>
-
-                    <!-- Todo los menus -->
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Menu</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Hamburguesa</option>
-                        </select>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Agregar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- </div> Cierra un tag abierto en el header -->
-</div>
+    $(document).ready( function() {
+        // llamar a la funcion para actualizar la table
+         actualizarDashboard(idComedor);
+    });
+</script>
 <?php
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/footer');

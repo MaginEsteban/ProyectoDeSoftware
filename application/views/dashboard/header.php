@@ -39,6 +39,10 @@
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+        <!-- jQuery 3 -->
+<script src="<?= base_url("recursos/libs")?>/jquery/dist/jquery.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

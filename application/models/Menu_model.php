@@ -73,6 +73,27 @@ class Menu_model extends CI_Model {
         
         return $query->row(0,'Menu_model');
     }
+
+    //retorna todo los menus asignados a los turnos
+    public function findAllByIdTurno($id_Turno){
+        $this->db->select('*');
+        $this->db->from('programacion');
+        $this->db->where('programacion.id_turno',$id_Turno);
+        $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
+        $this->db->join('menu','menu.id_menu=programacion_menu.id_menu');
+        $this->db->join('dia_programacion','dia_programacion.id_dia_programacion=programacion.id_dia_programacion');
+        $query = $this->db->get();
+        return $query->result();
+    }
      
+    //retorn todos los menus de una comedor
+    public function findAllByIdComedor($id_comedor){
+        $this->db->select('*');
+        $this->db->from('menu');
+        $this->db->where('id_comedor',$id_comedor);
+        $query = $this->db->get();
+       
+        return $query->result();
+    }
 
 }

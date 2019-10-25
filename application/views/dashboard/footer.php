@@ -14,31 +14,16 @@
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src="<?= base_url("recursos/libs")?>/jquery/dist/jquery.js"></script>
+<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
 
-<<<<<<< HEAD
-<!-- script de programacion modal -->
-<script src="<?=base_url('recursos/js/programacion.js') ?>"></script>
 
-<!-- script de poper (tooltip) -->
-<script src="<?=base_url('recursos/js/popper.js') ?>"></script>
+<script src="<?= base_url("recursos")?>/js/programacion.js"></script>
 
-
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
-
-
-<!-- script de poper (tooltip) -->
-<script src="<?=base_url('recursos/js/popper.js') ?>"></script>
-=======
-<!-- <script src="<?= base_url("recursos")?>/js/dashboard/users.js"></script> -->
->>>>>>> c4930e1618c61d62ce290962d314fb696efa9d7c
-
-
+<!-- sweetalert  -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
