@@ -37,8 +37,8 @@
 						Registro
 					</span>
 				</div>
-
-				<form class="login100-form validate-form">
+				<?php echo validation_errors(); ?>
+				<form class="login100-form validate-form" action="<?php echo base_url('register/post_register') ?>" method="post" >
 
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Legajo requerido">
 						<span class="label-input100">Legajo</span>
@@ -53,8 +53,8 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Username requerido">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Ingrese su username">
+						<span class="label-input100">Nombre de Usuario</span>
+						<input class="input100" type="text" name="username" placeholder="Ingrese su nombre de usuario">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -69,40 +69,9 @@
 						<input class="input100" type="password" name="cpass" placeholder="Ingrese su contraseña">
 						<span class="focus-input100"></span>
                     </div>
-                    
-                    <div class="wrap-input100 validate-input m-b-18">
-                        <span class="label-input100">Rol en la universidad</span>
-                    </div>
-                    
-					<div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Alumno
-							</label>
-						</div>
-                    </div>	
-					
-                    <div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb2" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb2">
-								Docente
-							</label>
-						</div>
-                    </div>
-                    
-                    <div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb3" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb3">
-								No docente
-							</label>
-						</div>
-					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Registrar
 						</button>
 					</div>

@@ -8,50 +8,37 @@ class Security extends CI_Controller {
     //Array asociativo de lo que no puede hacer cada rol. Ej: el administrador puede hacer todo pero el vendedor
     //no puede acceder a lo que este en su array.
     public $rol_no_puede = array(
-       'USUARIO_CLIENTE' => array(),
-       'USUARIO_NO_REGISTRADO' => array('user'),
-       'ADMINISTRADOR_COMEDOR'=> array(),
+       'CLIENTE' => array('user','comedor','turno'),
+       'USUARIO NO REGISTRADO' => array('user'),
+       'ADMINISTRADOR COMEDOR'=> array(''),
        'ADMINISTRADOR'=> array()
       );
  
     public function __construct() {
        parent::__construct();
- 
        $this->usuario = $this->session->userdata('user');
- 
        $this->validarPagina(current_url());
- 
        $datos['mnu_activo'] = $this->uri->segment(1);
- 
        if ($this->uri->segment(2) != ""){
- 
           $datos['mnu_activo'] .= "_".$this->uri->segment(2);
- 
           if ($this->uri->segment(3) != "") {
- 
              $datos['mnu_activo'] .= "_".$this->uri->segment(3);
- 
           }
        } 
        $this->session->set_userdata($datos);
     } 
 
-    public function validarPagina($url_actual){
-
-        if($this->logeado()){
-          $no_url = $this->rol_no_puede[$this->usuario->tipo];
- 
-          foreach ($no_url as $url) {
- 
-             if(stristr($url_actual,base_url($url))){
+   public function validarPagina($url_actual){
+      if($this->logeado()){
+         $no_url = $this->rol_no_puede[$this->usuario->tipo];
+         foreach ($no_url as $url) {
+            if(stristr($url_actual,base_url($url))){
                 //comparo si $url se encuentra en $url_actual
                 redirect(base_url('error_403'));
-             }
+            }
          }
-         
-       }
- 
-    }
+      }
+   }
  
  
     public function logeado(){

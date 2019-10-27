@@ -39,7 +39,7 @@ class User extends Security {
     public function delete (){
         $id_usuario = $this->uri->segment(3);
         $this->User_model->delete($id_usuario);
-        redirect(base_url('user/listing'));
+        redirect(base_url('users/list'));
     }
     public function listing()
 	{
@@ -62,20 +62,20 @@ class User extends Security {
         if($_POST['tipos'] == '3'){
            $this->User_model->insert_usuario_comedor($id_user,$idComedor);     
         }
-        redirect(base_url('users/list'));
+        redirect(base_url('user/listing'));
         
      }
      
      public function modificarUsuario(){
-        $id_pers = $this->input->post('id_persona');
+        $id_persona = $this->input->post('id_persona');
         $email = $this->input->post('email');
         $tipoUser = $this->input->post('tipos');
         $nombre = $this->input->post('nombre');
         $num = $this->input->post('numero');
-        $id_user_com = $this->input->post('id_user_comedor');
-        $numeroCom = $this->input->post('comedores');
-        $id_user = $this->input->post('id');
-        $this->User_model->update($id_user,$id_pers,$tipoUser,$nombre,$email);
+        $id_usuario_comedor = $this->input->post('id_usuario_comedor');
+        $comedor = $this->input->post('comedores');
+        $id_usuario = $this->input->post('id_usuario');
+        $this->User_model->update($id_usuario,$id_persona,$tipoUser,$nombre,$email);
         //si el tipo seleccionado es distinto al que tenia y selecciono admin. comed
         if($_POST['tipos'] != $_POST['tipo'] && $_POST['tipos'] == 3){
             $this->User_model->insert_usuario_comedor($id_user,$numeroCom);     
