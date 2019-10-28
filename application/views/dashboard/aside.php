@@ -1,4 +1,6 @@
 
+<?php $user = $this->session->userdata('user'); ?>
+
 </div> <!-- cierro el div abierto en el header-->
 
 <aside class="main-sidebar">
