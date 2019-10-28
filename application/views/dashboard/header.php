@@ -64,7 +64,7 @@
                 <span class="logo-mini"><img src="<?= base_url('recursos')?>/img/unrn.png" alt="" height="40px"
                         style="color:white"></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Comedor-</b>UNRN</span>
+                <span class="logo-lg"><b>Comedor - </b>UNRN</span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -91,7 +91,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Configuracion</a>
+                                        <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="btn btn-default btn-flat">Configuracion</a>
                                     </div>
                                     <div class="pull-right">
                                         <a onClick="close_session()" class="btn btn-default btn-flat">Logout</a>

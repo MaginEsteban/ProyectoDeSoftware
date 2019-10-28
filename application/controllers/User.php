@@ -41,6 +41,7 @@ class User extends Security {
         $this->User_model->delete($id_usuario);
         redirect(base_url('users/list'));
     }
+
     public function listing()
 	{
         $data = array(
@@ -91,6 +92,26 @@ class User extends Security {
         redirect(base_url('user/listing'));
     }
 
-    
+    public function edit_my_user(){
+        $id_usuario = $this->uri->segment(3);
+        $data = array(
+            'usuario' => $this->User_model->find_by_id($id_usuario),
+            'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
+            'user' => $this->session->userdata('user')
+        );
+        $this->load->view('users/edit_my_user',$data);
+    }
+
+    public function modificarMiUsuario(){
+        $su_nombre = $this->input->post('su_nombre');
+        $su_apellido = $this->input->post('su_apellido');
+        $id_persona = $this->input->post('id_persona');
+        $email = $this->input->post('email');
+        $contraseña = $this->input->post('contraseña');
+        $nombre = $this->input->post('nombre');
+        $id_usuario = $this->input->post('id_usuario');
+        $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
+        redirect(base_url('dashboard'));
+    }
 
 }
