@@ -10,14 +10,14 @@ class User_model extends CI_Model{
     }
     
     public function insert ($legajo,$tipo_usuario,$nombre,$contraseña,$email){
-            $id_pers = $this->find_person_by_legajo($legajo);
-            $data = array(
-               'id_persona' => $id_pers,
-               'id_tipo_usuario' => $tipo_usuario,
-               'nombre' => $nombre,
-               'contraseña' => $contraseña,
-               'email' => $email
-            );
+        $id_pers = $this->find_person_by_legajo($legajo);
+        $data = array(
+            'id_persona' => $id_pers,
+            'id_tipo_usuario' => $tipo_usuario,
+            'nombre' => $nombre,
+            'contraseña' => $contraseña,
+            'email' => $email
+        );
         $this->db->insert('usuario', $data);
         return $this->db->insert_id();
     } 
@@ -76,7 +76,7 @@ class User_model extends CI_Model{
         $this->db->from('usuario');
         $this->db->where('id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
     }
 
     public function find_person_by_id_user($id){
@@ -85,7 +85,7 @@ class User_model extends CI_Model{
         $this->db->join('persona','usuario.id_persona = persona.id_persona');
         $this->db->where('usuario.id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
     }
 
     public function find_comedor_by_id_user($id){
@@ -95,7 +95,7 @@ class User_model extends CI_Model{
         $this->db->join('comedor', 'usuario_comedor.id_comedor = comedor.id_comedor');
         $this->db->where('usuario.id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
 
     }
     /**
