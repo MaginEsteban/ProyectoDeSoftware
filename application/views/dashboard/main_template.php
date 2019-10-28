@@ -1,5 +1,5 @@
 <?php  
-$this->load->view('dashboard/header',$user);      
+$this->load->view('dashboard/header');      
 ?>
 <section class="content-header">
     <h2>
@@ -14,6 +14,6 @@ $this->load->view('dashboard/header',$user);
 <!-- </div> Cierra un tag abierto en el header -->
 </div>
 <?php
-    $this->load->view('dashboard/aside',$user);
+    $this->load->view('dashboard/aside');
     $this->load->view('dashboard/footer');
 ?>
