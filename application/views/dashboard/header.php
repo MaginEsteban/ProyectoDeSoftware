@@ -32,10 +32,6 @@
 
     <!-- user menu -->
 
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="<?= base_url('recursos/adminlte/')?>dist/css/skins/skin-blue.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,8 +45,10 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
         <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.0.js"
-        integrity="sha256-TFWSuDJt6kS+huV+vVlyV1jM3dwGdeNWqezhTxXB/X8=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.0.js"
+        integrity="sha256-TFWSuDJt6kS+huV+vVlyV1jM3dwGdeNWqezhTxXB/X8=" crossorigin="anonymous"></script> -->
+        <!-- jQuery 3 -->
+<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -76,30 +74,11 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-user-circle-o"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="<?= base_url("recursos")?>/img/user2-160x160.jpg" class="img-circle"
-                                        alt="User Image">
-                                    <p>
-                                        <?php echo $user->nombre; ?> - <?php echo $user->tipo; ?>
-                                        <small><?php echo $user->email; ?></small>
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="btn btn-default btn-flat">Configuracion</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a onClick="close_session()" class="btn btn-default btn-flat">Logout</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs"></a>
+                        </li>
+                        <li>
+                            <a onClick="close_session()" class="fa fa-sign-out"></a>
                         </li>
                     </ul>
                 </div>
