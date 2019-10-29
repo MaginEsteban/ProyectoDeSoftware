@@ -77,8 +77,17 @@
             <li class="active"><a class="user-menu" href="<?= base_url("turno/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Turnos</span></a></li>
           </ul>
           
+          <a href="#"><i class="fa fa-calendar"></i> <span>Tickets</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Ticket</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
+          </ul>
+          
         </li>
-
         <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-link"></i> <span>Reestablecer Contraseña</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
        

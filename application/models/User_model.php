@@ -9,19 +9,19 @@ class User_model extends CI_Model{
         $this->load->helper('url');
     }
     
-    public function insert ($legajo,$tipo_usuario,$nombre,$contraseña,$email){
+    public function insert ($legajo,$tipo_usuario,$email){
             $id_pers = $this->find_person_by_legajo($legajo);
             $data = array(
                'id_persona' => $id_pers,
                'id_tipo_usuario' => $tipo_usuario,
-               'nombre' => $nombre,
-               'contraseña' => $contraseña,
+               'nombre' => $legajo,
+               'contraseña' => $legajo,
                'email' => $email
             );
         $this->db->insert('usuario', $data);
         return $this->db->insert_id();
     } 
-
+    /*
     public function insert_usuario_comedor($id_user,$id_comedor){
         $data = array(
             'id_usuario' => $id_user,
@@ -34,11 +34,8 @@ class User_model extends CI_Model{
         $this->db->where('id_usuario_comedor', $id_user_comedor);
         $this->db->delete('usuario_comedor');
     }
-
-    public function delete($id_user){
-        $this->db->where('id_usuario', $id_user);
-        $this->db->delete('usuario');
-    }
+    
+    
     public function update_usuario_comedor($id_usuario_comedor,$id_usuario,$id_comedor){
         $data = array(
             'id_usuario_comedor' => $id_usuario_comedor,
@@ -48,12 +45,18 @@ class User_model extends CI_Model{
         $this->db->where('id_usuario_comedor', $id_usuario_comedor);
         $this->db->update('usuario_comedor', $data);
     }
-    public function update($id,$id_pers,$tipo_usuario,$nombre,$email){
+    */
+    public function delete($id_user){
+        $this->db->where('id_usuario', $id_user);
+        $this->db->delete('usuario');
+    }
+    public function update($id,$id_pers,$tipo_usuario,$nombre,$contraseña,$email){
             $data = array(
                 'id_usuario' => $id,
                 'id_persona' => $id_pers,
                 'id_tipo_usuario' => $tipo_usuario,
                 'nombre' => $nombre,
+                'contraseña' => $contraseña,
                 'email' => $email
             );
         $this->db->where('id_usuario', $id);
@@ -61,7 +64,7 @@ class User_model extends CI_Model{
     }
 
     public function findAll(){
-        $this->db->select('*');
+        $this->db->select('usuario.id_usuario,usuario.nombre,usuario.email,persona.numero_legajo,tipo_usuario.tipo');
         $this->db->from('usuario');
         $this->db->join('persona', 'usuario.id_persona = persona.id_persona');
         $this->db->join('tipo_usuario', 'usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario');
@@ -76,7 +79,7 @@ class User_model extends CI_Model{
         $this->db->from('usuario');
         $this->db->where('id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
     }
 
     public function find_person_by_id_user($id){
@@ -85,19 +88,20 @@ class User_model extends CI_Model{
         $this->db->join('persona','usuario.id_persona = persona.id_persona');
         $this->db->where('usuario.id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
     }
-
+    /*
     public function find_comedor_by_id_user($id){
-        $this->db->select('*');
+        $this->db->select('comedor.id_comedor,usuario_comedor.id_usuario_comedor, usuario.id_tipo_usuario');
         $this->db->from('usuario');
         $this->db->join('usuario_comedor', 'usuario.id_usuario = usuario_comedor.id_usuario');
         $this->db->join('comedor', 'usuario_comedor.id_comedor = comedor.id_comedor');
         $this->db->where('usuario.id_usuario',$id);
         $query = $this->db->get();
-        return $query->result();
+        return $query->row(0,'User_model');
 
     }
+    */
     /**
      * Permite reestablecer la contraseña
     */
@@ -132,8 +136,8 @@ class User_model extends CI_Model{
             return true;
     }
       
-     private function find_person_by_legajo($legajo){
-         $persona = $this->db->get_where('persona',array('numero_legajo' => $legajo))->row(); 
+     public function find_person_by_legajo($legajo){
+         $persona = $this->db->get_where('persona',array('numero_legajo' => $legajo))->row();
          return $persona->id_persona;
      }
 

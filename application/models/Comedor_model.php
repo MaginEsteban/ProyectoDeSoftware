@@ -60,4 +60,20 @@ class Comedor_model extends CI_Model {
         return $query->row(0,'Comedor_model');
     }
 
+    public function updateUserComedor($id_usuario,$id_comedor){
+        $data = array(
+            'id_usuario' => $id_usuario
+        );
+        $this->db->where('id_comedor',$id_comedor);
+        $this->db->update('comedor',$data);
+    }
+
+    public function find_comedor_by_id_user($id_usuario){
+        $this->db->select('comedor.id_comedor');
+        $this->db->from('comedor');
+        $this->db->where('id_usuario',$id_usuario);
+        $query = $this->db->get();
+        return $query->row(0,'Comedor_model');
+    }
+
 }

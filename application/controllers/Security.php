@@ -40,7 +40,6 @@ class Security extends CI_Controller {
 
         if($this->logeado()){
           $no_url = $this->rol_no_puede[$this->usuario->tipo];
- 
           foreach ($no_url as $url) {
  
              if(stristr($url_actual,base_url($url))){

@@ -17,7 +17,6 @@
                         <tr class="bg-info">
                             <th scope="col">Legajo</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
                             <th scope="col">Email</th>
                             <th scope="col">Tipo de Usuario</th>
                             <th scope="col">Acciones</th>
@@ -29,7 +28,6 @@
                         <tr>
                             <td scope="row"><?php echo $usuario->numero_legajo; ?></th>
                             <td scope="row"><?php echo $usuario->nombre; ?></th>
-                            <td scope="row"><?php echo $usuario->apellido; ?></th>
                             <td scope="row"><?php echo $usuario->email; ?></th>
                             <td scope="row"><?php echo $usuario->tipo; ?></th>
                             <td>

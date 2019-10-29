@@ -19,10 +19,10 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?= base_url("recursos/adminlte/")?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<!-- SlimScroll -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/chart.js/Chart.js"></script>
+<script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
+
+<!-- Cuando recarga la pagina redirecciona a dashboard -->
+<script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

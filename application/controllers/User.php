@@ -26,7 +26,7 @@ class User extends Security {
         $data = array(
             'usuario' => $this->User_model->find_by_id($id_usuario),
             'comedores' => $this->Comedor_model->findAll(),
-            'comedor'=> $this->User_model->find_comedor_by_id_user($id_usuario),
+            'comedor'=> $this->Comedor_model->find_comedor_by_id_user($id_usuario),
             'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
         );
         $this->load->view('users/edit',$data);
@@ -45,43 +45,54 @@ class User extends Security {
 
     
      public function store(){
-
         $legajo = $this->input->post('legajo');
         $email= $this->input->post('email');
         $idTipoUsuario = $this->input->post('tipos');
         $idComedor = $this->input->post('comedores');
-        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$legajo,$legajo,$email,$idComedor);
+        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
 
-        if($_POST['tipos'] == '3'){
-           $this->User_model->insert_usuario_comedor($id_user,$idComedor);     
+       //Si es admin. Comedor entra al if
+        if($idTipoUsuario == '3'){
+           $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
         }
-        redirect(base_url('users/list'));
+        redirect(base_url('user/listing'));
         
      }
      
      public function modificarUsuario(){
-    
-        $id_pers = $this->input->post('id_persona');
+        
         $email = $this->input->post('email');
-        $tipoUser = $this->input->post('tipos');
         $nombre = $this->input->post('nombre');
-        $num = $this->input->post('numero');
-        $id_user_com = $this->input->post('id_user_comedor');
-        $numeroCom = $this->input->post('comedores');
-        $id_user = $this->input->post('id');
-        $this->User_model->update($id_user,$id_pers,$tipoUser,$nombre,$email);
+        $contraseña = $this->input->post('contraseña');
+        $tipo = $this->input->post('tipo_seleccionado');
+        $comedor_new = $this->input->post('numero_comedor_seleccionado');
+        $comedor_old = $this->input->post('id_comedor');
+        $id_user = $this->input->post('id_usuario');
+        $id_pers = $this->input->post('id_persona');
+        
+        
+        $this->User_model->update($id_user,$id_pers,$tipo,$nombre,$contraseña,$email);
+        
+
+        // verifica si se cambio el comedor
+         if( !($comedor_new == $comedor_old)){
+            $this->Comedor_model->updateUserComedor($id_user,$comedor_new);
+         }
+        /*
         //si el tipo seleccionado es distinto al que tenia y selecciono admin. comed
-        if($_POST['tipos'] != $_POST['tipo'] && $_POST['tipos'] == 3){
+        // 1 = Usuario Cliente / 3 = Administrador de Comedores
+        if($_POST['tipos_new'] != $_POST['tipo'] && $_POST['tipos'] == 3){
             $this->User_model->insert_usuario_comedor($id_user,$numeroCom);     
         }
         //si el tipo seleccionado es igual al que tenia y el numero de comedor es distinto al que tenia
-        if($_POST['tipos'] != $_POST['tipo'] && $numeroCom != $num){
+        if($_POST['tipos_new'] == $_POST['tipo'] && $numero_com_old != $numeroCom){
             $this->User_model->update_usuario_comedor($id_user_com,$id_user,$numeroCom);     
         }
         //si el tipo seleccionado es distinto al que tenia y selecciono usuario client
-        if($_POST['tipos'] != $_POST['tipo'] && $_POST['tipos'] == 1){
+        if($_POST['tipos_new'] != $_POST['tipo'] && $_POST['tipos'] == 1){
             $this->User_model->delete_usuario_comedor($id_user_com);
         }
+        */
         redirect(base_url('user/listing'));
     }
 
