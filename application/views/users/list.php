@@ -11,7 +11,7 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col mx-auto">
                 <table class="table table-striped"> Aqui se encuentran todos los usuarios disponibles
                     <thead class="">
                         <tr class="bg-info">
