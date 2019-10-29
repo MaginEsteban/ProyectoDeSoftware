@@ -29,12 +29,12 @@ class Programacion extends Security {
     }
 
 
-    public function delete_menu(){
+    public function delete_menu_programacion(){
         //obtiene el id del menu
         $id_menu = $this->input->post('programacion_menu');
         
         // Elimino
-
+        
     }
 
     //dias de la programacion

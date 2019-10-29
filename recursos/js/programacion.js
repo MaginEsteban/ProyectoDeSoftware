@@ -92,7 +92,7 @@ function eliminarMenu(idProgramacionMenu) {
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/programacion/delete_menu/",
+				url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion",
 				data: {		programacion_menu: idProgramacionMenu	},
 				method: 'POST',
 				success: function (respuesta) {

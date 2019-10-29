@@ -78,4 +78,23 @@ class Menu_model extends CI_Model {
         return $query->result();
     }
 
+    // eliminar menu de una programacion
+    public function delete_programacion_menu($id_programacion_menu){
+      
+        $this->db->delete('programacion_menu');
+        $this->db>where('id_programacion_menu',$id_programacion_menu);
+    }
+
+    // agrega una menu a una programacion
+    public function add_programacion_menu($id_programacion,$id_menu){
+        $data = array(
+            'id_programacion' => $id_programacion,
+            'id_menu' => $id_menu
+        );
+        
+        $this->db->set($data);
+        $this->db->insert('programacion_menu');
+
+    }
+
 }

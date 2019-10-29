@@ -13,13 +13,15 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
+
 <script src="<?= base_url("recursos")?>/js/programacion.js"></script>
 <!-- sweetalert  -->
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url("recursos")?>/js/adminlte.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 
 <!-- Cuando recarga la pagina redirecciona a dashboard -->
 <script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
