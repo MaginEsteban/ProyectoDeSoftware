@@ -16,4 +16,3 @@ class Ciudad_model extends CI_Model {
     }
 
 }
-?>

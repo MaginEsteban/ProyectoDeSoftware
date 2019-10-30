@@ -14,19 +14,13 @@ class Comedor extends Security {
 
     public function add()
 	{
-        $data = array(
-            'ciudades' => $this->Ciudad_model->findAll(),
-            'user' => $this->session->userdata('user'),
-        );
+        $data['ciudades'] = $this->Ciudad_model->findAll();
         $this->load->view('comedores/add',$data);
     }
 
     public function listing()
 	{
-        $data = array(
-            'comedores' => $this->Comedor_model->findAll(),
-            'user' => $this->session->userdata('user'),
-        );
+        $data['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('comedores/list',$data);
     }
 
@@ -34,8 +28,7 @@ class Comedor extends Security {
         $id_comedor = $this->uri->segment(3);
         $data = array(
             'comedor' => $this->Comedor_model->findById($id_comedor),
-            'ciudades' => $this->Ciudad_model->findAll(),
-            'user' => $this->session->userdata('user'),
+            'ciudades' => $this->Ciudad_model->findAll()
         );
         $this->load->view('comedores/edit',$data);
     }
@@ -60,5 +53,4 @@ class Comedor extends Security {
         $this->Comedor_model->update($idComedor,$nombreCiudad,$idCiudad);
         redirect(base_url('comedor/listing'));
     }
-
 }

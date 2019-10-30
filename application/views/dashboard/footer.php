@@ -13,9 +13,9 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-<script src="<?= base_url("recursos/libs")?>/bootstrap/dist/js/bootstrap.js"></script>
-<script src="<?= base_url("recursos")?>/js/programacion.js"></script>
-<!-- sweetalert  -->
+
+<!-- jQuery 3 -->
+<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?= base_url("recursos/adminlte/")?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
@@ -24,12 +24,10 @@
 <!-- Cuando recarga la pagina redirecciona a dashboard -->
 <script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 
-    
 </body>
 </html>

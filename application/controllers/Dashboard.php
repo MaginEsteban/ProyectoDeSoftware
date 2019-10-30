@@ -6,14 +6,10 @@ class Dashboard extends Security {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('User_model');
-		$this->load->helper('url');
 	}
-
     public function index()
 	{
-		$data['user'] = $this->session->userdata('user');
-		$this->load->view('dashboard/main_template', $data);
+		$this->load->view('dashboard/main_template');
 	}
 
 }

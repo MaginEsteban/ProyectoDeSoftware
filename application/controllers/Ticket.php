@@ -3,11 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . 'controllers/Security.php'; 
 
-class User extends Security {
+class Ticket extends Security {
     
     public function __construct(){
         parent::__construct();
-        $this->load->model(array('User_model','Comedor_model'));
+        $this->load->model(array('Ticket_model','Menu_model','Comedor_model'));
         $this->load->helper('url_helper');
         
     }
@@ -17,8 +17,12 @@ class User extends Security {
     */
     public function add()
 	{
-        $data ['comedores'] = $this->Comedor_model->findAll();
-        $this->load->view('users/add',$data);
+        /*En Session se podria tener el numero de comedor y entonces se buscaria 
+          de que comedor quiere sacar un ticket para mostrarle solo los menues que
+          estan disponibles en ese comedor
+        */
+        $data ['menues'] = $this->Menu_model->findAll();
+        $this->load->view('tickets_user/add',$data);
     }
    
     public function edit(){
@@ -39,23 +43,22 @@ class User extends Security {
     }
     
     public function listing(){
-        $data['usuarios'] = $this->User_model->findAll();
-        $this->load->view('users/list',$data);
+        $data['tickets'] = $this->Ticket_model->findAll();
+        $this->load->view('tickets_user/list',$data);
     }
 
     
      public function store(){
-
-        $legajo = $this->input->post('legajo');
-        $email= $this->input->post('email');
-        $idTipoUsuario = $this->input->post('tipos');
-        $idComedor = $this->input->post('comedores');
-        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$legajo,$legajo,$email,$idComedor);
-
-        if($_POST['tipos'] == '3'){
-           $this->User_model->insert_usuario_comedor($id_user,$idComedor);     
-        }
-        redirect(base_url('users/list'));
+        $code = $this->Ticket_model->get_random_code() + 1;
+        $id_menu = $this->input->post('menues');
+        $id_estado_pago = 1;
+        $id_ticket = $this->Ticket_model->insert($code,$id_estado_pago,$id_menu);
+        /*
+        Con el dato del usuario en _$SESSION se realiza el insert en la tabla reserva
+        $this->Ticket_model->insert_reserva($,$,$,$);
+        */
+             
+        redirect(base_url('ticket/listing'));
         
      }
      

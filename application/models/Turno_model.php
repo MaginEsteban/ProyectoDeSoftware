@@ -1,7 +1,6 @@
 <?php
 class Turno_model extends CI_Model {
   
-
     public function __construct()
     {
         $this->load->database();
@@ -39,10 +38,19 @@ class Turno_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('turno');
         $this->db->join('comedor', 'turno.id_comedor = comedor.id_comedor');
-        $query = $this->db->get();
+       
+         $query = $this->db->get();
+        
         return $query->result();
     }
 
+    public function findAllComedores(){
+        $this->db->select('*');
+        $this->db->from('comedor');
+        $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function findById($id){
         $this->db->select('*');
@@ -51,21 +59,6 @@ class Turno_model extends CI_Model {
         $this->db->where('tu.id_turno', $id);
         $query = $this->db->get();
         return $query->row(0,'Turno_model');
-    }
-
-
-
-
-    public function findTurnosByIdComedor($id_comedor){
-       
-        $this->db->select('*');
-        $this->db->from('turno');
-        $this->db->where('id_comedor',$id_comedor);
-        $query = $this->db->get();
-
-        return $query->result();
-
-
     }
 
 }

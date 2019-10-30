@@ -1,5 +1,5 @@
 <?php   
-    $this->load->view('dashboard/header',$user);  
+    $this->load->view('dashboard/header');  
 ?>
     <section class="content-header">
         <h1>
@@ -11,7 +11,7 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col mx-auto">
                 <table class="table table-striped"> Aqui se encuentran todos los menues disponibles
                     <thead class="">
                         <tr class="bg-info">
@@ -74,7 +74,7 @@
     </script>
 
 <?php   
-    $this->load->view('dashboard/aside',$user);
+    $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');
     $this->load->view('dashboard/footer');
 ?>

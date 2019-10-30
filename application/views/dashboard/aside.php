@@ -1,6 +1,4 @@
 
-<?php $user = $this->session->userdata('user'); ?>
-
 </div> <!-- cierro el div abierto en el header-->
 
 <aside class="main-sidebar">
@@ -14,7 +12,8 @@
           <img src="<?= base_url("recursos")?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $user->nombre; ?></p>
+          <p>alsd</p>
+          
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -24,7 +23,7 @@
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Buscar...">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
@@ -87,10 +86,19 @@
             <li class="active"><a class="user-menu" href="<?= base_url("turno/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Turnos</span></a></li>
           </ul>
           
+          <a href="#"><i class="fa fa-calendar"></i> <span>Tickets</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Ticket</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
+          </ul>
+          
         </li>
-
-        <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-key"></i> <span>Reestablecer Contraseña</span></a></li>
-        <li ><a href="<?= base_url('programacion/');?>"><i class="fa fa-tasks"></i> <span>Programacion</span></a></li>
+        <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-link"></i> <span>Reestablecer Contraseña</span></a></li>
+        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
        
       </ul>
       <!-- /.sidebar-menu -->

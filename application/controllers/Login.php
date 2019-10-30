@@ -10,6 +10,7 @@ class Login extends CI_Controller {
 	}
 
      public function index(){
+
 		$this->load->view('login');
 	}
 	
@@ -29,9 +30,13 @@ class Login extends CI_Controller {
 		if( !isset( $user ) )	{
 			$redirec_to = false;
 			$mensaje = 'El nombre de usuario o la contraseña no es valida...';
+		
+
 		}else{
 			$this->abrir_sesion($user);
-		}
+
+			}
+		
 		$response = array('redirecTo'=>$redirec_to,'url'=>$url,'message'=>$mensaje,'user'=>$user,'nombre'=>$user_name,'pass'=>$user_password);
 	    header('Content-Type: application/json');
 		echo json_encode ($response);
@@ -39,6 +44,7 @@ class Login extends CI_Controller {
 	 
 	private function abrir_sesion($usuario){
 		if ($usuario) {
+			 
 			$usuario_data = array (
 				'user' => $usuario,
 				'logged' => TRUE);
@@ -46,8 +52,10 @@ class Login extends CI_Controller {
 			$this->session->set_userdata($usuario_data);
 		}
 	}	
+		
 
 	public function cerrar_sesion() {
-		$this->session->sess_destroy();
+		$this->session->sess_destroy ();
+		redirect ( 'login' );
 	}
 }
