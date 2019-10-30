@@ -48,6 +48,6 @@ class Login extends CI_Controller {
 	}	
 
 	public function cerrar_sesion() {
-		$this->session->sess_destroy ();
+		$this->session->sess_destroy();
 	}
 }

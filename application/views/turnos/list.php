@@ -36,7 +36,7 @@
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
 
-                                <a href="<?= base_url('turno/delete/').$turno->id_turno; ?>" role="button" class="btn btn-danger m-1">
+                                <a onClick="confirmDelete()" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
@@ -47,6 +47,30 @@
             </div>
         </div>
     </section>
+    <script>
+        function confirmDelete(){
+        event.preventDefault();
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Usted esta a punto de eliminar este turno!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                    url: "http://localhost/proyectodesoftware/turno/delete/<?php echo $turno->id_turno ?>",
+                    success: function() {
+                        location.href = "http://localhost/proyectodesoftware/turno/listing";
+                    }
+                })
+                }
+            })
+    }
+    </script>
      
 <?php   
     $this->load->view('dashboard/aside');

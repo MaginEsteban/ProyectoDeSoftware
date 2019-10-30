@@ -1,8 +1,9 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'controllers/Security.php'; 
 
-class Menu extends CI_Controller {
+class Menu extends Security {
 
     public function __construct(){
         parent::__construct();
@@ -47,6 +48,13 @@ class Menu extends CI_Controller {
         $id_menu = $this->uri->segment(3);
         $this->Menu_model->delete($id_menu);
         redirect(base_url('menu/listing'));
+    }
+
+    public function delete_post(){
+        $id = $this->input->post('id');
+        $this->Menu_model->delete($id_menu);
+        redirect(base_url('menu/listing'));
+
     }
 
     public function crearMenu(){

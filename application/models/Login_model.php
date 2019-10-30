@@ -19,6 +19,15 @@ class Login_model extends CI_Model{
         return $row;
     }
 
+    public function find_by_id($id){
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->join('tipo_usuario','usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario' );
+        $this->db->where('id_usuario',$id);
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row;
+    }
       
 
 }

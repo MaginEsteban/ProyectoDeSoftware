@@ -8,7 +8,7 @@ class Security extends CI_Controller {
     //Array asociativo de lo que no puede hacer cada rol. Ej: el administrador puede hacer todo pero el vendedor
     //no puede acceder a lo que este en su array.
     public $rol_no_puede = array(
-       'CLIENTE' => array('user','comedor','turno'),
+       'CLIENTE' => array(),
        'USUARIO NO REGISTRADO' => array('user'),
        'ADMINISTRADOR COMEDOR'=> array(''),
        'ADMINISTRADOR'=> array()
@@ -17,6 +17,7 @@ class Security extends CI_Controller {
     public function __construct() {
        parent::__construct();
        $this->usuario = $this->session->userdata('user');
+      
        $this->validarPagina(current_url());
        $datos['mnu_activo'] = $this->uri->segment(1);
        if ($this->uri->segment(2) != ""){
@@ -43,8 +44,7 @@ class Security extends CI_Controller {
  
     public function logeado(){
  
-      if($this->session->userdata('logged'))
-      {
+      if($this->session->userdata('logged')){
          return true;
       }else{
          redirect('login', 'refresh');

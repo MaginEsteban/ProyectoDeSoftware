@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Usuarios
+            Mi Usuario
             <small>Modificar Usuario</small>
         </h1>
 
@@ -15,10 +15,10 @@
             <div class="col-6 mx-auto card">
 
                 <form action="<?= base_url('user/modificarMiUsuario'); ?>" method="POST" class="m-2">
-                    <input type="hidden" name="id_persona" value= "<?php $usuario->id_persona ?>"/>
+                    <input type="hidden" name="id_persona" value= "<?php echo $usuario->id_persona ?>"/>
                     <!-- Identificador -->
                     <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            name="id" value="<?php echo $usuario->id_usuario; ?>">
+                            name="id_usuario" value="<?php echo $usuario->id_usuario; ?>">
                      <!-- Nombre de la persona-->
                      <div class="form-group">
                         <label for="exampleInputEmail1">Su nombre</label>

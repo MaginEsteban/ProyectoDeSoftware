@@ -7,9 +7,8 @@ class User extends Security {
     
     public function __construct(){
         parent::__construct();
-        $this->load->model(array('User_model','Comedor_model'));
+        $this->load->model(array('User_model','Comedor_model','Login_model'));
         $this->load->helper('url_helper');
-        
     }
 
     /**
@@ -92,6 +91,20 @@ class User extends Security {
         redirect(base_url('user/listing'));
     }
 
+    public function modificarMiUsuario(){
+        $su_nombre = $this->input->post('su_nombre');
+        $su_apellido = $this->input->post('su_apellido');
+        $id_persona = $this->input->post('id_persona');
+        $email = $this->input->post('email');
+        $contraseña = $this->input->post('contraseña');
+        $nombre = $this->input->post('nombre');
+        $id_usuario = $this->input->post('id_usuario');
+        $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
+        $user = $this->Login_model->find_by_id($id_usuario);
+        $this->recargar_sesion($user);
+        redirect(base_url('dashboard'));
+    }
+
     public function edit_my_user(){
         $id_usuario = $this->uri->segment(3);
         $data = array(
@@ -102,16 +115,15 @@ class User extends Security {
         $this->load->view('users/edit_my_user',$data);
     }
 
-    public function modificarMiUsuario(){
-        $su_nombre = $this->input->post('su_nombre');
-        $su_apellido = $this->input->post('su_apellido');
-        $id_persona = $this->input->post('id_persona');
-        $email = $this->input->post('email');
-        $contraseña = $this->input->post('contraseña');
-        $nombre = $this->input->post('nombre');
-        $id_usuario = $this->input->post('id_usuario');
-        $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
-        redirect(base_url('dashboard'));
-    }
+    private function recargar_sesion($usuario){
+		if ($usuario) {
+			$usuario_data = array (
+				'user' => $usuario,
+				'logged' => TRUE);
+			$this->session->sess_expiration = '28800';// expires 
+			$this->session->set_userdata($usuario_data);
+		}
+	}	
+
 
 }

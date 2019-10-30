@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'controllers/Security.php'; 
 
-class Dashboard extends CI_Controller {
+class Dashboard extends Security {
 
 	public function __construct() {
 		parent::__construct();

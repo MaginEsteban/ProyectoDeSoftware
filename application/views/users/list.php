@@ -38,7 +38,7 @@
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
                                 <!-- eliminar usuario -->
-                                <a href="<?= base_url('user/delete/').$usuario->id_usuario; ?>" role="button" class="btn btn-danger m-1">
+                                <a onClick="confirmDelete()" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
@@ -51,6 +51,30 @@
 
         </div>
     </section>
+    <script>
+        function confirmDelete(){
+        event.preventDefault();
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Usted esta a punto de eliminar este usuario!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                    url: "http://localhost/proyectodesoftware/user/delete/<?php echo $usuario->id_usuario ?>",
+                    success: function() {
+                        location.href = "http://localhost/proyectodesoftware/user/listing";
+                    }
+                })
+                }
+            })
+    }
+    </script>
 <?php   
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');
