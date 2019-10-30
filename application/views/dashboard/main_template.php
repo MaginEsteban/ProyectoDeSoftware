@@ -1,11 +1,11 @@
-<?php  $this->load->view('dashboard/header');      ?>
+<?php  
+$this->load->view('dashboard/header');      
+$user = $this->session->userdata('user')
+?>
 <section class="content-header">
-    <h1>
-        Dashboard
-        <small>-</small>
-    </h1>
     <h2>
-    Bienvenido
+        Bienvenido <?php echo $user->nombre; ?> <br>
+        <small>Usted es <?php echo $user->tipo; ?></small>
     </h2>
 </section>
 <section class="content container-fluid">

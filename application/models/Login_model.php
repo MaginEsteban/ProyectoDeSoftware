@@ -17,7 +17,6 @@ class Login_model extends CI_Model{
         $this->db->where(array('nombre'=>$name,'contraseña'=>$pass));
         $query = $this->db->get();
         $row = $query->row();
-
         return $row;
         
     }

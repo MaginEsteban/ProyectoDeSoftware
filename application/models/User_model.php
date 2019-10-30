@@ -141,6 +141,28 @@ class User_model extends CI_Model{
          return $persona->id_persona;
      }
 
+     public function update_my_user($id,$id_pers,$nombre,$email,$su_nombre,$su_apellido,$contraseña){
+        $data = array(
+            'id_usuario' => $id,
+            'id_persona' => $id_pers,
+            'nombre' => $nombre,
+            'email' => $email,
+            'contraseña' => $contraseña
+        );
+        $this->db->where('id_usuario', $id);
+        $this->db->update('usuario', $data);
+        $this->edit_my_datos($id_pers,$su_nombre,$su_apellido);
+    }
+    
+    public function edit_my_datos($id_pers,$su_nombre,$su_apellido){
+        $data = array(
+            'id_persona' => $id_pers,
+            'nombre' => $su_nombre,
+            'apellido' => $su_apellido
+        );
+        $this->db->where('id_persona', $id_pers);
+        $this->db->update('persona', $data);
+    }
 
 
 }

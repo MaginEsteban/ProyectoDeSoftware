@@ -1,3 +1,4 @@
+<?php $user = $this->session->userdata('user'); ?>
 
 </div> <!-- cierro el div abierto en el header-->
 
@@ -12,7 +13,7 @@
           <img src="<?= base_url("recursos")?>/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>alsd</p>
+          <p><?php echo $user->nombre; ?></p>
           
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
@@ -97,8 +98,8 @@
           </ul>
           
         </li>
-        <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-link"></i> <span>Reestablecer Contraseña</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-key"></i> <span>Reestablecer Contraseña</span></a></li>
+        <li ><a href="<?= base_url('programacion/');?>"><i class="fa fa-tasks"></i> <span>Programacion</span></a></li>
        
       </ul>
       <!-- /.sidebar-menu -->

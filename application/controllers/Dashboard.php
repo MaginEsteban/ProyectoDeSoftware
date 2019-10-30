@@ -6,6 +6,7 @@ class Dashboard extends Security {
 
 	public function __construct() {
 		parent::__construct();
+		
 	}
     public function index()
 	{
