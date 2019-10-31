@@ -61,4 +61,15 @@ class Turno_model extends CI_Model {
         return $query->row(0,'Turno_model');
     }
 
+    public function findTurnosByIdComedor($id_comedor){
+       
+        $this->db->select('*');
+        $this->db->from('turno');
+        $this->db->where('id_comedor',$id_comedor);
+        $query = $this->db->get();
+
+        return $query->result();
+
+
+    }
 }

@@ -9,12 +9,17 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="<?= base_url('recursos')?>/css/util.css">
 
     <link rel="stylesheet" href="<?= base_url('recursos')?>/css/main.css">
 
-    <link rel="stylesheet"
-        href="<?= base_url('recursos/adminlte/')?>bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <!-- Font Awesome -->
     <link rel="stylesheet"
         href="<?= base_url('recursos/adminlte/')?>bower_components/font-awesome/css/font-awesome.min.css">
@@ -68,19 +73,23 @@
                 <span class="logo-lg"><b>Comedor-</b>UNRN</span>
             </a>
             <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top" role="navigation">
+            <nav class="navbar navbar-static-top p-0" role="navigation">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                        <li>
-                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs"></a>
-                        </li>
-                        <li>
-                            <a onClick="close_session()" class="fa fa-sign-out"></a>
-                        </li>
+                <div class="row mr-1">
+                    <div class="col"><li>
+                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs text-white"></a>
+                        </li></div>
+                    <div class="col"><li>
+                            <a onClick="close_session()" class="fa fa-sign-out text-white"></a>
+                        </li></div>
+                </div>
+                        
+                        
                     </ul>
                 </div>
             </nav>

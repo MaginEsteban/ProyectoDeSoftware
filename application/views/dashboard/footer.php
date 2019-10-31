@@ -13,9 +13,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?= base_url("recursos/adminlte/")?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?= base_url("recursos/adminlte/")?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
@@ -23,6 +20,7 @@
 
 <!-- Cuando recarga la pagina redirecciona a dashboard -->
 <script src="<?= base_url("recursos")?>/js/habilitarSelectComedor.js"></script>
+<script src="<?= base_url("recursos")?>/js/programacion.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
