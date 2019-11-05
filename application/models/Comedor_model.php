@@ -30,12 +30,13 @@ class Comedor_model extends CI_Model {
             $this->db->delete('comedor');
         
     }
+
     public function findAll(){
         $this->db->select('*');
         $this->db->from('comedor');
         $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
        
-         $query = $this->db->get();
+        $query = $this->db->get();
         
         return $query->result();
     }
