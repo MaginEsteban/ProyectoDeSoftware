@@ -62,7 +62,7 @@
           </ul>
         <?php endif; ?>
 
-          <a href="#"><i class="fa fa-list-ol"></i> <span>Menues</span>
+          <a href="#"><i class="fa fa-cutlery"></i> <span>Menues</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
