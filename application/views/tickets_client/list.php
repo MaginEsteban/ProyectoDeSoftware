@@ -15,8 +15,11 @@
                 <table class="table table-striped"> Aqui se encuentran todos sus tickets                    <thead class="">
                         <tr class="bg-info">
                             <th scope="col">Codigo</th>
-                            <th scope="col">Estado</th>
+                            <th scope="col">Estado de Pago</th>
+                            <th scope="col">Estado de Ticket</th>
                             <th scope="col">Menu</th>
+                            <th scope="col">Fecha de Retiro</th>
+                            <th scope="col">Turno</th>
                             <th scope="col">Acciones</th>
 
                         </tr>
@@ -26,16 +29,17 @@
                         <tr>
                             <td scope="row"><?php echo $ticket->codigo; ?></th>
                             <td scope="row"><?php if($ticket->id_estado_pago == 1){echo "PENDIENTE DE PAGO";}else{echo "PAGADO";} ?></th>
-                            <td scope="row"><?php echo $ticket->nombre; ?></th>
+                            <td scope="row"><?php echo $ticket->nombre_estado; ?></th>
+                            <td scope="row"><?php echo $ticket->nombre_menu; ?></th>
+                            <td scope="row"><?php echo $ticket->fecha_retiro_ticket; ?></th>
+                            <td scope="row"><?php echo $ticket->nombre_turno; ?></th>
                             <td>
-                                <!-- modificar ticket -->
-                                <a href="<?= base_url('ticket/edit/').$ticket->id_ticket; ?>" role="button" class="btn btn-primary m-1">
-                                    <i class="fa fa-pencil-square-o"></i> 
-                                </a>
+                            <?php if($ticket->nombre_estado != "CANCELADO" && !isset($ticket->fecha_fin)){?>
                                 <!-- eliminar ticket -->
-                                <a href="<?= base_url('ticket/delete/').$ticket->id_ticket; ?>" role="button" class="btn btn-danger m-1">
+                                <a href="<?= base_url('ticket/delete/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cancelar Ticket" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
+                            <?php }?> 
                             </td>
                         </tr>
                     <?php endforeach; ?>

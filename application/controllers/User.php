@@ -104,6 +104,7 @@ class User extends Security {
         $nombre = $this->input->post('nombre');
         $id_usuario = $this->input->post('id_usuario');
         $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
+        
         $user = $this->Login_model->find_by_id($id_usuario);
         $this->recargar_sesion($user);
         redirect(base_url('dashboard'));

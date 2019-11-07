@@ -87,14 +87,25 @@
             <li class="active"><a class="user-menu" href="<?= base_url("turno/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Turnos</span></a></li>
           </ul>
           
-          <a href="#"><i class="fa fa-calendar"></i> <span>Tickets</span>
+                <!--Tickets Cliente-->
+                <a href="#"><i class="fa fa-ticket"></i> <span>Tickets</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
             <li class="active"><a class="user-menu" href="<?= base_url("ticket/add"); ?>"><i class="fa fa-plus"></i> <span>Agregar Ticket</span></a></li>
-            <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_client"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
+          </ul>
+
+          <!--Tickets Admin-->
+          <a href="#"><i class="fa fa-ticket"></i> <span>Tickets</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_admin"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
           </ul>
           
         </li>
