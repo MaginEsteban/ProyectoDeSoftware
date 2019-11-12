@@ -48,6 +48,14 @@ class Ticket extends Security {
         redirect(base_url('ticket/listing_admin'));
     }
     
+    public function cobrar_ticket(){
+        $id_ticket = $this->uri->segment(3);
+        $data =$this->Ticket_model->get_estado_ticket_by_id($id_ticket);
+        $this->Ticket_model->update($id_ticket,$data,5);
+        $data = $this->Ticket_model->get_ticket_by_id($id_ticket);
+        $this->Ticket_model->update_ticket($id_ticket,$data);
+        redirect(base_url('ticket/listing_admin'));
+    }
     public function change(){
         $id_ticket = $this->uri->segment(3);
         $data = array(

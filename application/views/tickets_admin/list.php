@@ -12,7 +12,7 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-10 mx-auto">
-                <table class="table table-striped"> Aqui se encuentran todos sus tickets                    <thead class="">
+                <table class="table table-striped"> Aqui se encuentran todos los tickets                    <thead class="">
                         <tr class="bg-info">
                             <th scope="col">Codigo</th>
                             <th scope="col">Estado de Pago</th>
@@ -38,13 +38,17 @@
                                 <!-- cambiar estado ticket -->
                                 <a href="<?= base_url('ticket/change/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cambiar Estado Ticket " role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-share"></i>
+                                </a>
+                                <!-- cobrar ticket -->
+                                <a href="<?= base_url('ticket/cobrar_ticket/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cobrar ticket " role="button" class="btn btn-primary m-1">
+                                    <i class="fa fa-usd"></i>
                                 </a>                            
                             <?php } ?>
                             
                             <?php if($ticket->nombre_estado != "CANCELADO" && $ticket->nombre_estado != "ENTREGADO" && !isset($ticket->fecha_fin)){ ?>
                                 <!-- eliminar ticket -->
                                 <a href="<?= base_url('ticket/delete/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cancelar Ticket" role="button" class="btn btn-danger m-1">
-                                    <i class="fa fa-remove"></i>
+                                    <i class="fa fa-times"></i>
                                 </a>
                             <?php } ?>
                             </td>
