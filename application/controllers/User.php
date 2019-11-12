@@ -43,15 +43,14 @@ class User extends Security {
     }
 
     
-     public function store(){
+    public function store(){
         
         $legajo = $this->input->post('legajo');
-        if(!isnull($this->User_model->find_person_by_legajo($legajo)){
-
-        $email= $this->input->post('email');
-        $idTipoUsuario = $this->input->post('tipos');
-        $idComedor = $this->input->post('comedores');
-        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
+        if(!isnull($this->User_model->find_person_by_legajo($legajo))){
+            $email= $this->input->post('email');
+            $idTipoUsuario = $this->input->post('tipos');
+            $idComedor = $this->input->post('comedores');
+            $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
 
        //Si es admin. Comedor entra al if
         if($idTipoUsuario == '3'){
