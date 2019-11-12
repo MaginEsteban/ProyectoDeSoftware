@@ -27,7 +27,6 @@ class Ticket_model extends CI_Model{
     public function update($id_ticket,$estado_ticket,$id_estado){
         $fecha = date('Y-m-d H:i:s');
         $data = array(
-            'id_estado_ticket' => $estado_ticket->id_estado_ticket,
             'fecha_inicio' => $estado_ticket->fecha_inicio,
             'fecha_fin' => $fecha,
             'id_ticket' => $id_ticket,
@@ -38,9 +37,30 @@ class Ticket_model extends CI_Model{
         $this->insert_ticket_estado($fecha,null,$id_ticket,$id_estado);
     }
 
+    public function update_ticket($id_ticket,$datos){
+        $data = array(
+            'codigo' => $datos->codigo,
+            'id_estado_pago' => 2,
+            'id_menu' => $datos->id_menu,
+            'id_persona' => $datos->id_persona,
+            'id_turno' => $datos->id_turno,
+            'fecha_retiro_ticket' => $datos->fecha_retiro_ticket,
+            'fecha_registro_ticket' => $datos->fecha_registro_ticket
+        );
+        $this->db->where('id_ticket',$id_ticket);
+        $this->db->update('ticket',$data);
+    }
+
+    public function get_ticket_by_id($id_ticket){
+        $this->db->select('*');
+        $this->db->from('ticket');
+        $this->db->where('id_ticket',$id_ticket);
+        $query = $this->db->get();
+        return $query->row(0,'Ticket_model');
+    }
     public function get_estado_ticket_by_id($id_ticket){
         $this->db->select('max(id_estado) as maximo, id_estado_ticket,
-        fecha_inicio');
+        fecha_inicio, id_estado');
         $this->db->from('estado_ticket');
         $this->db->where('id_ticket',$id_ticket);
         $query = $this->db->get();

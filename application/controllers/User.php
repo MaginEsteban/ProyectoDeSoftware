@@ -44,7 +44,10 @@ class User extends Security {
 
     
      public function store(){
+        
         $legajo = $this->input->post('legajo');
+        if(!isnull($this->User_model->find_person_by_legajo($legajo)){
+
         $email= $this->input->post('email');
         $idTipoUsuario = $this->input->post('tipos');
         $idComedor = $this->input->post('comedores');
@@ -53,9 +56,10 @@ class User extends Security {
        //Si es admin. Comedor entra al if
         if($idTipoUsuario == '3'){
            $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
-        }
+        }  
         redirect(base_url('user/listing'));
-        
+        }
+        redirect(base_url('user/add'));
      }
      
      public function modificarUsuario(){
