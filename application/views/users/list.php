@@ -16,7 +16,7 @@
                     <thead class="">
                         <tr class="bg-info">
                             <th scope="col">Legajo</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">Nombre de Usuario</th>
                             <th scope="col">Email</th>
                             <th scope="col">Tipo de Usuario</th>
                             <th scope="col">Acciones</th>
@@ -38,6 +38,10 @@
                                 <!-- eliminar usuario -->
                                 <a onClick="confirmDelete()" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
+                                </a>
+                                <!-- Sancionar usuario -->
+                                <a href="<?= base_url('sancion/add/').$usuario->id_usuario; ?>" role="button" class="btn btn-primary m-1">
+                                    <i class="fa fa-exclamation-circle"></i> 
                                 </a>
                             </td>
                         </tr>

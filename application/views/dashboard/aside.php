@@ -98,7 +98,7 @@
             <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_client"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
           </ul>
 
-          <!--Tickets Admin-->
+          <?php if ($user->id_tipo_usuario == 4 ) : ?>
           <a href="#"><i class="fa fa-ticket"></i> <span>Tickets</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -107,6 +107,18 @@
           <ul class="treeview-menu">
             <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_admin"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
           </ul>
+          <?php endif; ?>
+
+          <?php if ($user->id_tipo_usuario == 4 ) : ?>
+          <a href="#"><i class="fa fa-exclamation-triangle"></i> <span>Sanciones</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a class="user-menu" href="<?= base_url("sancion/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Sanciones</span></a></li>
+          </ul>
+          <?php endif; ?>
           
         </li>
         <li ><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-key"></i> <span>Reestablecer Contraseña</span></a></li>
