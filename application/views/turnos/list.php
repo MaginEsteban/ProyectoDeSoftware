@@ -11,8 +11,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-10 mx-auto">
-            <table class="table table-striped"> Aqui se encuentran todos los turnos disponibles
+            <div class="col mx-auto">
+            <table class="table table-striped" id="myTable"> Aqui se encuentran todos los turnos disponibles
                     <thead class="">
                         <tr class="bg-info">
                             <th scope="col">Nro Turno</th>
@@ -70,6 +70,15 @@
                 }
             })
     }
+    </script>
+      <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            });
+        } );
     </script>
      
 <?php   

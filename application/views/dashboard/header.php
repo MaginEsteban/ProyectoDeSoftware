@@ -12,7 +12,10 @@
     <script
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">    
+    </script>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="<?= base_url('recursos')?>/css/util.css">
 

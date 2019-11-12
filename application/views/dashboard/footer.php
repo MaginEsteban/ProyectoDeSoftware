@@ -24,6 +24,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

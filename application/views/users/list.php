@@ -12,8 +12,8 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col mx-auto">
-                <table class="table table-striped"> Aqui se encuentran todos los usuarios disponibles
-                    <thead class="">
+                <table class="table table-striped" id="myTable"> Aqui se encuentran todos los usuarios disponibles 
+                    <thead>
                         <tr class="bg-info">
                             <th scope="col">Legajo</th>
                             <th scope="col">Nombre de Usuario</th>
@@ -77,6 +77,16 @@
             })
     }
     </script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            });
+        } );
+    </script>
+    
 <?php   
     $this->load->view('dashboard/aside');
     $this->load->view('dashboard/sidebar');
