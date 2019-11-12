@@ -32,15 +32,15 @@
                             <td scope="row"><?php echo $usuario->tipo; ?></th>
                             <td>
                                 <!-- modificar usuario -->
-                                <a href="<?= base_url('user/edit/').$usuario->id_usuario; ?>" role="button" class="btn btn-primary m-1">
+                                <a href="<?= base_url('user/edit/').$usuario->id_usuario; ?>" data-toggle="tooltip" title="Modificar Usuario" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
                                 <!-- eliminar usuario -->
-                                <a onClick="confirmDelete()" role="button" class="btn btn-danger m-1">
+                                <a onClick="confirmDelete()" data-toggle="tooltip" title="Eliminar Usuario" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                                 <!-- Sancionar usuario -->
-                                <a href="<?= base_url('sancion/add/').$usuario->id_usuario; ?>" role="button" class="btn btn-primary m-1">
+                                <a href="<?= base_url('sancion/add/').$usuario->id_usuario; ?>" data-toggle="tooltip" title="Sancionar Usuario" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-exclamation-circle"></i> 
                                 </a>
                             </td>
