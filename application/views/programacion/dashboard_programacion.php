@@ -40,9 +40,10 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-bag"></i>
             </div>
-            <a href="<?= base_url('ticket/list/').$ticket_entregados->id_estado ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_entregados->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    
     <!-- ./col -->
     <div class="col-lg col-xs  mx-auto">
         <!-- small box -->
@@ -55,9 +56,11 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="<?= base_url('ticket/list/').$ticket_reservados->id_estado ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_reservados->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+   
+   
     <!-- ./col -->
     <div class="col-lg col-xs mx-auto">
         <!-- small box -->
@@ -69,7 +72,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="<?= base_url('ticket/list/').$ticket_en_procesos->id_estado ?>"  class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_en_procesos->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -86,7 +89,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="<?= base_url('ticket/list/').$ticket_cancelados->id_estado ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_cancelados->nombre ?>"  class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -102,7 +105,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="" class="small-box-footer" id="cancelTickets">Cancelar <i class="fa fa-arrow-circle-right"></i></a>
+            <a class="small-box-footer" id="cancelTickets">Cancelar <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>
