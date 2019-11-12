@@ -88,5 +88,6 @@ class Comedor_model extends CI_Model {
         
         return $query->row(0);
     }
+    
 
 }

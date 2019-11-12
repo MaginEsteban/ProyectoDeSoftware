@@ -137,6 +137,22 @@ class Ticket_model extends CI_Model{
         );
        $this->db->insert('estado_ticket', $data);
    }
+
+
+   public function countTicketByEstate($turnos){
+    return   $this->db->select('e.id_estado,e.nombre, COUNT(e.nombre) as cantidad')
+             ->group_by('e.nombre')
+             ->from('ticket as t')
+             ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
+             ->join('estado as e','e.id_estado=et.id_estado')
+           //  ->where('et.fecha_fin',"null")
+             ->get()
+             ->result()
+             ;         
+        //  return  $this->db->last_query();
+
+
+  }
 }
 
 ?>
