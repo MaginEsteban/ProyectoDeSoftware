@@ -11,6 +11,8 @@ class Programacion extends Security {
         $this->load->model('Turno_model');
         $this->load->model('Menu_model');
         $this->load->model('Days_model');
+        $this->load->model('Ticket_model');
+
     }
 
     public function index(){
@@ -19,12 +21,17 @@ class Programacion extends Security {
        $usuario =  $this->session->userdata('user');
        
         //busca el comedor que administra
-       $comedor = $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario);
-       $turnos =  $this->Turno_model->findTurnosByIdComedor($comedor->id_comedor);
-            
-       $data['comedor'] = $comedor;
-       $data['turnos'] = $turnos;   
+        $data['comedor'] = $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario);
+       $data['turnos'] =  $this->Turno_model->findTurnosByIdComedor($data['comedor']->id_comedor);
+        
+       $tickets = $this->Ticket_model->countTicketByEstate( $data['turnos']);
 
+
+       $data['ticket_cancelados'] =$tickets[0];//
+       $data['ticket_en_procesos'] = $tickets[1];//
+       $data['ticket_entregados'] = $tickets[2];//
+       $data['ticket_reservados'] = $tickets[3];
+       
        $this->load->view('programacion/dashboard_programacion',$data);
     }
 

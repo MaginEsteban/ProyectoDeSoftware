@@ -71,9 +71,28 @@ class Ticket extends Security {
         $this->load->view('tickets_client/list',$data);
     }
 
+
+    // permite aplicar cambios de filtrado
     public function listing_admin(){
-        $data['tickets'] = $this->Ticket_model->findAll();
-        $this->load->view('tickets_admin/list',$data);
+        
+        $state = $this->uri->segment(3); 
+        $data['tickets'] = array();
+        
+
+
+        if(  $state  ){
+            // con filtro
+            $data['tickets'] = $this->Ticket_model->findAllByState($state);
+        }
+        else{
+            // sin filtro
+            $data['tickets'] = $this->Ticket_model->findAll();
+        }
+       
+      
+
+        $this->load->view('tickets_admin/list',$data);   
+
     }
 
     
