@@ -21,31 +21,19 @@ class User_model extends CI_Model{
         $this->db->insert('usuario', $data);
         return $this->db->insert_id();
     } 
-    /*
-    public function insert_usuario_comedor($id_user,$id_comedor){
-        $data = array(
-            'id_usuario' => $id_user,
-            'id_comedor' => $id_comedor
-        );
-        $this->db->insert('usuario_comedor',$data);
-    }
-
-    public function delete_usuario_comedor($id_user_comedor){
-        $this->db->where('id_usuario_comedor', $id_user_comedor);
-        $this->db->delete('usuario_comedor');
-    }
     
-    
-    public function update_usuario_comedor($id_usuario_comedor,$id_usuario,$id_comedor){
+    public function insert_register ($legajo,$tipo_usuario,$name,$pass,$email){
+        $id_pers = $this->find_person_by_legajo($legajo);
         $data = array(
-            'id_usuario_comedor' => $id_usuario_comedor,
-            'id_usuario' => $id_usuario,
-            'id_comedor' => $id_comedor
+           'id_persona' => $id_pers,
+           'id_tipo_usuario' => $tipo_usuario,
+           'nombre' => $name,
+           'contraseña' => $pass,
+           'email' => $email
         );
-        $this->db->where('id_usuario_comedor', $id_usuario_comedor);
-        $this->db->update('usuario_comedor', $data);
-    }
-    */
+    $this->db->insert('usuario', $data);
+} 
+    //HACER INSERT PARA EL QUE SE REGISTRA
     public function delete($id_user){
         $this->db->where('id_usuario', $id_user);
         $this->db->delete('usuario');

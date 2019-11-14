@@ -25,6 +25,7 @@
                     </thead>
                     <tbody>
                     <?php foreach ($usuarios as $usuario): ?>
+                        <?php if($usuario->tipo != "ADMINISTRADOR"){?>
                         <tr>
                             <td scope="row"><?php echo $usuario->numero_legajo; ?></th>
                             <td scope="row"><?php echo $usuario->nombre; ?></th>
@@ -45,6 +46,7 @@
                                 </a>
                             </td>
                         </tr>
+                        <?php }?>
                     <?php endforeach; ?>
                    </tbody>
                 </table>

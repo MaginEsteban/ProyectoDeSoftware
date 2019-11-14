@@ -1,6 +1,6 @@
 <?php  
 $this->load->view('dashboard/header');      
-$user = $this->session->userdata('user')
+$user = $this->session->userdata('user');
 ?>
 <section class="content-header">
     <h2>

@@ -1,4 +1,4 @@
-<?php $user = $this->session->userdata('user'); ?>
+<?php $user = $this->session->userdata('user');?>
 
 </div> <!-- cierro el div abierto en el header-->
 
