@@ -75,8 +75,8 @@
 
                         <!-- Turno -->
                         <td class="bg-dark" id="turno">
-                            <p class="h4 text-center text-white text-capitalize"><?= $turno->nombre; ?> </p>
-                            <p class="h6 text-center text-white text-capitalize"><?= $turno->hora_inicio; ?>- <?= $turno->hora_fin; ?></p>
+                            <p class="h4 text-center text-white text-capitalize text-justify"><?= $turno->nombre; ?> </p>
+                            <p class="h6 text-center text-white text-capitalize text-justify"><?= $turno->hora_inicio; ?>- <?= $turno->hora_fin; ?></p>
                         </td>
 
                         <!-- Lunes -->
@@ -108,9 +108,16 @@
                 </table>
                 <div class="row h-100 align-items-center justify-content-center text-center">
                   <div class="col-lg-10 align-self-end">
-                      <h1 class="text-uppercase text-white font-weight-bold"><?php echo $comedor->nombre_comedor; ?></h1>
+                      <h1 class="text-uppercase text-white font-weight-bold d-inline">
+                         <?php echo $comedor->nombre_comedor; ?>   
+                  
+                      </h1>
                       <p class="text-white-75 font-weight-light mb-5">Ubicado en: <?php echo $comedor->nombre; ?></p>
                       <hr class="divider my-4">
+                  </div>
+                  <div class="col-2">
+                     <i class="fa fa-star text-white" aria-hidden="true"></i>  
+
                   </div>
                 </div>
             </div>

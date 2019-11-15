@@ -16,21 +16,36 @@
          
         //   actualizarDashboard();
       });
+
+      $('#menu_reserva').click(function (evt) {
+
+            evt.preventDefault();
+
+             console.log("reserva");
+
+
+        });
       
       //renderiza un menu
-      function render_menu(menu) {
+      function render_menu(id,nombre,dia,turno) {
 
           htmlMenu =
               `<div class="row menu" id="menu-container" >
 
-          <!-- Informacion de menu -->
-          <div class="col text-center text-white">
-          ${menu.nombre}
-          </div>
-          </div>
+                    <!-- Informacion de menu -->
+                        <div class="col-9 text-center text-white">
+                            ${nombre}
+                        </div>
+                        <div class="col-3">
+                            <a href="" role="button" id="menu_reserva">
+                                <i class="fa fa-shopping-cart text-white" aria-hidden="true" id="${id}"></i>
+                            </a>
+                        </div>
+                </div>
+                
           `;
 
-          $('#turno_' + menu.id_turno + "_dia_" + menu.id_dia_programacion).append(htmlMenu);
+          $('#turno_' + turno + "_dia_" + dia).append(htmlMenu);
 
       }
 
@@ -43,17 +58,19 @@
 
           //peticon ajax para obtener todo los menus de un comedor dado
           $.ajax({
-              url: "http://localhost/proyectodesoftware/programacion/menusAllTurnos",
+              url: "http://localhost/proyectodesoftware/detalle_comedores/findAllMenuByTurnos",
               data: {
                   comedor: idComedor
               },
               method: "POST",
               success: function(response) {
-                  var menus = JSON.parse(response);
+                 
+                var menus = JSON.parse(response);
                   //limpiar el dashboard
+                console.log( menus ); 
 
                   for (var i = 0; i < menus.length; i++) {
-                      render_menu(menus[i]);
+                      render_menu(menus[i].id_menu,menus[i].nombre,menus[i].dia,menus[i].id_turno);
                   }
                   return false;
               },
