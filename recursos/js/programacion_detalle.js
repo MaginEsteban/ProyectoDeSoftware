@@ -15,17 +15,42 @@
           });
          
         //   actualizarDashboard();
-      });
 
-      $('#menu_reserva').click(function (evt) {
 
-            evt.preventDefault();
+
+        $('#menu_reserva').on('click',function (event) {
+
+            event.preventDefault();
 
              console.log("reserva");
 
 
         });
+
+
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.slider-nav'
+          });
+    
+          $('.slider-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true
+          });
+
+      });
+
       
+      
+
+
       //renderiza un menu
       function render_menu(id,nombre,dia,turno) {
 
@@ -37,9 +62,9 @@
                             ${nombre}
                         </div>
                         <div class="col-3">
-                            <a href="" role="button" id="menu_reserva">
+                            <button id="menu_reserva btn btn-primary">
                                 <i class="fa fa-shopping-cart text-white" aria-hidden="true" id="${id}"></i>
-                            </a>
+                            </button>
                         </div>
                 </div>
                 
