@@ -16,7 +16,7 @@ function render_menu(menu) {
 	
 		<!-- Informacion de menu -->
 			<div class="col-9">
-				${menu.nombre}				
+				${menu.nombre_menu}				
 			</div>
 
 			<!-- acciones del menu -->
@@ -138,11 +138,18 @@ function agregarMenu(idComedor, idTurno) {
 		});
 
 	$.when( 
-		$.ajax( "http://localhost/proyectodesoftware/programacion/menus" ),
-		$.ajax( "http://localhost/proyectodesoftware/programacion/days" )
+		$.ajax({ 
+			url: "http://localhost/proyectodesoftware/programacion/menus",
+			method: "POST",
+			data: {comedor:idComedor},
+		} ),
+		$.ajax(
+			 "http://localhost/proyectodesoftware/programacion/days"
+		 )
 	
 	).then(function( htmlMenusResult, htmlDaysResult ) {
-	
+		console.log(htmlMenusResult);
+		
 		Swal.mixin({
 			confirmButtonText: 'Siguiente &rarr;',
 			showCancelButton: true,
@@ -157,7 +164,6 @@ function agregarMenu(idComedor, idTurno) {
 					nombre_menu = $('#menus_comedor').find(":selected").text();
 
 					menu_seleccionados.push(id_menu, nombre_menu);
-					console.log(menu_seleccionados);
 				}
 			},
 			{
@@ -184,9 +190,7 @@ function agregarMenu(idComedor, idTurno) {
 					title: 'Datos Ingresados',
 					confirmButtonText: 'Confirmar',
 					html: `
-						nombre menu :${menu_seleccionados[1]} <br>
-						Dias:
-						
+						nombre menu :${menu_seleccionados[1]} 				
 					`
 				}).then((data) => {
 					//mensaje add menu

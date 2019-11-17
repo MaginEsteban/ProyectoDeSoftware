@@ -93,39 +93,49 @@ class Menu_model extends CI_Model {
 
     // agrega una menu a una programacion
     public function add_programacion_menu($turno,$dia,$menu){
-        $this->db->trans_start();
-        $data_programacion = array(
-            
+       
+        $ultimoIdProgramacion = -1;
+
+        $data_programacion = array(    
             'id_turno' => $turno,
             'id_dia_programacion' => $dia
         );
+       
+        //verifico si la programacion ya existe, obtengo el id
+       $programacion =  $this->db->select('p.id_programacion')
+                                    ->get_where('programacion as p',$data_programacion)
+                                    ->result()[0];
         
-        $this->db->set($data_programacion);
-        $this->db->insert('programacion');
+        if( $programacion->id_programacion == 0 ){
+            $this->db->set($data_programacion);
+            $this->db->insert('programacion');
+            $ultimoIdProgramacion = $this->db->insert_id();
 
-        $ultimoIdProgramacion = $this->db->insert_id();
+        }else{
+            $ultimoIdProgramacion = $programacion->id_programacion;
+
+        }
 
         $data_programacion_menu = array(
-            
             'id_programacion' => $ultimoIdProgramacion,
             'id_menu' => $menu
         );
          
         $this->db->set($data_programacion_menu);
         $this->db->insert('programacion_menu');
-        $this->db->trans_complete();
+        
     }
 
 
 
     //retorna todo los menus asignados a los turnos
     public function findAllByIdTurno($id_Turno){
-        $this->db->select('*');
+        $this->db->select('m.id_menu,m.nombre as nombre_menu,dp.id_dia_programacion, programacion.id_turno');
         $this->db->from('programacion');
         $this->db->where('programacion.id_turno',$id_Turno);
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
-        $this->db->join('menu','menu.id_menu=programacion_menu.id_menu');
-        $this->db->join('dia_programacion','dia_programacion.id_dia_programacion=programacion.id_dia_programacion');
+        $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');
+        $this->db->join('dia_programacion as dp','dp.id_dia_programacion=programacion.id_dia_programacion');
         $query = $this->db->get();
         return $query->result();
     }
@@ -139,9 +149,9 @@ class Menu_model extends CI_Model {
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
         $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');
         $this->db->join('dia_programacion as dp','dp.id_dia_programacion=programacion.id_dia_programacion');
-      $this->db->join('stock','stock.id_menu=m.id_menu');
+        $this->db->join('stock','stock.id_menu=m.id_menu');
         $this->db->where('programacion.id_turno',$id_Turno);
-    $this->db->where('stock.cantidad >',0);
+        $this->db->where('stock.cantidad >',0);
         $query = $this->db->get();
         return $query->result();
     }

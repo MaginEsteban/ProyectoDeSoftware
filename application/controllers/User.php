@@ -19,6 +19,8 @@ class User extends Security {
         $data ['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('users/add',$data);
     }
+
+
     // REVISAR EDIT QUE NO FUNCIONA
     public function edit(){
         $id_usuario = $this->uri->segment(3);
@@ -123,5 +125,36 @@ class User extends Security {
 		}
 	}	
 
+
+ /**
+     * Vista reestablecer la contraseña
+    */
+    public function restore_password(){
+        $this->load->view('users/restore_password');
+    }
+
+    /**
+     * Permiter reestablecer la contraseña de un usuario
+    */
+    public function check_password(){
+            
+        $ok = $this->User_model->update_password();
+                
+        $response;
+        if($ok){
+            $response = array(
+                'mensaje' => 'La contraseña se cambio con exito',
+                'class' => 'alert-primary'
+            );  
+        }
+        else{
+            $response = array(
+                'mensaje' => 'Los datos ingresado son incorrento...no se reestablecio la contraseña',
+                'class' => 'alert-danger'
+            );                   
+        }
+       
+        $this->load->view('users/restore_password',$response);
+    }
 
 }

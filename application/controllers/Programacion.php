@@ -50,7 +50,6 @@ class Programacion extends Security {
         $dias = $this->input->post('dias');
         $menu = $this->input->post('menu');
         
-        echo $dias;
         //agrega el menu
         foreach($dias as $dia){
             $this->Menu_model->add_programacion_menu($turno,$dia,$menu);
@@ -67,12 +66,11 @@ class Programacion extends Security {
 
     //menus de un comedor
     public function menus(){
-        $id_comedor = $this->input->post('comedor')[0];
+        $id_comedor = $this->input->post('comedor');
        
        //menus del comedor
-
        $data['menus'] = $this->Menu_model->findAllByIdComedor($id_comedor);
-
+    
         return $this->load->view('programacion/menus',$data);
     }
 
