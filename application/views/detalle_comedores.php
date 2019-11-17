@@ -181,6 +181,7 @@
     <script src="<?= base_url('recursos')?>/js/creative.min.js"></script>
     <script src="<?= base_url('recursos')?>/js/programacion_detalle.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 
 </body>
