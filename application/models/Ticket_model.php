@@ -149,6 +149,7 @@ class Ticket_model extends CI_Model{
              ->result();         
   }
 
+  //list magin
   public function findAllByState($state){
    
     $this->db->select('ticket.id_ticket,ticket.codigo, ticket.id_estado_pago,
@@ -166,6 +167,31 @@ class Ticket_model extends CI_Model{
     $query = $this->db->get();
    
     return $query->result();
+  }
+
+  // cantidad de ticket que necesitan ser cancelados
+  public function findAllForCancel($fecha=null){
+    return $this->db->select('COUNT(e.nombre) as cantidad')
+                    ->from('ticket as t')
+                    ->join('menu as m','t.id_menu=m.id_menu')
+                    ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
+                    ->join('estado as e','e.id_estado=et.id_estado')
+                    ->where('t.fecha_retiro_ticket<',$fecha)
+                    ->where('e.nombre','RESERVADO')
+                    ->where('e.nombre','EN_PROCESO')
+                    ->get()
+                    ->result();   
+
+
+  }
+
+  //llama procedimiento, para cancelar ticket de un turno
+  public function prCancelarTicketsByTurno($turno){
+    
+    $stored_proc = "CALL pr_calcelar_tickets(?)";
+    $data = array('idTurno' => $turno);
+    
+    $result = $this->db->query($stored_proc, $data);
   }
 
 }

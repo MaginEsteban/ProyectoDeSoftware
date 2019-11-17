@@ -90,7 +90,7 @@
 
                 <div class="row">
 
-                    <div class="col mx-auto">
+                    <div class="col-12 mr-n5 ml-n5 mx-auto">
 
 
                         <table class="table table-bordered comedor" id="<?php echo $comedor->id_comedor?>">

@@ -98,7 +98,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
         <!-- small box -->
         <div class="small-box bg-dark">
             <div class="inner">
-                <h3 class="text-white"><?= $ticket_cancelados->cantidad ?></h3>
+                <h3 class="text-white"><?= $ticket_para_cancelar->cantidad ?></h3>
                 
                 <p class="text-white">P/ CANCELAR</p>
             </div>

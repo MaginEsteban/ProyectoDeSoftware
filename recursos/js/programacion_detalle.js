@@ -98,14 +98,14 @@ function reservaTicket(menu) {
 function render_menu(id, nombre, dia, turno) {
 
 	htmlMenu =
-		`<div class="row menu" id="menu-container" >
+		`<div class="row menu mb-3" id="menu-container" >
 
                     <!-- Informacion de menu -->
-                        <div class="col-9 text-center text-white">
+                        <div class="col-8 text-center text-white mr-n1 text-truncate">
                             ${nombre}
                         </div>
-                        <div class="col-3">
-                            <button class="btn btn-info menu_reserva">
+                        <div class="col-2">
+                            <button class="btn btn-info m-n1 menu_reserva rounded-circle">
                                 <i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id})"></i>
                             </button>
                         </div>

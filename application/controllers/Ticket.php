@@ -118,4 +118,6 @@ class Ticket extends Security {
         $this->Ticket_model->insert_ticket_estado($fecha_registro,null,$id_ticket,2);
         redirect(base_url('ticket/listing_client'));
     }
+
+
 }
