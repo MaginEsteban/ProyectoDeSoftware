@@ -129,4 +129,20 @@ class Menu_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+
+
+    //para reserva  de munu
+    public function findAllByIdTurnoReserva($id_Turno){
+        $this->db->select('m.id_menu,m.nombre,dp.id_dia_programacion as dia, programacion.id_turno');
+        $this->db->from('programacion');
+        $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
+        $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');
+        $this->db->join('dia_programacion as dp','dp.id_dia_programacion=programacion.id_dia_programacion');
+      $this->db->join('stock','stock.id_menu=m.id_menu');
+        $this->db->where('programacion.id_turno',$id_Turno);
+    $this->db->where('stock.cantidad >',0);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

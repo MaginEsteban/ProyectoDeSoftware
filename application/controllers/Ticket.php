@@ -17,6 +17,7 @@ class Ticket extends Security {
     */
     public function add()
 	{
+        
         /*En Session se podria tener el numero de comedor y entonces se buscaria 
           de que comedor quiere sacar un ticket para mostrarle solo los menues que
           estan disponibles en ese comedor
