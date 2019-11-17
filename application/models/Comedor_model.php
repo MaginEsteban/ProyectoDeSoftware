@@ -69,6 +69,7 @@ class Comedor_model extends CI_Model {
         $this->db->update('comedor',$data);
     }
 
+
     public function find_comedor_by_id_user($id_usuario){
         $this->db->select('comedor.id_comedor');
         $this->db->from('comedor');
@@ -76,6 +77,17 @@ class Comedor_model extends CI_Model {
         $query = $this->db->get();
         return $query->row(0,'Comedor_model');
     }
+    
+    /*
+    public function esUserAdminComedor($id_usuario){
+        $this->db->select('id_usuario');
+        $this->db->from('comedor');
+        $this->db->where('id_usuario',$id_usuario);
+        $query = $this->db->get();
+        return $query->row(0,'Comedor_model');
+    }
+
+    */
 
     public function findByIdAdminComedor($id_usuario){
        

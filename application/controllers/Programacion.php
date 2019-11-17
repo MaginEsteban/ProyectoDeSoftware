@@ -22,7 +22,7 @@ class Programacion extends Security {
        
         //busca el comedor que administra
         $data['comedor'] = $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario);
-       $data['turnos'] =  $this->Turno_model->findTurnosByIdComedor($data['comedor']->id_comedor);
+        $data['turnos'] =  $this->Turno_model->findTurnosByIdComedor($data['comedor']->id_comedor);
         
        $tickets = $this->Ticket_model->countTicketByEstate( $data['turnos']);
 

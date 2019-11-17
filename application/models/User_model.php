@@ -32,12 +32,16 @@ class User_model extends CI_Model{
            'email' => $email
         );
     $this->db->insert('usuario', $data);
-} 
-    //HACER INSERT PARA EL QUE SE REGISTRA
+    } 
+
     public function delete($id_user){
         $this->db->where('id_usuario', $id_user);
         $this->db->delete('usuario');
+        if($this->esUserAdminComedor($id_user)){
+            $this->modificarUserComedor($id_user);
+        }
     }
+
     public function update($id,$id_pers,$tipo_usuario,$nombre,$contraseña,$email){
             $data = array(
                 'id_usuario' => $id,
@@ -78,18 +82,6 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->row(0,'User_model');
     }
-    /*
-    public function find_comedor_by_id_user($id){
-        $this->db->select('comedor.id_comedor,usuario_comedor.id_usuario_comedor, usuario.id_tipo_usuario');
-        $this->db->from('usuario');
-        $this->db->join('usuario_comedor', 'usuario.id_usuario = usuario_comedor.id_usuario');
-        $this->db->join('comedor', 'usuario_comedor.id_comedor = comedor.id_comedor');
-        $this->db->where('usuario.id_usuario',$id);
-        $query = $this->db->get();
-        return $query->row(0,'User_model');
-
-    }
-    */
     /**
      * Permite reestablecer la contraseña
     */

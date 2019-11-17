@@ -19,7 +19,7 @@ class User extends Security {
         $data ['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('users/add',$data);
     }
-    // REVISAR EDIT QUE NO FUNCIONA
+    
     public function edit(){
         $id_usuario = $this->uri->segment(3);
         $data = array(
@@ -33,11 +33,15 @@ class User extends Security {
 
     public function delete (){
         $id_usuario = $this->uri->segment(3);
+        $esAdmin = $this->Comedor_model->findByIdAdminComedor($id_usuario);
         $this->User_model->delete($id_usuario);
+        if(isset($esAdmin)){
+            $this->Comedor_model->updateUserComedor(0,$esAdmin->id_comedor);
+        }
         redirect(base_url('user/listing'));
     }
-    public function listing()
-	{
+
+    public function listing(){
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);
     }
