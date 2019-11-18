@@ -145,6 +145,7 @@ class Ticket_model extends CI_Model{
              ->from('ticket as t')
              ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
              ->join('estado as e','e.id_estado=et.id_estado')
+             ->where('et.fecha_fin', NULL)
              ->get()
              ->result();         
   }
@@ -161,7 +162,7 @@ class Ticket_model extends CI_Model{
         ->join('turno','ticket.id_turno = turno.id_turno')
         ->join('estado_ticket','estado_ticket.id_ticket = ticket.id_ticket')
         ->join('estado','estado_ticket.id_estado = estado.id_estado')
-        ->where('estado_ticket.fecha_fin', null)
+        ->where('estado_ticket.fecha_fin', NULL)
         ->where('estado.nombre', $state);
 
     $query = $this->db->get();
@@ -170,17 +171,20 @@ class Ticket_model extends CI_Model{
   }
 
   // cantidad de ticket que necesitan ser cancelados
-  public function findAllForCancel($fecha=null){
-    return $this->db->select('COUNT(e.nombre) as cantidad')
+  public function findAllForCancel($fecha){
+    return   $this->db->select('COUNT(t.id_ticket) as cantidad')
                     ->from('ticket as t')
                     ->join('menu as m','t.id_menu=m.id_menu')
                     ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
                     ->join('estado as e','e.id_estado=et.id_estado')
                     ->where('t.fecha_retiro_ticket<',$fecha)
-                    ->where('e.nombre','RESERVADO')
-                    ->where('e.nombre','EN_PROCESO')
+                    
+                    ->where("( e.nombre = 'RESERVADO' OR e.nombre = 'EN_PROCESO' )")
+                    ->where('et.fecha_fin',NULL)
+
                     ->get()
-                    ->result();   
+                    ->result()[0];
+
 
 
   }
@@ -188,7 +192,7 @@ class Ticket_model extends CI_Model{
   //llama procedimiento, para cancelar ticket de un turno
   public function prCancelarTicketsByTurno($turno){
     
-    $stored_proc = "CALL pr_calcelar_tickets(?)";
+    $stored_proc = "CALL pr_cancelar_tickets(?)";
     $data = array('idTurno' => $turno);
     
     $result = $this->db->query($stored_proc, $data);

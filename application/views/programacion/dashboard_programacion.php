@@ -105,7 +105,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a class="small-box-footer text-white" id="cancelTickets">Cancelar <i class="fa fa-arrow-circle-right"></i></a>
+            <a class="small-box-footer text-white" onclick="cancelTickets(<?=$comedor->id_comedor; ?>)"  id="cancelTickets">Cancelar <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>

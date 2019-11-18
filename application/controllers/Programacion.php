@@ -32,11 +32,24 @@ class Programacion extends Security
 
         $tickets = $this->Ticket_model->countTicketByEstate($data['turnos']);
 
-        $data['ticket_cancelados'] = $tickets[0]; //
-        $data['ticket_en_procesos'] = $tickets[1]; //
-        $data['ticket_entregados'] = $tickets[2]; //
-        $data['ticket_reservados'] = $tickets[3];
-        $data['ticket_para_cancelar'] =  $this->Ticket_model->findAllForCancel($fechaActual)[0];
+        // print_r($tickets);
+        // print_r('<br>');
+        //  print_r('<br>');
+
+
+        $data['ticket_cancelados'] = $tickets[0]; 
+        $data['ticket_en_procesos'] = $tickets[3]; 
+        $data['ticket_entregados'] = $tickets[1]; 
+        $data['ticket_reservados'] = $tickets[2];
+        $data['ticket_para_cancelar'] =  $this->Ticket_model->findAllForCancel($fechaActual);
+       
+
+        //  print_r($data);
+        // print_r('<br>');
+        //  print_r('<br>');
+
+        // print_r( $this->Ticket_model->findAllForCancel($fechaActual) );
+        //  die;
 
       //  print_r($fechaActual.'<br>');
       // print_r(  $data['ticket_para_cancelar'] );
@@ -118,5 +131,7 @@ class Programacion extends Security
         foreach ($turnos as $turno) {
             $this->Ticket_model->prCancelarTicketsByTurno($turno->id_turno);
         }
+
+        redirect('programacion','refresh');
     }
 }

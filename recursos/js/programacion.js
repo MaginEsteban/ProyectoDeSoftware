@@ -239,11 +239,12 @@ function agregarMenu(idComedor, idTurno) {
 }
 
 
-$('#cancelTickets').click(function(evt){
+function cancelTickets(idComedor){
 	
-	evt.preventDefault();
+	event.preventDefault();
 	
-	//informe de error
+	console.log(idComedor);
+
 	var Toast = Swal.mixin({
 		toast: true,
 		position: 'top-end',
@@ -267,9 +268,9 @@ $('#cancelTickets').click(function(evt){
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion/",
+				url: "http://localhost/proyectodesoftware/programacion/cancelarTicketOutDate/",
 				data: {
-					programacion_menu: idProgramacionMenu
+					comedor: idComedor
 				},
 				method: 'POST',
 				success: function (respuesta) {
@@ -291,4 +292,4 @@ $('#cancelTickets').click(function(evt){
 		}
 	})
 
-});
+}
