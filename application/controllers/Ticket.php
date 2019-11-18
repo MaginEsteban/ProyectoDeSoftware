@@ -17,6 +17,7 @@ class Ticket extends Security {
     */
     public function add()
 	{
+        
         /*En Session se podria tener el numero de comedor y entonces se buscaria 
           de que comedor quiere sacar un ticket para mostrarle solo los menues que
           estan disponibles en ese comedor
@@ -71,9 +72,28 @@ class Ticket extends Security {
         $this->load->view('tickets_client/list',$data);
     }
 
+
+    // permite aplicar cambios de filtrado
     public function listing_admin(){
-        $data['tickets'] = $this->Ticket_model->findAll();
-        $this->load->view('tickets_admin/list',$data);
+        
+        $state = $this->uri->segment(3); 
+        $data['tickets'] = array();
+        
+
+
+        if(  $state  ){
+            // con filtro
+            $data['tickets'] = $this->Ticket_model->findAllByState($state);
+        }
+        else{
+            // sin filtro
+            $data['tickets'] = $this->Ticket_model->findAll();
+        }
+       
+      
+
+        $this->load->view('tickets_admin/list',$data);   
+
     }
 
     
@@ -98,4 +118,6 @@ class Ticket extends Security {
         $this->Ticket_model->insert_ticket_estado($fecha_registro,null,$id_ticket,2);
         redirect(base_url('ticket/listing_client'));
     }
+
+
 }

@@ -29,65 +29,83 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
 </section>
 <!-- Cuadro de informacion de tickets -->
 <div class="row p-2">
-    <div class="col-lg-3 col-xs-3 mx-auto">
+    <div class="col-lg col-xs ml-1 mx-auto">
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
+                <h3><?= $ticket_entregados->cantidad ?></h3>
+                
+                <p class="text-white"><?= $ticket_entregados->nombre ?></p>
             </div>
             <div class="icon">
                 <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_entregados->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-3  mx-auto">
+    <div class="col-lg col-xs  mx-auto">
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
+                <h3><?= $ticket_reservados->cantidad ?></h3>
+                
+                <p class="text-white"><?= $ticket_reservados->nombre ?></p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_reservados->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+   
+   
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-3 mx-auto">
+    <div class="col-lg col-xs mx-auto">
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
+                <h3><?= $ticket_en_procesos->cantidad ?></h3>
+                <p class="text-white"><?= $ticket_en_procesos->nombre ?></p>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_en_procesos->nombre ?>" class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
     <!-- ./col -->
 
-    <div class="col-lg-3 col-xs-3 mx-auto">
+    <div class="col-lg col-xs mx-auto">
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
+                <h3><?= $ticket_cancelados->cantidad ?></h3>
+                
+                <p class="text-white"><?= $ticket_cancelados->nombre ?></p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('ticket/listing_admin/').$ticket_cancelados->nombre ?>"  class="small-box-footer">Mas Info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+<!--  -->
+    <div class="col-lg col-xs mx-auto mr-1">
+        <!-- small box -->
+        <div class="small-box bg-dark">
+            <div class="inner">
+                <h3 class="text-white"><?= $ticket_para_cancelar->cantidad ?></h3>
+                
+                <p class="text-white">P/ CANCELAR</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer text-white" id="cancelTickets">Cancelar <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>
@@ -117,9 +135,9 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
            <!-- Turno -->
             <td class="bg-info" id="turno">
                 <p class="h4 text-center text-white text-capitalize"><?= $turno->nombre; ?> </p>
-                <a href="" role="button" class="btn rounded-circle bg-secondary">
+                <button class="btn rounded-circle bg-secondary">
                     <i class="fa fa-plus m-auto" onclick="agregarMenu(<?= $comedor->id_comedor;  ?>,<?= $turno->id_turno;  ?>)" aria-hidden="true"></i>
-                </a>
+                </button>
             </td>
             
             <!-- Lunes -->

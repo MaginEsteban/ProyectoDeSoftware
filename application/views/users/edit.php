@@ -18,12 +18,10 @@
 
                 <form action="<?= base_url('user/modificarUsuario'); ?>" method="POST" class="m-2">
                     
-                    <input type="hidden" name="id_usuario" value= "<?php $usuario->id_usuario ?>"/>
-                    <input type="hidden" name="id_comedor" value= "<?php if(isset($comedor)){echo $comedor->id_comedor;}else{echo "-1";}?>"/> 
-                    <input type="hidden" name="contraseña" value= "<?php $usuario->contraseña ?>"/>
-                    <input type="hidden" name="id_persona" value= "<?php $persona->id_persona ?>"/>
-
-                    
+                    <input type="hidden" name="id_usuario" value= "<?php echo $usuario->id_usuario; ?>"/>
+                    <input type="hidden" name="id_comedor" value= "<?php if(isset($comedor)){echo $comedor->id_comedor;}else{echo "-1";} ?>"/> 
+                    <input type="hidden" name="contraseña" value= "<?php echo $usuario->contraseña; ?>"/>
+                    <input type="hidden" name="id_persona" value= "<?php echo $persona->id_persona; ?>"/> 
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre </label>

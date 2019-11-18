@@ -1,65 +1,149 @@
+$(document).ready(function () {
+	// llamar a la funcion para actualizar la table
+	var comedores = [];
+	comedores = $('.comedor').each(
+		function () {
+			var comedor = $(this).attr('id');
 
-      $(document).ready(function() {
-          // llamar a la funcion para actualizar la table
-          var comedores = [];
-          comedores = $('.comedor').each(
-              function(){
-                  var comedor =  $(this).attr('id');
+			comedores.push(comedor);
+		}
+	);
 
-              comedores.push(comedor );
-            }
-          );
-      
-          $.each(comedores,function(index,value){
-            actualizarDashboard(value.id);
-          });
-         
-        //   actualizarDashboard();
-      });
-      
-      //renderiza un menu
-      function render_menu(menu) {
+	$.each(comedores, function (index, value) {
+		actualizarDashboard(value.id);
+	});
 
-          htmlMenu =
-              `<div class="row menu" id="menu-container" >
+	//   actualizarDashboard();
 
-          <!-- Informacion de menu -->
-          <div class="col text-center text-white">
-          ${menu.nombre}
-          </div>
-          </div>
+	$('.slider-for').slick({
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: false,
+		fade: true,
+		asNavFor: '.slider-nav'
+	});
+
+	$('.slider-nav').slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		asNavFor: '.slider-for',
+		dots: true,
+		centerMode: true,
+		focusOnSelect: true
+	});
+
+});
+
+
+
+
+function reservaTicket(menu) {
+
+	event.preventDefault();
+
+	var Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000
+	});
+
+
+	Swal.fire({
+		title: '¿Estas seguro de reservar el ticket?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, reservar!',
+		cancelButtonText: 'Cancelar'
+
+	}).then((result) => {
+		if (result.value) {
+
+			//realiza la peticion
+			$.ajax({
+				url: "http://localhost/proyectodesoftware/ticket/add/",
+				data: {
+					menu: menu
+				},
+				method: 'POST',
+				success: function (respuesta) {
+					setTimeout(function () {
+						Toast.fire({
+							type: 'success',
+							title: 'Ticket Reservado...'
+						})
+					}, 1500);
+				},
+				error: function (error) {
+					Swal.fire({
+						type: 'error',
+						title: 'Oops...',
+						text: 'No se ha podido reservar el ticket'
+					});
+				}
+			});
+		}
+	});
+	return true;
+}
+
+
+
+
+
+
+//renderiza un menu
+function render_menu(id, nombre, dia, turno) {
+
+	htmlMenu =
+		`<div class="row menu mb-3" id="menu-container" >
+
+                    <!-- Informacion de menu -->
+                        <div class="col-8 text-center text-white mr-n1 text-truncate">
+                            ${nombre}
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-info m-n1 menu_reserva rounded-circle">
+                                <i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id})"></i>
+                            </button>
+                        </div>
+                </div>
+                
           `;
 
-          $('#turno_' + menu.id_turno + "_dia_" + menu.id_dia_programacion).append(htmlMenu);
+	$('#turno_' + turno + "_dia_" + dia).append(htmlMenu);
 
-      }
+}
 
-      function actualizarDashboard(idComedor) {
+function actualizarDashboard(idComedor) {
 
-          var menus;
+	var menus;
 
 
-          $('#loading').show();
+	$('#loading').show();
 
-          //peticon ajax para obtener todo los menus de un comedor dado
-          $.ajax({
-              url: "http://localhost/proyectodesoftware/programacion/menusAllTurnos",
-              data: {
-                  comedor: idComedor
-              },
-              method: "POST",
-              success: function(response) {
-                  var menus = JSON.parse(response);
-                  //limpiar el dashboard
+	//peticon ajax para obtener todo los menus de un comedor dado
+	$.ajax({
+		url: "http://localhost/proyectodesoftware/detalle_comedores/findAllMenuByTurnos",
+		data: {
+			comedor: idComedor
+		},
+		method: "POST",
+		success: function (response) {
 
-                  for (var i = 0; i < menus.length; i++) {
-                      render_menu(menus[i]);
-                  }
-                  return false;
-              },
-              complete: function() {
-                  $('#loading').hide();
-              }
-          });
+			var menus = JSON.parse(response);
+			//limpiar el dashboard
 
-      }
+			for (var i = 0; i < menus.length; i++) {
+				render_menu(menus[i].id_menu, menus[i].nombre, menus[i].dia, menus[i].id_turno);
+			}
+			return false;
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
+
+}

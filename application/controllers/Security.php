@@ -8,13 +8,25 @@ class Security extends CI_Controller {
     //Array asociativo de lo que no puede hacer cada rol. Ej: el administrador puede hacer todo pero el vendedor
     //no puede acceder a lo que este en su array.
     public $rol_no_puede = array(
-       'CLIENTE' => array(),
-       'USUARIO NO REGISTRADO' => array('user'),
-       'ADMINISTRADOR COMEDOR'=> array(),
-       'ADMINISTRADOR'=> array()
+       'USUARIO_CLIENTE' 
+            => array(
+                'User','Turno','Programacion'
+               ),
+       'USUARIO_NO_REGISTRADO' 
+            => array(
+               'User','Menu','Programacion','Ticket','Comedor','Dashboard','Turno'
+            ),
+       'ADMINISTRADOR_COMEDOR'
+            =>array(
+               'User','Comedor','Turno'
+            ),
+       'ADMINISTRADOR'
+            => array(
+               'Menu','Programacion','Ticket'
+            )
       );
  
-    public function __construct() {
+   public function __construct() {
        parent::__construct();
  
        $this->usuario = $this->session->userdata('user');
@@ -34,9 +46,9 @@ class Security extends CI_Controller {
           }
        } 
        $this->session->set_userdata($datos);
-    } 
+   } 
 
-    public function validarPagina($url_actual){
+   public function validarPagina($url_actual){
         if($this->logeado()){
           $no_url = $this->rol_no_puede[$this->usuario->tipo];
           foreach ($no_url as $url) {
@@ -47,11 +59,11 @@ class Security extends CI_Controller {
              }
          } 
        } 
-    }
+   }
 
-    public function logeado(){
+   public function logeado(){
  
-      if($this->session->userdata('logged')){
+      if( $this->session->userdata('logged') ){
          return true;
       }else{
          redirect('login', 'refresh');

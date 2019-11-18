@@ -21,35 +21,27 @@ class User_model extends CI_Model{
         $this->db->insert('usuario', $data);
         return $this->db->insert_id();
     } 
-    /*
-    public function insert_usuario_comedor($id_user,$id_comedor){
+    
+    public function insert_register ($legajo,$tipo_usuario,$name,$pass,$email){
+        $id_pers = $this->find_person_by_legajo($legajo);
         $data = array(
-            'id_usuario' => $id_user,
-            'id_comedor' => $id_comedor
+           'id_persona' => $id_pers,
+           'id_tipo_usuario' => $tipo_usuario,
+           'nombre' => $name,
+           'contraseña' => $pass,
+           'email' => $email
         );
-        $this->db->insert('usuario_comedor',$data);
-    }
+    $this->db->insert('usuario', $data);
+    } 
 
-    public function delete_usuario_comedor($id_user_comedor){
-        $this->db->where('id_usuario_comedor', $id_user_comedor);
-        $this->db->delete('usuario_comedor');
-    }
-    
-    
-    public function update_usuario_comedor($id_usuario_comedor,$id_usuario,$id_comedor){
-        $data = array(
-            'id_usuario_comedor' => $id_usuario_comedor,
-            'id_usuario' => $id_usuario,
-            'id_comedor' => $id_comedor
-        );
-        $this->db->where('id_usuario_comedor', $id_usuario_comedor);
-        $this->db->update('usuario_comedor', $data);
-    }
-    */
     public function delete($id_user){
         $this->db->where('id_usuario', $id_user);
         $this->db->delete('usuario');
+        if($this->esUserAdminComedor($id_user)){
+            $this->modificarUserComedor($id_user);
+        }
     }
+
     public function update($id,$id_pers,$tipo_usuario,$nombre,$contraseña,$email){
             $data = array(
                 'id_usuario' => $id,
@@ -90,18 +82,6 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->row(0,'User_model');
     }
-    /*
-    public function find_comedor_by_id_user($id){
-        $this->db->select('comedor.id_comedor,usuario_comedor.id_usuario_comedor, usuario.id_tipo_usuario');
-        $this->db->from('usuario');
-        $this->db->join('usuario_comedor', 'usuario.id_usuario = usuario_comedor.id_usuario');
-        $this->db->join('comedor', 'usuario_comedor.id_comedor = comedor.id_comedor');
-        $this->db->where('usuario.id_usuario',$id);
-        $query = $this->db->get();
-        return $query->row(0,'User_model');
-
-    }
-    */
     /**
      * Permite reestablecer la contraseña
     */

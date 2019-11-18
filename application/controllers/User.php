@@ -19,7 +19,9 @@ class User extends Security {
         $data ['comedores'] = $this->Comedor_model->findAll();
         $this->load->view('users/add',$data);
     }
-   
+
+
+    // REVISAR EDIT QUE NO FUNCIONA
     public function edit(){
         $id_usuario = $this->uri->segment(3);
         $data = array(
@@ -43,14 +45,15 @@ class User extends Security {
     }
 
     
-    public function store(){
+     public function store(){
         
         $legajo = $this->input->post('legajo');
-        if(!isnull($this->User_model->find_person_by_legajo($legajo))){
-            $email= $this->input->post('email');
-            $idTipoUsuario = $this->input->post('tipos');
-            $idComedor = $this->input->post('comedores');
-            $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
+        if(!is_null($this->User_model->find_person_by_legajo($legajo))){
+
+        $email= $this->input->post('email');
+        $idTipoUsuario = $this->input->post('tipos');
+        $idComedor = $this->input->post('comedores');
+        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
 
        //Si es admin. Comedor entra al if
         if($idTipoUsuario == '3'){
@@ -67,34 +70,23 @@ class User extends Security {
         $nombre = $this->input->post('nombre');
         $contraseña = $this->input->post('contraseña');
         $tipo = $this->input->post('tipo_seleccionado');
+        if($tipo != 1){
         $comedor_new = $this->input->post('numero_comedor_seleccionado');
+        }
+        else{
+            $comedor_new = -1;
+        }
         $comedor_old = $this->input->post('id_comedor');
         $id_user = $this->input->post('id_usuario');
         $id_pers = $this->input->post('id_persona');
-        
+              
         
         $this->User_model->update($id_user,$id_pers,$tipo,$nombre,$contraseña,$email);
         
-
         // verifica si se cambio el comedor
          if( !($comedor_new == $comedor_old)){
             $this->Comedor_model->updateUserComedor($id_user,$comedor_new);
          }
-        /*
-        //si el tipo seleccionado es distinto al que tenia y selecciono admin. comed
-        // 1 = Usuario Cliente / 3 = Administrador de Comedores
-        if($_POST['tipos_new'] != $_POST['tipo'] && $_POST['tipos'] == 3){
-            $this->User_model->insert_usuario_comedor($id_user,$numeroCom);     
-        }
-        //si el tipo seleccionado es igual al que tenia y el numero de comedor es distinto al que tenia
-        if($_POST['tipos_new'] == $_POST['tipo'] && $numero_com_old != $numeroCom){
-            $this->User_model->update_usuario_comedor($id_user_com,$id_user,$numeroCom);     
-        }
-        //si el tipo seleccionado es distinto al que tenia y selecciono usuario client
-        if($_POST['tipos_new'] != $_POST['tipo'] && $_POST['tipos'] == 1){
-            $this->User_model->delete_usuario_comedor($id_user_com);
-        }
-        */
         redirect(base_url('user/listing'));
     }
 
@@ -133,5 +125,36 @@ class User extends Security {
 		}
 	}	
 
+
+ /**
+     * Vista reestablecer la contraseña
+    */
+    public function restore_password(){
+        $this->load->view('users/restore_password');
+    }
+
+    /**
+     * Permiter reestablecer la contraseña de un usuario
+    */
+    public function check_password(){
+            
+        $ok = $this->User_model->update_password();
+                
+        $response;
+        if($ok){
+            $response = array(
+                'mensaje' => 'La contraseña se cambio con exito',
+                'class' => 'alert-primary'
+            );  
+        }
+        else{
+            $response = array(
+                'mensaje' => 'Los datos ingresado son incorrento...no se reestablecio la contraseña',
+                'class' => 'alert-danger'
+            );                   
+        }
+       
+        $this->load->view('users/restore_password',$response);
+    }
 
 }

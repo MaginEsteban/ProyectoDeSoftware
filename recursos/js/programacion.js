@@ -1,7 +1,9 @@
 //permite limpiar el dashboard
 
 function clean_dashboard() {
-    $('#turno').siblings('td').empty();
+
+	$('#turno').siblings('td').empty();
+
 }
 
 
@@ -9,55 +11,55 @@ function clean_dashboard() {
 //renderiza un menu
 function render_menu(menu) {
 
-    htmlMenu =
-        `<div class="row menu" id="menu-container" >
-    
-    <!-- Informacion de menu -->
-    <div class="col-9">
-    ${menu.nombre}
-    </div>
-    
-    <!-- acciones del menu -->
-    <div class="col-3">
-    <button type="button">
-    <i class="fa fa-times text-danger" id="delete-${menu.id_programacion_menu}" onclick="eliminarMenu(${menu.id_programacion_menu})"
-    aria-hidden="true"></i>
-    </button>
-    </div>
-    </div>
-    `;
+	htmlMenu =
+		`<div class="row menu" id="menu-container" >
+	
+		<!-- Informacion de menu -->
+			<div class="col-9">
+				${menu.nombre_menu}				
+			</div>
 
-    $('#turno_' + menu.id_turno + "_dia_" + menu.id_dia_programacion).append(htmlMenu);
+			<!-- acciones del menu -->
+			<div class="col-3">
+				<button type="button">
+					<i class="fa fa-times text-danger" id="delete-${menu.id_programacion_menu}" onclick="eliminarMenu(${menu.id_programacion_menu})" 
+						aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+	`;
+
+	$('#turno_' + menu.id_turno + "_dia_" + menu.id_dia_programacion).append(htmlMenu);
 
 }
 
 function actualizarDashboard(idComedor) {
 
-    var menus;
+	var menus;
 
 
-    $('#loading').show();
+	$('#loading').show();
 
-    //peticon ajax para obtener todo los menus de un comedor dado
-    $.ajax({
-        url: "http://localhost/proyectodesoftware/programacion/menusAllTurnos",
-        data: {
-            comedor: idComedor
-        },
-        method: "POST",
-        success: function (response) {
-            var menus = JSON.parse(response);
-            //limpiar el dashboard
+	//peticon ajax para obtener todo los menus de un comedor dado
+	$.ajax({
+		url: "http://localhost/proyectodesoftware/programacion/menusAllTurnos",
+		data: {
+			comedor: idComedor
+		},
+		method: "POST",
+		success: function (response) {
+			var menus = JSON.parse(response);
+			//limpiar el dashboard
 
-            for (var i = 0; i < menus.length; i++) {
-                render_menu(menus[i]);
-            }
-            return false;
-        },
-        complete: function () {
-            $('#loading').hide();
-        }
-    });
+			for (var i = 0; i < menus.length; i++) {
+				render_menu(menus[i]);
+			}
+			return false;
+		},
+		complete: function () {
+			$('#loading').hide();
+		}
+	});
 
 }
 
@@ -67,55 +69,54 @@ function actualizarDashboard(idComedor) {
 //funcion para eliminar un menu
 function eliminarMenu(idProgramacionMenu) {
 
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-    });
+	var Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000
+	});
 
+	$("#delete-" + idProgramacionMenu).closest("#menu-container").remove();
 
+	//abre el modal_alert
+	Swal.fire({
+		title: '¿Estas seguro de eliminar ese menu?',
+		text: "No podrás revertir esto!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, eliminar!',
+		cancelButtonText: 'Cancelar'
 
-    //abre el modal_alert
-    Swal.fire({
-        title: '¿Estas seguro de eliminar ese menu?',
-        text: "No podrás revertir esto!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar!',
-        cancelButtonText: 'Cancelar'
+	}).then((result) => {
+		if (result.value) {
 
-    }).then((result) => {
-        if (result.value) {
-
-            //realiza la peticion
-            $.ajax({
-                url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion/",
-                data: {
-                    programacion_menu: idProgramacionMenu
-                },
-                method: 'POST',
-                success: function (respuesta) {
-                    $("#delete-" + idProgramacionMenu).closest("#menu-container").remove();
-                    setTimeout(function () {
-                        Toast.fire({
-                            type: 'success',
-                            title: 'Menu eliminado...'
-                        })
-                    }, 1500);
-                },
-                error: function (error) {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'No se ha podido eliminar el menu'
-                    })
-                }
-            });
-        }
-    })
+			//realiza la peticion
+			$.ajax({
+				url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion/",
+				data: {
+					programacion_menu: idProgramacionMenu
+				},
+				method: 'POST',
+				success: function (respuesta) {
+					setTimeout(function () {
+						Toast.fire({
+							type: 'success',
+							title: 'Menu eliminado...'
+						})
+					}, 1500);
+				},
+				error: function (error) {
+					Swal.fire({
+						type: 'error',
+						title: 'Oops...',
+						text: 'No se ha podido eliminar el menu'
+					})
+				}
+			});
+		}
+	})
 }
 
 
@@ -124,115 +125,170 @@ function eliminarMenu(idProgramacionMenu) {
 
 function agregarMenu(idComedor, idTurno) {
 
-    var menu_seleccionados = [];
-    var dias = [];
+	var menu_seleccionados = [];
+	var dias = [];
 
-    event.preventDefault();
+	event.preventDefault();
 
-    //realiza una peticion para obtener  de la programacion
-    $.when(
-        $.ajax("http://localhost/proyectodesoftware/programacion/days"),
-        $.ajax({
-            url: "http://localhost/proyectodesoftware/programacion/menus",
-            data: {
-                comedor: idComedor
-            },
-            method: 'POST'
-        })
-    ).done(function (htmlDaysResult, htmlMenusResult) {
-        // una ves que se realiza las dos peticiones
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000
+		});
 
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
+	$.when( 
+		$.ajax({ 
+			url: "http://localhost/proyectodesoftware/programacion/menus",
+			method: "POST",
+			data: {comedor:idComedor},
+		} ),
+		$.ajax(
+			 "http://localhost/proyectodesoftware/programacion/days"
+		 )
+	
+	).then(function( htmlMenusResult, htmlDaysResult ) {
+		console.log(htmlMenusResult);
+		
+		Swal.mixin({
+			confirmButtonText: 'Siguiente &rarr;',
+			showCancelButton: true,
+			cancelButtonText: 'Cancelar',
+			progressSteps: ['1', '2'],
 
+		}).queue([{
+				title: 'Menus',
+				html: htmlMenusResult[0],
+				preConfirm: () => {
+					id_menu = $('#menus_comedor').find(":selected").val();
+					nombre_menu = $('#menus_comedor').find(":selected").text();
 
-        Swal.mixin({
-            confirmButtonText: 'Siguiente &rarr;',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            progressSteps: ['1', '2'],
+					menu_seleccionados.push(id_menu, nombre_menu);
+				}
+			},
+			{
+				title: 'Dias de la Programacion',
+				text: 'Seleccione los dias...',
+				html: htmlDaysResult[0],
+				preConfirm: () => {
 
-        }).queue([{
-            title: 'Menus',
-            html: htmlMenusResult[0],
-            preConfirm: () => {
-                id_menu = $('#menus_comedor').find(":selected").val();
-                nombre_menu = $('#menus_comedor').find(":selected").text();
+					$("input[type=checkbox]:checked").each(function () {
 
-                menu_seleccionados.push(id_menu, nombre_menu);
-                console.log(menu_seleccionados);
-            }
-        },
-        {
-            title: 'Dias de la Programacion',
-            text: 'Seleccione los dias...',
-            html: htmlDaysResult[0],
-            preConfirm: () => {
+						//text del checkbox
+						var nombre = $(this).siblings('label').text();
 
-                $("input[type=checkbox]:checked").each(function () {
+						dias.push(this.value);
+					});
 
-                    //text del checkbox
-                    var nombre = $(this).siblings('label').text();
+					console.log(dias);
+				}
+			}
+		]).then((result) => {
 
-                    dias.push(this.value);
-                });
+			if (result.value) {
+				Swal.fire({
+					title: 'Datos Ingresados',
+					confirmButtonText: 'Confirmar',
+					html: `
+						nombre menu :${menu_seleccionados[1]} 				
+					`
+				}).then((data) => {
+					//mensaje add menu
 
-                console.log(dias);
-            }
-        }
-        ]).then((result) => {
+					$.ajax({
+						url: "http://localhost/proyectodesoftware/programacion/add_programacion_menu/",
+						method: "POST",
+						data: {menu:menu_seleccionados[0],turno:idTurno,dias:dias},
+						success: () => {
 
-            if (result.value) {
-                Swal.fire({
-                    title: 'Datos Ingresados',
-                    confirmButtonText: 'Confirmar',
-                    html: `
-    nombre menu :${menu_seleccionados[1]} <br>    
-    `
-                }).then((data) => {
-                    //mensaje add menu
+							//limpia el dashboard 
+							clean_dashboard();
 
-                    $.ajax({
-                        url: "http://localhost/proyectodesoftware/programacion/add_programacion_menu/",
-                        method: "POST",
-                        data: { menu: menu_seleccionados[0], turno: idTurno, dias: dias },
-                        success: () => {
+							//vuelve a renderizar los datos
+							actualizarDashboard(idComedor);
 
-                            //limpia el dashboard
-                            clean_dashboard();
+							setTimeout(function () {
+								Toast.fire({
+									type: 'success',
+									title: 'Menu agregado...'
+								})
 
-                            //vuelve a renderizar los datos
-                            actualizarDashboard(idComedor);
+							}, 1250);
 
-                            setTimeout(function () {
-                                Toast.fire({
-                                    type: 'success',
-                                    title: 'Menu agregado...'
-                                })
+						},
+						error: (response) => {
+							Swal.fire({
+								type: 'error',
+								title: 'Oops...',
+								text: 'No se ha podido agregar el menu'
+							})
+							console.log(response.responseText);
+						}
 
-                            }, 1250);
-
-                        },
-                        error: (response) => {
-                            Swal.fire({
-                                type: 'error',
-                                title: 'Oops...',
-                                text: 'No se ha podido agregar el menu'
-                            })
-                            console.log(response.responseText);
-                        }
-
-                    });
+					});
 
 
 
-                })
-            }
-        });
+				})
+			}
+		});
 
-    });
+	});
+
+	
 }
+
+
+$('#cancelTickets').click(function(evt){
+	
+	evt.preventDefault();
+	
+	//informe de error
+	var Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000
+	});
+
+	//abre el modal_alert
+	Swal.fire({
+		title: '¿Estas seguro de cancelar ticket?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, cancelar!',
+		cancelButtonText: 'Cancelar'
+
+	}).then((result) => {
+		
+		if (result.value) {
+
+			//realiza la peticion
+			$.ajax({
+				url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion/",
+				data: {
+					programacion_menu: idProgramacionMenu
+				},
+				method: 'POST',
+				success: function (respuesta) {
+					setTimeout(function () {
+						Toast.fire({
+							type: 'success',
+							title: 'Tickets cancelados...'
+						})
+					}, 1500);
+				},
+				error: function (error) {
+					Swal.fire({
+						type: 'error',
+						title: 'Oops...',
+						text: 'No se ha podido cancelar los turnos'
+					})
+				}
+			});
+		}
+	})
+
+});

@@ -137,6 +137,63 @@ class Ticket_model extends CI_Model{
         );
        $this->db->insert('estado_ticket', $data);
    }
+
+
+   public function countTicketByEstate($turnos){
+    return   $this->db->select('e.id_estado,e.nombre, COUNT(e.nombre) as cantidad')
+             ->group_by('e.nombre')
+             ->from('ticket as t')
+             ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
+             ->join('estado as e','e.id_estado=et.id_estado')
+             ->get()
+             ->result();         
+  }
+
+  //list magin
+  public function findAllByState($state){
+   
+    $this->db->select('ticket.id_ticket,ticket.codigo, ticket.id_estado_pago,
+    ticket.fecha_retiro_ticket,menu.nombre as nombre_menu,
+    turno.nombre as nombre_turno , estado.nombre as nombre_estado,
+    estado_ticket.fecha_fin as fecha_fin')
+        ->from('ticket')
+        ->join('menu', 'ticket.id_menu = menu.id_menu')
+        ->join('turno','ticket.id_turno = turno.id_turno')
+        ->join('estado_ticket','estado_ticket.id_ticket = ticket.id_ticket')
+        ->join('estado','estado_ticket.id_estado = estado.id_estado')
+        ->where('estado_ticket.fecha_fin', null)
+        ->where('estado.nombre', $state);
+
+    $query = $this->db->get();
+   
+    return $query->result();
+  }
+
+  // cantidad de ticket que necesitan ser cancelados
+  public function findAllForCancel($fecha=null){
+    return $this->db->select('COUNT(e.nombre) as cantidad')
+                    ->from('ticket as t')
+                    ->join('menu as m','t.id_menu=m.id_menu')
+                    ->join('estado_ticket as et','t.id_ticket=et.id_ticket')
+                    ->join('estado as e','e.id_estado=et.id_estado')
+                    ->where('t.fecha_retiro_ticket<',$fecha)
+                    ->where('e.nombre','RESERVADO')
+                    ->where('e.nombre','EN_PROCESO')
+                    ->get()
+                    ->result();   
+
+
+  }
+
+  //llama procedimiento, para cancelar ticket de un turno
+  public function prCancelarTicketsByTurno($turno){
+    
+    $stored_proc = "CALL pr_calcelar_tickets(?)";
+    $data = array('idTurno' => $turno);
+    
+    $result = $this->db->query($stored_proc, $data);
+  }
+
 }
 
 ?>

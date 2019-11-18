@@ -31,8 +31,8 @@ class Register extends CI_Controller {
 			$nombre = $this->input->post('username');
 			$tipo_usuario = 1;
 			$contraseña = $this->input->post('pass');
-            $this->User_model->insert($legajo,$tipo_usuario,$nombre,$contraseña,$email);
-             redirect( base_url('login') ); 
+            $this->User_model->insert_register($legajo,$tipo_usuario,$nombre,$contraseña,$email);  
+				redirect( base_url('login') ); 
             }
  
          

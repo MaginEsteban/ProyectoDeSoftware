@@ -88,6 +88,7 @@ class Comedor_model extends CI_Model {
         
         return $query->row(0);
     }
+    
 
     public function find_all_comedores_fav_by_id_user($id_usuario){
         $this->db->select('*');
