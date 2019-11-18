@@ -90,4 +90,13 @@ class Comedor_model extends CI_Model {
     }
     
 
+    public function find_all_comedores_fav_by_id_user($id_usuario){
+        $this->db->select('*');
+        $this->db->from('comedor_favorito');
+        $this->db->join('comedor','comedor_favorito.id_comedor = comedor.id_comedor');
+        $this->db->join('ciudad','comedor.id_ciudad = ciudad.id_ciudad');
+        $this->db->where('comedor_favorito.id_usuario',$id_usuario);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
