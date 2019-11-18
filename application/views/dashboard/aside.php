@@ -124,11 +124,11 @@
               </span>
           </a>
           <ul class="treeview-menu">
-          <?php if ($user->id_tipo_usuario == 3 || $user->id_tipo_usuario == 4 ) : ?>
-            <li class="active"><a class="user-menu" href="<?= base_url("sancion/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Sanciones</span></a></li>
+           <?php if ($user->id_tipo_usuario == 3 || $user->id_tipo_usuario == 4 ) : ?>
+              <li class="active"><a class="user-menu" href="<?= base_url("sancion/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Listado Sanciones</span></a></li>
             <?php endif; ?>
             <?php if ($user->id_tipo_usuario == 1) : ?>
-            <li class="active"><a class="user-menu" href="<?= base_url("sancion/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Mis Sanciones</span></a></li>
+              <li class="active"><a class="user-menu" href="<?= base_url("sancion/listing"); ?>"><i class="fa fa-list-ul"></i> <span>Mis Sanciones</span></a></li>
             <?php endif; ?>
           </ul>
 
