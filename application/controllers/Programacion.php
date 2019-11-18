@@ -28,6 +28,18 @@ class Programacion extends Security {
        $this->load->view('programacion/dashboard_programacion',$data);
     }
 
+    public function ver_programacion()
+    {
+        $id_comedor = $this->uri->segment(3);
+        $usuario =  $this->session->userdata('user');
+       
+       $turnos =  $this->Turno_model->findTurnosByIdComedor($id_comedor);
+            
+       $data['comedor'] = $comedor;
+       $data['turnos'] = $turnos;   
+
+       $this->load->view('programacion/dashboard_programacion',$data);
+    }
 
     public function delete_menu_programacion(){
         //obtiene el id del menu
