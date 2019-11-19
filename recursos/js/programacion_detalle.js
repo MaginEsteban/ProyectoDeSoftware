@@ -147,3 +147,53 @@ function actualizarDashboard(idComedor) {
 	});
 
 }
+
+function agregarFavorito(usuario,comedor){
+
+	var Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000
+	});
+
+	console.log(usuario+'/'+comedor);
+	Swal.fire({
+		title: '¿Estas seguro de marcar este comedor como favorito?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, agregar!',
+		cancelButtonText: 'Cancelar'
+
+	}).then((result) => {
+		if (result.value) {
+
+			//realiza la peticion
+			$.ajax({
+				url: "http://localhost/proyectodesoftware/detalle_comedores/add_favorito/",
+				data: {
+					usuario: usuario,
+					comedor: comedor
+				},
+				method: 'POST',
+				success: function (respuesta) {
+					setTimeout(function () {
+						Toast.fire({
+							type: 'success',
+							title: 'Comedor agregado a Favoritos...'
+						})
+					}, 1500);
+				},
+				error: function (error) {
+					Swal.fire({
+						type: 'error',
+						title: 'Oops...',
+						text: 'No se ha podido agregar a Favoritos'
+					});
+				}
+			});
+		}
+	});
+}

@@ -35,7 +35,6 @@ class Comedor_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('comedor');
         $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
-       
         $query = $this->db->get();
         
         return $query->result();
@@ -81,6 +80,7 @@ class Comedor_model extends CI_Model {
        
         $this->db->select('*');
         $this->db->from('comedor');
+        $this->db->join('ciudad','comedor.id_ciudad = ciudad.id_ciudad');
         $this->db->where('id_usuario',$id_usuario);
         
 
@@ -99,4 +99,32 @@ class Comedor_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function es_favorito($id_usuario,$id_comedor)
+    {
+        $this->db->select('id_comedor_favorito');
+        $this->db->from('comedor_favorito');
+        $this->db->where('comedor_favorito.id_usuario',$id_usuario);
+        $this->db->where('comedor_favorito.id_comedor',$id_comedor);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function add_comedor_favorito($usuario,$comedor)
+    {
+        $data = array(
+            'id_usuario' => $usuario,
+            'id_comedor' => $comedor
+         );
+     $this->db->insert('comedor_favorito', $data);
+        
+    }
+
+    public function delete_comedor_favorito($id_usuario,$id_comedor)
+    {
+        $this->db->where('id_comedor', $id_usuario);
+        $this->db->where('id_usuario', $id_comedor);
+        $this->db->delete('comedor');
+    }
+
 }

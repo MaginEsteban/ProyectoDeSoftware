@@ -11,12 +11,12 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body  style="background-image: url(<?= base_url('recursos')?>/img/tabla-madera-sobremesa-vacia-fondo-borroso_1253-1584.jpg);">
     <div class="page-wrap d-flex flex-row align-items-center">
         <div class="container">
-            <div class="row">
+            <div class="row h-100 justify-content-center align-items-center" style="padding-top: 100px;">
 
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-6 mx-auto card">
                     <h2 class="font-weight-light">Reestablecer Contraseña</h2>
                 
                     <form  action="<?=base_url('user/check_password'); ?>" class="mt-3" method="POST">

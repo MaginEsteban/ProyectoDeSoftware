@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel" style="padding-bottom: 20px;">
             <div class="pull-left image">
-                <img src="<?= base_url("recursos")?>/img/circle-512.png" class="img-circle" alt="User Image">
+                <img src="<?= base_url("recursos")?>/img/circle-512.png" class="img-circle" alt="User Image"></img>
             </div>
             <div class="pull-left info">
                 <p><?php echo $user->nombre; ?></p>
@@ -18,7 +18,7 @@
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-
+        </div>
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -98,23 +98,10 @@
                         <li class="active"><a class="user-menu" href="<?= base_url("ticket/add"); ?>"><i
                                     class="fa fa-plus"></i> <span>Agregar Ticket</span></a></li>
                         <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_client"); ?>"><i
-                                    class="fa fa-list-ul"></i> <span>Listado Tickets</span></a></li>
-                    </ul>
-                    <?php endif; ?>
-
-                    <?php if ($user->id_tipo_usuario == 4 ) : ?>
-                    <a href="#"><i class="fa fa-ticket"></i> <span>Tickets</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a class="user-menu" href="<?= base_url("ticket/add"); ?>"><i
-                                    class="fa fa-plus"></i> <span>Comprar Ticket</span></a></li>
-                        <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_client"); ?>"><i
                                     class="fa fa-list-ul"></i> <span>Mis Tickets</span></a></li>
                     </ul>
                     <?php endif; ?>
+
 
                     <?php if ($user->id_tipo_usuario == 3 ) : ?>
                     <a href="#"><i class="fa fa-ticket"></i> <span>Tickets</span>
@@ -144,21 +131,6 @@
                         <?php endif; ?>
                     </ul>
 
-                    <?php if ($user->id_tipo_usuario == 4 ) : ?>
-                    <a href="#"><i class="fa fa-tasks"></i> <span>Programaciones</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <?php foreach ($allComedores as $comedor): ?>
-                        <li class="active"><a class="user-menu"
-                                href="<?= base_url("programacion/ver_programacion/").$comedor->id_comedor; ?>"><i
-                                    class="fa fa-tasks"></i><?php echo $comedor->nombre_comedor;  ?><span></span></a>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <?php endif; ?>
 
                 </li>
                 <li><a href="<?= base_url('user/restore_password');?>"><i class="fa fa-key"></i> <span>Reestablecer Contraseña</span></a></li>
