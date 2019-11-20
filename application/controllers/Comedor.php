@@ -53,4 +53,6 @@ class Comedor extends Security {
         $this->Comedor_model->update($idComedor,$nombreCiudad,$idCiudad);
         redirect(base_url('comedor/listing'));
     }
+
+
 }

@@ -14,16 +14,19 @@ class Detalle_Comedores extends Security {
     
 	public function index()
 	{
-
+        $user = $this->session->userdata('user');
         $comedores = $this->Comedor_model->findAll();
 
         foreach ($comedores as $comedor) {
             $turnos = $this->Turno_model->findTurnosByIdComedor($comedor->id_comedor);
-            $comedor->turnos = $turnos;        
+            $comedor->turnos = $turnos;  
+            $comedor->esFavorito = $this->Comedor_model->es_favorito($user->id_usuario,$comedor->id_comedor); 
+            if (! $comedor->esFavorito) {
+                $comedor->esFavorito = 0;
+            }
         }
         $data['comedores'] = $comedores;
-
-       
+        $data['user'] = $user;
 		$this->load->view('detalle_comedores', $data);
     }
     
@@ -47,5 +50,17 @@ class Detalle_Comedores extends Security {
 
        
 
+    }
+
+    public function add_favorito(){
+        $id_user = $this->input->post('usuario');
+        $id_comedor = $this->input->post('comedor');
+        $this->Comedor_model->add_comedor_favorito($id_user,$id_comedor);
+    }
+
+    public function delete_favorito(){
+        $id_user = $this->input->post('usuario');
+        $id_comedor = $this->input->post('comedor');
+        $this->Comedor_model->delete_comedor_favorito($id_user,$id_comedor);
     }
 }

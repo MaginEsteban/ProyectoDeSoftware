@@ -32,7 +32,7 @@
 
     <style>
     .menu-item-car {
-        background-color: white;
+        background-color: transparent;
         width: 150px !important;
         margin: 10px;
     }
@@ -56,6 +56,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <?php if (!isset($user)): ?>
                     <li class="nav-item text-black">
                         <a class="nav-link js-scroll-trigger" href="<?= base_url('register')?>">
                             <span class=""> Registro</span>
@@ -64,6 +65,12 @@
                     <li class="nav-item text-black">
                         <a class="nav-link js-scroll-trigger" href="<?= base_url('login')?>">Login</a>
                     </li>
+                    <?php endif; ?>
+                    <?php if (isset($user)): ?>
+                    <li class="nav-item text-black">
+                       <a class="text-dark"href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>"> <img src="<?= base_url("recursos")?>/img/circle-512.png" class="img-circle" alt="User Image" style="height: 20px;">  <?php echo $user->nombre; ?></img></a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -77,7 +84,7 @@
                 <div class="col">
                     <div class="slider-nav">
                          <?php foreach ($comedores as $comedor): ?>
-                            <div class="menu-item-car"><?=$comedor->nombre_comedor ?></div>
+                            <div class="menu-item-car space-3 text-center"><?=$comedor->nombre_comedor ?></div>
                          <?php endforeach;?>
                     </div>
                 </div>
@@ -140,14 +147,11 @@
                             <div class="col-lg-10 align-self-end">
                                 <h1 class="text-uppercase text-black font-weight-bold d-inline">
                                     <?php echo $comedor->nombre_comedor; ?>
-
+                                    <i class="fa fa-star <?php if($comedor->esFavorito > 0 ) echo 'text-warning'; else echo 'text-black'; ?> " aria-hidden="true" onclick="agregarFavorito(<?=$user->id_usuario?>,<?=$comedor->id_comedor?>)"></i>
                                 </h1>
                                 <p class="text-black-75 font-weight-light mb-5">Ubicado en:
                                     <?php echo $comedor->nombre; ?></p>
                                 <hr class="divider my-4">
-                            </div>
-                            <div class="col-2">
-                                <i class="fa fa-star text-black" aria-hidden="true"></i>
 
                             </div>
                         </div>

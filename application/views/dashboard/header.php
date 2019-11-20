@@ -83,12 +83,12 @@
                 </a>
                 <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                <div class="row mr-1">
-                    <div class="col"><li>
-                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs text-white"></a>
+                <div class="row mr-1 ">
+                    <div class="col text-white"><li style="width: 60px;">
+                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs text-white"></a> User 
                         </li></div>
-                    <div class="col"><li>
-                            <a onClick="close_session()" class="fa fa-sign-out text-white"></a>
+                    <div class="col text-white" style=" font-family:Helvetica Neue, Helvetica, Arial, sans-serif;"><li>
+                            <a onClick="close_session()" class="fa fa-sign-out text-white"> </a> Salir
                         </li></div>
                 </div>
                         
