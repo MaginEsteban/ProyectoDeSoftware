@@ -144,7 +144,7 @@ class Menu_model extends CI_Model {
 
     //para reserva  de munu
     public function findAllByIdTurnoReserva($id_Turno){
-        $this->db->select('m.id_menu,m.nombre,dp.id_dia_programacion as dia, programacion.id_turno');
+        $this->db->select('m.id_menu,m.nombre,dp.id_dia_programacion as dia,dp.name as nombre_dia, programacion.id_turno');
         $this->db->from('programacion');
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
         $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');

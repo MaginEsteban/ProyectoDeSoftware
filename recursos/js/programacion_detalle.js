@@ -37,7 +37,7 @@ $(document).ready(function () {
 
 
 
-function reservaTicket(menu) {
+function reservaTicket(menu,dia,turno) {
 
 	event.preventDefault();
 
@@ -65,7 +65,9 @@ function reservaTicket(menu) {
 			$.ajax({
 				url: "http://localhost/proyectodesoftware/ticket/add/",
 				data: {
-					menu: menu
+					menu: menu,
+					dia: dia,
+					turno: turno
 				},
 				method: 'POST',
 				success: function (respuesta) {
@@ -95,7 +97,7 @@ function reservaTicket(menu) {
 
 
 //renderiza un menu
-function render_menu(id, nombre, dia, turno) {
+function render_menu(id, nombre, dia, dianombre, turno,idComedor) {
 
 	htmlMenu =
 		`<div class="row menu mb-3" id="menu-container" >
@@ -106,7 +108,7 @@ function render_menu(id, nombre, dia, turno) {
                         </div>
                         <div class="col-2">
                             <button class="btn btn-info m-n1 menu_reserva rounded-circle">
-                                <i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id})"></i>
+                                 <i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id},'${dianombre}',${turno},${idComedor})"></i>
                             </button>
                         </div>
                 </div>
@@ -135,9 +137,8 @@ function actualizarDashboard(idComedor) {
 
 			var menus = JSON.parse(response);
 			//limpiar el dashboard
-
 			for (var i = 0; i < menus.length; i++) {
-				render_menu(menus[i].id_menu, menus[i].nombre, menus[i].dia, menus[i].id_turno);
+				render_menu(menus[i].id_menu, menus[i].nombre, menus[i].dia,menus[i].nombre_dia, menus[i].id_turno,idComedor);
 			}
 			return false;
 		},
