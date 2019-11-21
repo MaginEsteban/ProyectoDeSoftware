@@ -79,6 +79,18 @@ class User_model extends CI_Model{
         $query = $this->db->get();
         return $query->row(0,'User_model');
     }
+
+    public function exists($legajo){
+        $this->db->select('usuario.legajo');
+        $this->db->from('usuario');
+        $this->db->join('persona','usuario.id_persona = persona.id_persona');
+        $this->db->where('legajo',$legajo);
+        $query = $this->db->get();
+        if(empty($query->row(0,'User_model')){
+            return false;
+        }
+        return true;
+    }
     /**
      * Permite reestablecer la contraseña
     */
