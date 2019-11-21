@@ -30,18 +30,18 @@ class Programacion extends Security
       
         $data['turnos'] =  $this->Turno_model->findTurnosByIdComedor($data['comedor']->id_comedor);
 
-        $tickets = $this->Ticket_model->countTicketByEstate($data['turnos']);
-
-        // print_r($tickets);
-        // print_r('<br>');
-        //  print_r('<br>');
-
-
-        $data['ticket_cancelados'] = $tickets[0]; 
-        $data['ticket_en_procesos'] = $tickets[3]; 
-        $data['ticket_entregados'] = $tickets[1]; 
-        $data['ticket_reservados'] = $tickets[2];
-        $data['ticket_para_cancelar'] =  $this->Ticket_model->findAllForCancel($fechaActual);
+        
+        $data['ticket_cancelados'] = $this->Ticket_model->countTicketByEstate($data['turnos'],6)[0]; 
+        $data['ticket_en_procesos'] =$this->Ticket_model->countTicketByEstate($data['turnos'],1)[0];          
+        $data['ticket_entregados'] = $this->Ticket_model->countTicketByEstate($data['turnos'],5)[0];
+        $data['ticket_reservados'] = $this->Ticket_model->countTicketByEstate($data['turnos'],2)[0];
+        
+        $tick_cancel = $this->Ticket_model->findAllForCancel($fechaActual);
+        
+        if( $tick_cancel)
+            $data['ticket_para_cancelar'] = $tick_cancel;
+        else
+        $data['ticket_para_cancelar'] = 0;
        
 
         //  print_r($data);

@@ -34,7 +34,8 @@ class Login extends CI_Controller {
 
 		}else{
 			$this->abrir_sesion($user);
-
+			if($user->id_tipo_usuario == 3)
+				$url = base_url('programacion/');
 			}
 		
 		$response = array('redirecTo'=>$redirec_to,'url'=>$url,'message'=>$mensaje,'user'=>$user,'nombre'=>$user_name,'pass'=>$user_password);

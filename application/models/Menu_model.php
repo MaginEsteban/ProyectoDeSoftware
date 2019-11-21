@@ -130,7 +130,7 @@ class Menu_model extends CI_Model {
 
     //retorna todo los menus asignados a los turnos
     public function findAllByIdTurno($id_Turno){
-        $this->db->select('m.id_menu,m.nombre as nombre_menu,dp.id_dia_programacion, programacion.id_turno');
+        $this->db->select('m.id_menu,m.nombre as nombre_menu,dp.id_dia_programacion, programacion.id_turno,programacion_menu.id_programacion_menu');
         $this->db->from('programacion');
         $this->db->where('programacion.id_turno',$id_Turno);
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');

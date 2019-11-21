@@ -51,6 +51,8 @@ function actualizarDashboard(idComedor) {
 			var menus = JSON.parse(response);
 			//limpiar el dashboard
 
+			alert(menus);
+
 			for (var i = 0; i < menus.length; i++) {
 				render_menu(menus[i]);
 			}

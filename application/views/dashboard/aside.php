@@ -18,7 +18,7 @@
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-
+        </div>
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -168,6 +168,7 @@
                 <?php endif; ?>
             </ul>
             <!-- /.sidebar-menu -->
+        
     </section>
     <!-- /.sidebar -->
 </aside>
