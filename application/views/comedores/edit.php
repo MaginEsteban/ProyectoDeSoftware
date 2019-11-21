@@ -35,7 +35,6 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Ciudad</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="ciudades">
-                        <option value="0">...</option>
                             <?php foreach ($ciudades as $ciudad): ?>
                             <option value="<?php echo $ciudad->id_ciudad; ?>" <?php if ($ciudad->id_ciudad == $comedor->id_ciudad)
                                 echo "selected"; ?> ><?php echo $ciudad->nombre; ?></option> 

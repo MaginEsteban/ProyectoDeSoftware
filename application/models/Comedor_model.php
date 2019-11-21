@@ -40,6 +40,16 @@ class Comedor_model extends CI_Model {
         return $query->result();
     }
 
+    public function findAllNotAsigned(){
+        $this->db->select('*');
+        $this->db->from('comedor');
+        $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
+        $this->db->where('id_usuario',0);
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+
     public function findAllCiudades(){
 
         $this->db->select('*');
@@ -61,9 +71,7 @@ class Comedor_model extends CI_Model {
     }
 
     public function updateUserComedor($id_usuario,$id_comedor){
-        $data = array(
-            'id_usuario' => $id_usuario
-        );
+        $data['id_usuario'] = $id_usuario;
         $this->db->where('id_comedor',$id_comedor);
         $this->db->update('comedor',$data);
     }
@@ -125,6 +133,15 @@ class Comedor_model extends CI_Model {
         $this->db->where('id_comedor', $id_usuario);
         $this->db->where('id_usuario', $id_comedor);
         $this->db->delete('comedor');
+    }
+    
+    public function esUserAdminComedor($id_user){
+        $this->db->select('id_comedor,id_usuario');
+        $this->db->from('comedor');
+        $this->db->where('id_usuario', $id_user);
+        $query = $this->db->get();
+
+        return $query->row(0,'Comedor_model');
     }
 
 }

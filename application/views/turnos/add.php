@@ -26,7 +26,6 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Comedor</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="comedores">
-                        <option value="0">...</option>
                             <?php foreach ($comedores as $comedor): ?>
                             <option value="<?php echo $comedor->id_comedor; ?>"><?php echo $comedor->nombre_comedor; ?></option> 
                             <?php endforeach; ?>

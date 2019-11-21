@@ -40,7 +40,6 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo De Menu</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="tiposdemenues">
-                        <option value="0">...</option>
                             <?php foreach ($tiposdemenu as $tpm): ?>
                             <option value="<?php echo $tpm->id_tipo_menu; ?>" <?php if ($tpm->id_tipo_menu == $menu->id_tipo_menu)
                                 echo "selected"; ?>><?php echo $tpm->nombre_tipo_menu; ?></option> 
@@ -52,7 +51,6 @@
                      <div class="form-group">
                         <label for="exampleFormControlSelect1">Comedor</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="comedores">
-                        <option value="0">...</option>
                             <?php foreach ($comedores as $comedor): ?>
                             <option value="<?php echo $comedor->id_comedor; ?>" <?php if ($comedor->id_comedor == $menu->id_comedor)
                                 echo "selected"; ?>><?php echo $comedor->nombre_comedor; ?></option> 

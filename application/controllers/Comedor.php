@@ -33,6 +33,11 @@ class Comedor extends Security {
         $this->load->view('comedores/edit',$data);
     }
 
+    public function update(){
+        $id_user = $this->uri->segment(3);
+        $this->Comedor_model->update_user_comedor($id_user);
+        redirect(base_url('user/listing'));
+    }
     public function delete(){
         $id_comedor = $this->uri->segment(3);
         $this->Comedor_model->delete($id_comedor);
@@ -54,5 +59,16 @@ class Comedor extends Security {
         redirect(base_url('comedor/listing'));
     }
 
+    public function esUserComedor(){
+        $id_user = $this->uri->segment(3);
+        $id_user_comedor = $this->Comedor_model->esUserAdminComedor($id_user);
+        if(isset($id_user_comedor->id_usuario)){
+            
+            if($id_user_comedor->id_usuario != 0){
+                $this->Comedor_model->updateUserComedor(0,$id_user_comedor->id_comedor);
+            }
+        }
+        redirect(base_url('user/listing'));
+    }
 
 }
