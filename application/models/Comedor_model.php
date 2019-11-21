@@ -36,7 +36,6 @@ class Comedor_model extends CI_Model {
         $this->db->from('comedor');
         $this->db->join('ciudad', 'comedor.id_ciudad = ciudad.id_ciudad');
         $query = $this->db->get();
-        
         return $query->result();
     }
 
@@ -90,10 +89,7 @@ class Comedor_model extends CI_Model {
         $this->db->from('comedor');
         $this->db->join('ciudad','comedor.id_ciudad = ciudad.id_ciudad');
         $this->db->where('id_usuario',$id_usuario);
-        
-
         $query = $this->db->get();
-        
         return $query->row(0);
     }
     

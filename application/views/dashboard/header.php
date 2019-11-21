@@ -116,7 +116,7 @@
                         $.ajax({
                         url: "http://localhost/proyectodesoftware/login/cerrar_sesion",
                         success: function() {
-                            location.href = "http://localhost/proyectodesoftware/login";
+                            location.href = "http://localhost/proyectodesoftware/";
                         }
                     })
                     }

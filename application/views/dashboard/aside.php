@@ -53,7 +53,7 @@
                     </ul>
                     <?php endif; ?>
 
-                    <?php if ($user->id_tipo_usuario == 4 || $user->id_tipo_usuario == 3) : ?>
+                    <?php if ($user->id_tipo_usuario == 3) : ?>
                     <a href="#"><i class="fa fa-cutlery"></i> <span>Menues</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>

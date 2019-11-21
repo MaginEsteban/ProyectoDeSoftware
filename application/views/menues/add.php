@@ -1,5 +1,4 @@
 <?php
-    
     $this->load->view('dashboard/header');  
 ?>
 
@@ -43,15 +42,11 @@
                         </select>
                     </div>
 
-                     <!-- Comedores -->
-                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Comedor</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="comedores">
-                            <?php foreach ($comedores as $comedor): ?>
-                            <option value="<?php echo $comedor->id_comedor; ?>"><?php echo $comedor->nombre_comedor; ?></option> 
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+                        <!-- Comedor -->
+                      <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            name="comedores" value="<?php echo $comedor->id_comedor; ?>">
+
+
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
