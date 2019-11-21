@@ -7,7 +7,8 @@ class Dashboard extends Security {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Comedor_model');
-		
+		$this->load->model('Ticket_model');
+		$this->load->model('Sancion_model');
 	}
     public function index()
 	{
@@ -16,6 +17,8 @@ class Dashboard extends Security {
 			$data = array(
 				'user' => $user,
 				'comedores'=> $this->Comedor_model->find_all_comedores_fav_by_id_user($user->id_usuario),
+				'tickets'=> $this->Ticket_model->find_by_id_persona($user->id_persona),
+				'sanciones'=> $this->Sancion_model->find_by_id_persona($user->id_persona),
 			);
 		}else {
 			if($user->id_tipo_usuario == 3){

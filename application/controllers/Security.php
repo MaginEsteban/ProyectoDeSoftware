@@ -18,7 +18,7 @@ class Security extends CI_Controller {
             ),
        'ADMINISTRADOR_COMEDOR'
             =>array(
-               'User','Comedor','Turno'
+               'User/add','Comedor','Turno'
             ),
        'ADMINISTRADOR'
             => array(
