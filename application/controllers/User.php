@@ -16,12 +16,10 @@ class User extends Security {
     */
     public function add()
 	{
-        $data ['comedores'] = $this->Comedor_model->findAll();
+        $data ['comedores'] = $this->Comedor_model->findAllNotAsigned();
         $this->load->view('users/add',$data);
     }
 
-
-    // REVISAR EDIT QUE NO FUNCIONA
     public function edit(){
         $id_usuario = $this->uri->segment(3);
         $data = array(
@@ -38,8 +36,7 @@ class User extends Security {
         $this->User_model->delete($id_usuario);
         redirect(base_url('user/listing'));
     }
-    public function listing()
-	{
+    public function listing(){
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);
     }
@@ -48,7 +45,7 @@ class User extends Security {
      public function store(){
         
         $legajo = $this->input->post('legajo');
-        if(!is_null($this->User_model->find_person_by_legajo($legajo))){
+        if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
 
         $email= $this->input->post('email');
         $idTipoUsuario = $this->input->post('tipos');

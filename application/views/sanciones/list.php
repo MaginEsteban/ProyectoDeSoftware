@@ -1,5 +1,6 @@
 <?php   
     $this->load->view('dashboard/header');  
+    $user = $this->session->userdata('user')
 ?>
     <!-- Main content -->
 
@@ -22,7 +23,9 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Nombre persona</th>
                             <th scope="col">Apellido persona</th>
+                            <?php if($user->id_tipo_usuario == 3): ?>
                             <th scope="col" style="width:150px">Acciones</th>
+                            <?php endif; ?>    
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +37,7 @@
                             <td scope="row"><?php echo $sancion->descripcion; ?></th>
                             <td scope="row"><?php echo $sancion->nombre; ?></th>
                             <td scope="row"><?php echo $sancion->apellido; ?></th>
+                            <?php if($user->id_tipo_usuario == 3): ?>
                             <td scope="row">
                                 <!-- modificar sancion -->
                                 <a href="<?= base_url('sancion/edit/').$sancion->id_sancion; ?>" role="button" class="btn btn-primary m-1">
@@ -43,6 +47,7 @@
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
+                            <?php endif; ?>  
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

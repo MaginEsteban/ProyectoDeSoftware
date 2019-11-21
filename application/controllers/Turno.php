@@ -56,5 +56,4 @@ class Turno extends Security {
         $this->Turno_model->update($idTurno,$nombreTurno,$hora_inicio,$hora_fin,$idComedor);
         redirect(base_url('turno/listing'));
     }
-
 }

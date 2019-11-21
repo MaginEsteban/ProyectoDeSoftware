@@ -37,9 +37,6 @@ class User_model extends CI_Model{
     public function delete($id_user){
         $this->db->where('id_usuario', $id_user);
         $this->db->delete('usuario');
-        if($this->esUserAdminComedor($id_user)){
-            $this->modificarUserComedor($id_user);
-        }
     }
 
     public function update($id,$id_pers,$tipo_usuario,$nombre,$contraseña,$email){
@@ -81,6 +78,18 @@ class User_model extends CI_Model{
         $this->db->where('usuario.id_usuario',$id);
         $query = $this->db->get();
         return $query->row(0,'User_model');
+    }
+
+    public function exists($legajo){
+        $this->db->select('usuario.legajo');
+        $this->db->from('usuario');
+        $this->db->join('persona','usuario.id_persona = persona.id_persona');
+        $this->db->where('legajo',$legajo);
+        $query = $this->db->get();
+        if(empty($query->row(0,'User_model')){
+            return false;
+        }
+        return true;
     }
     /**
      * Permite reestablecer la contraseña

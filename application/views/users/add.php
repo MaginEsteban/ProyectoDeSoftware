@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Legajo </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese el legajo..." name="legajo">
+                            placeholder="Ingrese el legajo..." name="legajo" required>
                         
                     </div>
                     
@@ -33,15 +33,17 @@
                     <!-- Select tipo usuario -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo de usuario</label>
-                        <select class="form-control" id="selectTypeUser" name="tipos"  required>
+                        <select class="form-control" id="selectTypeUser" name="tipos" >
                             <option value="1">USUARIO</option>
+                            <?php if(!empty($comedores)){ ?>
                             <option value="3">ADMINISTRADOR DE COMEDORES</option>
+                            <?php } ?>
                         </select>   
                     </div>
                     <!-- Select comedor-->
                     <div class="form-group" id="comedores_list">
                         <label for="comedores_list">Comedor </label>
-                        <select class="form-control"   name="comedores" required>
+                        <select class="form-control" name="comedores" >
                             
                             <?php foreach ($comedores as $comedor): ?>
                             <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor;?></option>

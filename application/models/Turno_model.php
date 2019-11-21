@@ -67,9 +67,14 @@ class Turno_model extends CI_Model {
         $this->db->from('turno');
         $this->db->where('id_comedor',$id_comedor);
         $query = $this->db->get();
-
         return $query->result();
+    }
 
-
+    public function findHoraTurno($id_turno){
+        $this->db->select('hora_inicio, hora_fin');
+        $this->db->from('turno');
+        $this->db->where('id_turno',$id_turno);
+        $query = $this->db->get();
+        return $query->row(0,'Turno_model');
     }
 }
