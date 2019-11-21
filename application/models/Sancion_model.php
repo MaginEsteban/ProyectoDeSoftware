@@ -53,15 +53,21 @@ class Sancion_model extends CI_Model {
         return $query->row(0,'Sancion_model');
     }
 
+    public function find_by_id_persona($id_persona){
+        $this->db->select('*');
+        $this->db->from('sancion');
+        $this->db->join('persona', 'sancion.id_persona = persona.id_persona');
+        $this->db->where('sancion.id_persona', $id_persona);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function findSancionesByLegajo($legajo){
         $this->db->select('*');
         $this->db->from('sancion');
         $this->db->join('persona', 'sancion.id_persona = persona.id_persona');
         $this->db->where('persona.numero_legajo', $legajo);
         $query = $this->db->get();
-
         return $query->result();
-
-
     }
 }

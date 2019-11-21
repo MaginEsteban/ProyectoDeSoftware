@@ -19,6 +19,12 @@ class Sancion extends Security {
         $this->load->view('sanciones/add',$data);
     }
 
+    public function listing_client(){
+        $usuario = $this->session->userdata('user');
+        $data['sanciones'] = $this->Sancion_model->find_by_id_persona($usuario->id_persona);
+        $this->load->view('sanciones/list',$data);
+    }
+
     public function listing()
 	{
         $data['sanciones'] = $this->Sancion_model->findAll();
@@ -58,4 +64,5 @@ class Sancion extends Security {
         redirect(base_url('sancion/listing'));
 
     }
+
 }
