@@ -45,7 +45,6 @@ class Menu_model extends CI_Model {
     }
 
     public function findAllTiposDeMenu(){
-
         $this->db->select('*');
         $this->db->from('tipo_menu');
         $query = $this->db->get();
@@ -56,9 +55,7 @@ class Menu_model extends CI_Model {
 
         $this->db->select('*');
         $this->db->from('comedor');
-       
-         $query = $this->db->get();
-        
+        $query = $this->db->get();
         return $query->result();
     }
     
@@ -68,9 +65,7 @@ class Menu_model extends CI_Model {
         $this->db->join('tipo_menu', 'menu.id_tipo_menu = tipo_menu.id_tipo_menu');
         $this->db->join('comedor', 'menu.id_comedor = comedor.id_comedor');
         $this->db->where('id_menu', $id);
-        
         $query = $this->db->get();
-        
         return $query->row(0,'Menu_model');
     }
      
