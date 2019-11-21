@@ -78,12 +78,13 @@ class Ticket_model extends CI_Model{
         $this->db->select('ticket.id_ticket,ticket.codigo, ticket.id_estado_pago,
         ticket.fecha_retiro_ticket,menu.nombre as nombre_menu,
         turno.nombre as nombre_turno , estado.nombre as nombre_estado,
-        estado_ticket.fecha_fin as fecha_fin');
+        estado_ticket.fecha_fin as fecha_fin,persona.nombre,persona.apellido');
         $this->db->from('ticket');
         $this->db->join('menu', 'ticket.id_menu = menu.id_menu');
         $this->db->join('turno','ticket.id_turno = turno.id_turno');
         $this->db->join('estado_ticket','estado_ticket.id_ticket = ticket.id_ticket');
         $this->db->join('estado','estado_ticket.id_estado = estado.id_estado');
+        $this->db->join('persona','persona.id_persona = ticket.id_persona');
         $this->db->where('estado_ticket.fecha_fin',null);
         $query = $this->db->get();
         return $query->result();

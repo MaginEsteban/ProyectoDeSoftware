@@ -16,6 +16,8 @@
                 <thead class="">
                         <tr class="bg-info">
                             <th scope="col">Codigo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
                             <th scope="col">Estado de Pago</th>
                             <th scope="col">Estado de Ticket</th>
                             <th scope="col">Menu</th>
@@ -29,6 +31,8 @@
                         <?php foreach ($tickets as $ticket): ?>
                         <tr>
                             <td scope="row"><?php echo $ticket->codigo; ?></td>
+                            <td scope="row"><?php echo $ticket->nombre; ?></td>
+                            <td scope="row"><?php echo $ticket->apellido; ?></td>
                             <td scope="row"><?php if($ticket->id_estado_pago == 1){echo "PENDIENTE DE PAGO";}else{echo "PAGADO";} ?></th>
                             <td scope="row"><?php echo $ticket->nombre_estado; ?></td>
                             <td scope="row"><?php echo $ticket->nombre_menu; ?></td>
