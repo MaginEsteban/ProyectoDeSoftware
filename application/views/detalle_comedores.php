@@ -48,7 +48,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 shadow-lg" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <img src="<?= base_url('recursos')?>/img/492px-Unrn-logo.svg.png" alt="" height="60px"></a>
+                <img src="<?= base_url('recursos')?>/img/492px-Unrn-logo.svg.png" alt="" height="60px" ></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -68,7 +68,10 @@
                     <?php endif; ?>
                     <?php if (isset($user)): ?>
                     <li class="nav-item text-black">
-                       <a class="text-dark"href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>"> <img src="<?= base_url("recursos")?>/img/circle-512.png" class="img-circle" alt="User Image" style="height: 20px;">  <?php echo $user->nombre; ?></img></a>
+                       <a class="nav-link js-scroll-trigger text-dark" href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>"> <img src="<?= base_url("recursos")?>/img/circle-512.png" class="img-circle" alt="User Image" style="height: 20px;">  <?php echo $user->nombre; ?></img></a>
+                    </li>
+                    <li class="nav-item text-black">
+                        <i class="fa fa-dashcub" aria-hidden="true"> <a class="nav-link js-scroll-trigger text-dark" href="<?= base_url("dashboard")?>">Dashboard</a></i>
                     </li>
                     <?php endif; ?>
                 </ul>
