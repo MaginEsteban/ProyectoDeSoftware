@@ -81,12 +81,12 @@ class User_model extends CI_Model{
     }
 
     public function exists($legajo){
-        $this->db->select('usuario.legajo');
+        $this->db->select('persona.numero_legajo');
         $this->db->from('usuario');
         $this->db->join('persona','usuario.id_persona = persona.id_persona');
-        $this->db->where('legajo',$legajo);
+        $this->db->where('persona.numero_legajo',$legajo);
         $query = $this->db->get();
-        if(empty($query->row(0,'User_model')){
+        if(empty($query->row(0,'User_model'))){
             return false;
         }
         return true;

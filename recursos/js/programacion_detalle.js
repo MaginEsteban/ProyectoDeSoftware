@@ -105,12 +105,13 @@ function render_menu(id, nombre, dia, dianombre, turno,idComedor) {
                     <!-- Informacion de menu -->
                         <div class="col-8 text-center text-white mr-n1 text-truncate">
                             ${nombre}
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-info m-n1 menu_reserva rounded-circle">
-                                 <i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id},'${dianombre}',${turno},${idComedor})"></i>
-                            </button>
-                        </div>
+						</div>
+
+							<div class="col-2">
+								<button class="btn btn-info m-n1 menu_reserva rounded-circle">
+									<i class="fa fa-shopping-cart text-white" aria-hidden="true" onclick="reservaTicket(${id},'${dianombre}',${turno},${idComedor})"></i>
+								</button>
+							</div>
                 </div>
                 
           `;
