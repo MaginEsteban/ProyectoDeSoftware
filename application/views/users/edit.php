@@ -41,7 +41,9 @@
                         <label for="exampleFormControlSelect1">Tipo de usuario</label>
                         <select class="form-control" id="selectTypeUser" name="tipo_seleccionado" required>
                             <option value="1">USUARIO</option>
+                            <?php if(!empty($comedores)){ ?>
                             <option value="3">ADMINISTRADOR DE COMEDORES</option>
+                            <?php } ?>
                         </select>
                         
                     </div>

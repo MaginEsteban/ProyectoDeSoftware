@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Usuarios
-            <small>Lista Usuarios </small>
+            <small>Listado Usuarios </small>
         </h1>
 
     </section>
@@ -72,7 +72,7 @@
                     $.ajax({
                     url: "http://localhost/proyectodesoftware/user/delete/<?php echo $usuario->id_usuario ?>",
                     success: function() {
-                        location.href = "http://localhost/proyectodesoftware/user/listing";
+                        location.href = "http://localhost/proyectodesoftware/comedor/esUserComedor/<?php echo $usuario->id_usuario ?>";
                     }
                 })
                 }

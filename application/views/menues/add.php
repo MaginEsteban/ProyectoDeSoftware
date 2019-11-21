@@ -36,7 +36,6 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo De Menu</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="tiposdemenues">
-                        <option value="0">...</option>
                             <?php foreach ($tiposdemenu as $tpm): ?>
                             <option value="<?php echo $tpm->id_tipo_menu; ?>"><?php echo $tpm->nombre_tipo_menu; ?></option> 
                             <?php endforeach; ?>

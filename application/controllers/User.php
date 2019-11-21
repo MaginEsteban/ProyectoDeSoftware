@@ -16,7 +16,7 @@ class User extends Security {
     */
     public function add()
 	{
-        $data ['comedores'] = $this->Comedor_model->findAll();
+        $data ['comedores'] = $this->Comedor_model->findAllNotAsigned();
         $this->load->view('users/add',$data);
     }
 
@@ -38,8 +38,7 @@ class User extends Security {
         $this->User_model->delete($id_usuario);
         redirect(base_url('user/listing'));
     }
-    public function listing()
-	{
+    public function listing(){
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);
     }

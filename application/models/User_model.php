@@ -37,9 +37,6 @@ class User_model extends CI_Model{
     public function delete($id_user){
         $this->db->where('id_usuario', $id_user);
         $this->db->delete('usuario');
-        if($this->esUserAdminComedor($id_user)){
-            $this->modificarUserComedor($id_user);
-        }
     }
 
     public function update($id,$id_pers,$tipo_usuario,$nombre,$contraseña,$email){
