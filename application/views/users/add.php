@@ -13,7 +13,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row align-items-center">
-            <div class="col-6 mx-auto card">
+            
+            <div class="col-10 col-md-6 mx-auto card">
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
                     <!-- Legajo -->
                     <div class="form-group">
@@ -50,7 +51,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                         <button type="submit" class="btn btn-primary">Submit</button>
+                         <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
 
             </div>

@@ -37,10 +37,25 @@
 						Registro
 					</span>
 				</div>
-				<?php echo validation_errors(); ?>
+				<?= validation_errors(); ?>
+ 
+				 <?php 
+				
+					if($this->session->flashdata('error')){
+						echo 'hola muno';
+						echo '<p class="text-center text-danger">' . $this->session->flashdata('error') . '</p>';
+					}
+				?> 
+
 				<form class="login100-form validate-form" action="<?php echo base_url('register/post_register') ?>" method="post" >
 
-                    <div class="wrap-input100 validate-input m-b-26" data-validate="Legajo requerido">
+
+					
+					<!-- <div style="width:100%;">
+						<p class="lead m-2 text-center">Datos personales</p>
+                    </div>
+                    -->
+				    <div class="wrap-input100 validate-input m-b-26" data-validate="Legajo requerido">
 						<span class="label-input100">Legajo</span>
 						<input class="input100" type="text" name="legajo" placeholder="Ingrese su legajo">
 						<span class="focus-input100"></span>
@@ -51,8 +66,13 @@
 						<input class="input100" type="email" name="email" placeholder="Ingrese su email">
 						<span class="focus-input100"></span>
                     </div>
-                    
-                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username requerido">
+
+                    <!-- <div style="width:100%;">
+						<p class="lead m-2 text-center">Datos del usuario</p>
+                    </div> -->
+					<!-- Datos del usuario -->
+
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Username requerido">
 						<span class="label-input100">Nombre de Usuario</span>
 						<input class="input100" type="text" name="username" placeholder="Ingrese su nombre de usuario">
 						<span class="focus-input100"></span>

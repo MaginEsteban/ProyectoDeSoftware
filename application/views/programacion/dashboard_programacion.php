@@ -181,7 +181,7 @@ box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.67);
 
     $(document).ready( function() {
         // llamar a la funcion para actualizar la table
-         actualizarDashboard(idComedor);
+         actualizarDashboard(idComedor, "<?= base_url('programacion/menusAllTurnos') ?>");
     });
 </script>
 <?php

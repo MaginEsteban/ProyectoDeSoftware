@@ -80,7 +80,8 @@
                         <button id="submitButton" class="login100-form-btn">
                             Ingresar
                         </button>
-                        <button id="submitButton" class="login100-form-btn" onclick="<?= base_url('register')?>">
+                       
+                        <button class="login100-form-btn" onClick="redir(event)">
                             Registrarse
                         </button>
                     </div>
@@ -109,6 +110,14 @@
 
 
     <script>
+
+    function redir(event){
+        event.preventDefault();
+       
+        window.location.href = "<?= base_url('register')?>";
+    }
+
+
     $("#form").submit(function(event) {
         event.preventDefault();
 

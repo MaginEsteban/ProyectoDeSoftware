@@ -33,7 +33,7 @@ function render_menu(menu) {
 
 }
 
-function actualizarDashboard(idComedor) {
+function actualizarDashboard(idComedor,url) {
 
 	var menus;
 
@@ -42,7 +42,7 @@ function actualizarDashboard(idComedor) {
 
 	//peticon ajax para obtener todo los menus de un comedor dado
 	$.ajax({
-		url: "http://localhost/proyectodesoftware/programacion/menusAllTurnos",
+		url: url,
 		data: {
 			comedor: idComedor
 		},
@@ -51,7 +51,7 @@ function actualizarDashboard(idComedor) {
 			var menus = JSON.parse(response);
 			//limpiar el dashboard
 
-			alert(menus);
+			//alert(menus);
 
 			for (var i = 0; i < menus.length; i++) {
 				render_menu(menus[i]);

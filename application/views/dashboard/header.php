@@ -114,9 +114,9 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                        url: "http://localhost/proyectodesoftware/login/cerrar_sesion",
+                        url: "http://localhost/ProyectoDeSoftware/login/cerrar_sesion",
                         success: function() {
-                            location.href = "http://localhost/proyectodesoftware/";
+                            location.href = "http://localhost/ProyectoDeSoftware/";
                         }
                     })
                     }

@@ -23,15 +23,19 @@ class User_model extends CI_Model{
     } 
     
     public function insert_register ($legajo,$tipo_usuario,$name,$pass,$email){
-        $id_pers = $this->find_person_by_legajo($legajo);
-        $data = array(
-           'id_persona' => $id_pers,
-           'id_tipo_usuario' => $tipo_usuario,
-           'nombre' => $name,
-           'contraseña' => $pass,
-           'email' => $email
-        );
-    $this->db->insert('usuario', $data);
+       
+            $id_pers = $this->find_person_by_legajo($legajo);
+        
+            $data = array(
+               'id_persona' => $id_pers,
+               'id_tipo_usuario' => $tipo_usuario,
+               'nombre' => $name,
+               'contraseña' => $pass,
+               'email' => $email
+            );
+            
+            $this->db->insert('usuario', $data);
+   
     } 
 
     public function delete($id_user){
@@ -80,6 +84,7 @@ class User_model extends CI_Model{
         return $query->row(0,'User_model');
     }
 
+    //bool
     public function exists($legajo){
         $this->db->select('persona.numero_legajo');
         $this->db->from('usuario');
@@ -91,6 +96,7 @@ class User_model extends CI_Model{
         }
         return true;
     }
+    
     /**
      * Permite reestablecer la contraseña
     */
