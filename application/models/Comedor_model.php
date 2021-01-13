@@ -76,7 +76,7 @@ class Comedor_model extends CI_Model {
     }
 
     public function find_comedor_by_id_user($id_usuario){
-        $this->db->select('comedor.id_comedor');
+        $this->db->select('*');
         $this->db->from('comedor');
         $this->db->where('id_usuario',$id_usuario);
         $query = $this->db->get();
@@ -89,8 +89,8 @@ class Comedor_model extends CI_Model {
         $this->db->from('comedor');
         $this->db->join('ciudad','comedor.id_ciudad = ciudad.id_ciudad');
         $this->db->where('id_usuario',$id_usuario);
-        $query = $this->db->get();
-        return $query->row(0);
+         $query = $this->db->get();
+         return $query->row(0);
     }
     
 

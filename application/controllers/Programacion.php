@@ -22,12 +22,12 @@ class Programacion extends Security
 
         // busca todos lo turnos del comedor que administrador-comedor
         $usuario =  $this->session->userdata('user');
-
+        
         $fechaActual = mdate('%Y-%m-%d', time());
 
         //busca el comedor que administra
         $data['comedor'] = $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario);
-      
+             
         $data['turnos'] =  $this->Turno_model->findTurnosByIdComedor($data['comedor']->id_comedor);
 
         

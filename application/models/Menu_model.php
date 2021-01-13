@@ -33,11 +33,13 @@ class Menu_model extends CI_Model {
             $this->db->delete('menu');
         
     }
+
+    //busqueda por comedor
     public function findAll(){
-        $this->db->select('*');
-        $this->db->from('menu');
-        $this->db->join('tipo_menu', 'menu.id_tipo_menu = tipo_menu.id_tipo_menu');
-        $this->db->join('comedor', 'menu.id_comedor = comedor.id_comedor');
+        $this->db->select("m.id_menu, m.nombre, m.descripcion, tm.nombre as 'nombre_tipo_menu', c.nombre as nombre_comedor");
+        $this->db->from('menu as m');
+        $this->db->join('tipo_menu as tm', 'm.id_tipo_menu = tm.id_tipo_menu');
+        $this->db->join('comedor as c', 'm.id_comedor = c.id_comedor');
        
          $query = $this->db->get();
         
@@ -72,9 +74,11 @@ class Menu_model extends CI_Model {
 
     //retorn todos los menus de una comedor
     public function findAllByIdComedor($id_comedor){
-        $this->db->select('*');
-        $this->db->from('menu');
-        $this->db->where('id_comedor',$id_comedor);
+        $this->db->select("m.id_menu, m.nombre, m.descripcion, tm.nombre as 'nombre_tipo_menu', c.nombre as nombre_comedor");
+        $this->db->from('menu as m');
+        $this->db->join('tipo_menu as tm', 'm.id_tipo_menu = tm.id_tipo_menu');
+        $this->db->join('comedor as c', 'm.id_comedor = c.id_comedor');
+        $this->db->where('m.id_comedor',$id_comedor);
         $query = $this->db->get();
        
         return $query->result();
@@ -149,6 +153,17 @@ class Menu_model extends CI_Model {
         $this->db->where('stock.cantidad >',0);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function check($menu, $id_tipo_menu,$id_comedor){
+
+        $this->db->select('*');
+        $this->db->from('menu as m');
+        $this->db->where('m.nombre',$menu);
+        $this->db->where('m.id_tipo_menu',$id_tipo_menu);
+        $this->db->where('m.id_comedor',$id_comedor);
+
+        return $this->db->count_all_results();
     }
 
 }

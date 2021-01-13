@@ -16,9 +16,7 @@ class Login_model extends CI_Model{
         $this->db->join('tipo_usuario','usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario' );
         $this->db->where(array('nombre'=>$name,'contraseña'=>$pass));
         $query = $this->db->get();
-        $row = $query->row();
-        return $row;
-        
+        return $query->row(); 
     }
 
     public function find_by_id($id){

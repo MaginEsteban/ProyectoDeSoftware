@@ -13,12 +13,14 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto card">
+            <div class="col-10 col-sm-6 mx-auto card">
+            <?php echo validation_errors(); ?>
 
-                <form action="<?= base_url('menu/crearMenu'); ?>" method="POST" class="m-2">
+                <form action="<?= base_url('menu/crear'); ?>" method="POST" class="m-2">
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre </label>
+
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                             placeholder="Ingrese el nombre del menu..." name="nombre">
                         
@@ -27,9 +29,7 @@
                     <!-- Descripcion -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Descripcion </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese la Descripcion del Menu..." name="descripcion">
-                        
+                        <textarea class="form-control" id="exampleInputEmail1" rows="3" placeholder="Ingrese una descripcion..." name="descripcion"></textarea>
                     </div>
 
                     <!-- Tipo De Menu -->
@@ -37,7 +37,7 @@
                         <label for="exampleFormControlSelect1">Tipo De Menu</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="tiposdemenues">
                             <?php foreach ($tiposdemenu as $tpm): ?>
-                            <option value="<?php echo $tpm->id_tipo_menu; ?>"><?php echo $tpm->nombre_tipo_menu; ?></option> 
+                            <option value="<?php echo $tpm->id_tipo_menu; ?>"><?php echo $tpm->nombre; ?></option> 
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -48,7 +48,7 @@
 
 
                     
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
 
             </div>

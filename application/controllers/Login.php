@@ -7,6 +7,7 @@ class Login extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Login_model');
+		$this->load->model('Comedor_model');
 	}
 
      public function index(){
@@ -35,6 +36,12 @@ class Login extends CI_Controller {
 		}else{
 			$this->abrir_sesion($user);
 			if($user->id_tipo_usuario == 3)
+				
+				$comedor = $this->Comedor_model->find_comedor_by_id_user($user->id_usuario);
+				
+				//agrego el id de comedor a la sesion
+				$this->session->set_userdata('id_comedor', $comedor->id_comedor);
+
 				$url = base_url('programacion/');
 			}
 		

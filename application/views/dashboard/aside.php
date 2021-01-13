@@ -54,19 +54,19 @@
                     <?php endif; ?>
 
                     <?php if ($user->id_tipo_usuario == 3) : ?>
-                    <a href="#"><i class="fa fa-cutlery"></i> <span>Menues</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
+                        <a href="#"><i class="fa fa-cutlery"></i> <span>Menues</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
 
-                        <li class="active"><a class="user-menu" href="<?= base_url("menu/add"); ?>"><i
-                                    class="fa fa-plus"></i> <span>Agregar Menu</span></a></li>
+                            <li class="active"><a class="user-menu" href="<?= base_url("menu/add"); ?>"><i
+                                        class="fa fa-plus"></i> <span>Agregar Menu</span></a></li>
 
-                        <li class="active"><a class="user-menu" href="<?= base_url("menu/listing"); ?>"><i
-                                    class="fa fa-list-ul"></i> <span>Listado Menues</span></a></li>
-                    </ul>
+                            <li class="active"><a class="user-menu" href="<?= base_url("menu/listing"); ?>"><i
+                                        class="fa fa-list-ul"></i> <span>Listado Menues</span></a></li>
+                        </ul>
                     <?php endif; ?>
 
                     <?php if ($user->id_tipo_usuario == 4 || $user->id_tipo_usuario == 3) : ?>

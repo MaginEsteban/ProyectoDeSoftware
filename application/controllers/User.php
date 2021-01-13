@@ -28,7 +28,7 @@ class User extends Security {
             'comedor'=> $this->Comedor_model->find_comedor_by_id_user($id_usuario),
             'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
         );
-        $this->load->view('users/edit',$data);
+        $this->load->view('users/edit',$data);//modificar vista comedor
     }
 
     public function delete (){
