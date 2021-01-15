@@ -37,14 +37,16 @@ class Menu extends Security {
         $this->load->view('menues/list',$data);
     }
 
-    public function edit(){ 
+    public function edit( ){ 
         $usuario = $this->session->userdata('user');
         $id_menu = $this->uri->segment(3);
+
         $data = array(
             'menu' => $this->Menu_model->findById($id_menu),
             'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
             'comedor' => $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario)
         );
+
         $this->load->view('menues/edit',$data);
     }
 
@@ -98,6 +100,50 @@ class Menu extends Security {
        
     }
 
+    public function modificarMenu(){
+      
+
+        $this->form_validation->set_rules('nombre', 'nombre', 'required|callback_unicidad_menu_check',
+            array('required' => 'Ingresar el nombre del menu...',
+                  'unicidad_menu_check' => 'El menu ya existe en el comedor...'));
+        $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
+        
+        array('required' => 'Ingresar la descripcion del menu...'));
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $usuario = $this->session->userdata('user');
+            $id_menu = $this->input->post('id');
+           
+            $data = array(
+                'menu' => $this->Menu_model->findById($id_menu),
+                'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
+                'comedor' => $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario)
+            );
+    
+            $this->load->view('menues/edit',$data);
+                   
+        //    $this->session->set_flashdata('error', validation_errors());
+        //    redirect(base_url('menu/edit/').$this->input->post('id'));
+        }
+        else
+        {
+            //paso la validacion
+                
+            $nombreMenu = $this->input->post('nombre');
+            $descripcion = $this->input->post('descripcion');
+            $idTipoMenu = $this->input->post('tiposdemenues');
+            $idComedor = $this->input->post('comedores');
+            $idMenu = $this->input->post('id');
+        
+            $this->Menu_model->update($idMenu,$nombreMenu,$descripcion,$idTipoMenu,$idComedor);
+            redirect(base_url('menu/listing'));
+        }
+
+    }
+
+
     function unicidad_menu_check(){
        
         $menu = $this->input->post('nombre');
@@ -108,17 +154,6 @@ class Menu extends Security {
             return TRUE;
                
         return FALSE;
-    }
-
-    public function modificarMenu(){
-        $nombreMenu = $this->input->post('nombre');
-        $descripcion = $this->input->post('descripcion');
-        $idTipoMenu = $this->input->post('tiposdemenues');
-        $idComedor = $this->input->post('comedores');
-        $idMenu = $this->input->post('id');
-        $this->Menu_model->update($idMenu,$nombreMenu,$descripcion,$idTipoMenu,$idComedor);
-        redirect(base_url('menu/listing'));
-
     }
 
 }

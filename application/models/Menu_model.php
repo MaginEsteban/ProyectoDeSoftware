@@ -63,10 +63,10 @@ class Menu_model extends CI_Model {
     
     public function findById($id){
         $this->db->select('*');
-        $this->db->from('menu');
-        $this->db->join('tipo_menu', 'menu.id_tipo_menu = tipo_menu.id_tipo_menu');
-        $this->db->join('comedor', 'menu.id_comedor = comedor.id_comedor');
-        $this->db->where('id_menu', $id);
+        $this->db->from('menu as m');
+        //$this->db->join('tipo_menu as tm', 'm.id_tipo_menu = tm.id_tipo_menu');
+      //  $this->db->join('comedor', 'menu.id_comedor = comedor.id_comedor');
+        $this->db->where('m.id_menu', $id);
         $query = $this->db->get();
         return $query->row(0,'Menu_model');
     }

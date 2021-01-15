@@ -36,6 +36,7 @@ class User extends Security {
         $this->User_model->delete($id_usuario);
         redirect(base_url('user/listing'));
     }
+
     public function listing(){
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);

@@ -14,7 +14,7 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-10 col-sm-6 mx-auto card">
-            <?php echo validation_errors(); ?>
+            <?php echo validation_errors();?>
 
                 <form action="<?= base_url('menu/crear'); ?>" method="POST" class="m-2">
                     <!-- Nombre -->

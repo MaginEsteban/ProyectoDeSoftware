@@ -72,8 +72,6 @@ class Ticket extends Security {
         $state = $this->uri->segment(3); 
         $data['tickets'] = array();
         
-
-
         if(  $state  ){
             // con filtro
             $data['tickets'] = $this->Ticket_model->findAllByState($state);
