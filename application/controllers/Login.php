@@ -33,11 +33,15 @@ class Login extends CI_Controller {
 			$mensaje = 'El nombre de usuario o la contraseña no es valida...';
 		
 
-		}else{
+		}
+		else{
 			$this->abrir_sesion($user);
-			if($user->id_tipo_usuario == 3)
+			
+			$user_session =  $this->session->userdata('user');
+
+			if($user_session->tipo == 'ADMINISTRADOR_COMEDOR'){ 
 				
-				$comedor = $this->Comedor_model->find_comedor_by_id_user($user->id_usuario);
+				$comedor = $this->Comedor_model->find_comedor_by_id_user($user_session->id_usuario);
 				
 				//agrego el id de comedor a la sesion
 				$this->session->set_userdata('id_comedor', $comedor->id_comedor);
@@ -45,9 +49,11 @@ class Login extends CI_Controller {
 				$url = base_url('programacion/');
 			}
 		
-		$response = array('redirecTo'=>$redirec_to,'url'=>$url,'message'=>$mensaje,'user'=>$user,'nombre'=>$user_name,'pass'=>$user_password);
-	    header('Content-Type: application/json');
-		echo json_encode ($response);
+			
+			$response = array('redirecTo'=>$redirec_to,'url'=>$url,'message'=>$mensaje,'user'=>$user,'nombre'=>$user_name,'pass'=>$user_password);
+			header('Content-Type: application/json');
+			echo json_encode ($response);
+		}
 	}
 	 
 	private function abrir_sesion($usuario){

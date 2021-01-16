@@ -145,11 +145,16 @@
                      //limpia los campos
                      $form[0].reset();
                  }
+            },
+            error: function( jqXHR, textStatus, errorThrown){ 
+               console.log('jqXHR:' +jqXHR.responseText);
+               console.log('textStatus:'+textStatus);
+               console.log('errorThrown:'+errorThrown);
+                
             }
         });
-
-       
     });
+    
     </script>
 </body>
 

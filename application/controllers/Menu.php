@@ -46,6 +46,7 @@ class Menu extends Security {
             'tiposdemenu' => $this->Menu_model->findAllTiposDeMenu(),
             'comedor' => $this->Comedor_model->findByIdAdminComedor($usuario->id_usuario)
         );
+       
 
         $this->load->view('menues/edit',$data);
     }
@@ -69,10 +70,14 @@ class Menu extends Security {
         $this->form_validation->set_rules('nombre', 'nombre', 'required|callback_unicidad_menu_check',
             array('required' => 'Ingresar el nombre del menu...',
                   'unicidad_menu_check' => 'El menu ya existe en el comedor...'));
+        $this->form_validation->set_rules('precio', 'precio', 'required|greater_than[0]',
+                  array('required' => 'Ingresar el precio del menu...',
+                        'greater_than'=> 'El precio ingresado no es valido' ));   
         $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
         
         array('required' => 'Ingresar la descripcion del menu...'));
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -91,8 +96,9 @@ class Menu extends Security {
             $descripcion = $this->input->post('descripcion');
             $idTipoMenu = $this->input->post('tiposdemenues');
             $idComedor = $this->input->post('comedores');
+            $precio = $this->input->post('precio');
            
-            $this->Menu_model->insert($nombreMenu,$descripcion,$idTipoMenu,$idComedor);
+            $this->Menu_model->insert($nombreMenu,$descripcion,$idTipoMenu,$idComedor,$precio);
             redirect(base_url('menu/listing')); 
         }
 
@@ -109,8 +115,14 @@ class Menu extends Security {
         $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
         
         array('required' => 'Ingresar la descripcion del menu...'));
+       
+        $this->form_validation->set_rules('precio_new', 'precio', 'required',
+        
+        array('required' => 'Ingresar la descripcion del menu...'));
+        
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
+        
         if ($this->form_validation->run() == FALSE)
         {
             $usuario = $this->session->userdata('user');
@@ -124,20 +136,32 @@ class Menu extends Security {
     
             $this->load->view('menues/edit',$data);
                    
-        //    $this->session->set_flashdata('error', validation_errors());
-        //    redirect(base_url('menu/edit/').$this->input->post('id'));
+        
         }
         else
         {
             //paso la validacion
-                
             $nombreMenu = $this->input->post('nombre');
             $descripcion = $this->input->post('descripcion');
             $idTipoMenu = $this->input->post('tiposdemenues');
             $idComedor = $this->input->post('comedores');
             $idMenu = $this->input->post('id');
         
+
+            $precio_new =  $this->input->post('precio_new');
+            $precio_old =  $this->input->post('precio_old');
+
+            //validar si el precio se modifico
+            if($precio_new !== $precio_old){
+                //se modifica el precio historico
+                $this->Menu_model->updatePrecio($idMenu, $idTipoMenu, $precio_new);
+            }
+
+            
             $this->Menu_model->update($idMenu,$nombreMenu,$descripcion,$idTipoMenu,$idComedor);
+
+            
+            
             redirect(base_url('menu/listing'));
         }
 

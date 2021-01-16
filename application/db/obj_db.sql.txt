@@ -28,6 +28,9 @@ declare idPromocion int default -1;
 
 END$$
 
+
+
+
 DROP PROCEDURE IF EXISTS `pr_cancelar_tickets`$$
 PROCEDURE `pr_cancelar_tickets` (`idTurno` INT)  BEGIN 
 -- se determina la hora actual 
@@ -107,6 +110,17 @@ CLOSE cursor1;
 
 END$$
 
+
+
+
+
+
+
+
+
+
+falta
+
 --
 -- Funciones
 --
@@ -121,6 +135,9 @@ r.fecha=fecha and r.id_turno=turno;
 
 RETURN total;
 END$$
+
+
+
 
 DROP FUNCTION IF EXISTS `fn_costo_final`$$
 FUNCTION `fn_costo_final` (`idTicket` INT) RETURNS DOUBLE BEGIN
@@ -205,6 +222,16 @@ DELIMITER ;
 
 
 
+
+
+
+
+
+
+
+
+
+
 --
 -- Disparadores `estado_ticket`
 --
@@ -234,6 +261,8 @@ where t.id_ticket=new.id_ticket and r.id_ticket=t.id_ticket and r.id_persona = p
 END
 $$
 DELIMITER ;
+
+
 DROP TRIGGER IF EXISTS `tg_stock_mas`;
 DELIMITER $$
 CREATE TRIGGER `tg_stock_mas` AFTER INSERT ON `estado_ticket` FOR EACH ROW BEGIN

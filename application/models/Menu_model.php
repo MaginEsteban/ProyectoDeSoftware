@@ -7,14 +7,32 @@ class Menu_model extends CI_Model {
         $this->load->helper('url');
     }
     
-    public function insert ($nombre,$descripcion,$id_tipo_menu,$id_comedor){
-            $data = array(
-               'nombre' => $nombre,
-               'descripcion' => $descripcion,
-               'id_tipo_menu' => $id_tipo_menu,
-               'id_comedor' => $id_comedor
-            );
+    public function insert ($nombre,$descripcion,$id_tipo_menu,$id_comedor,$precio){
+       
+       //menu
+        $data = array(
+            'nombre' => $nombre,
+            'descripcion' => $descripcion,
+            'id_tipo_menu' => $id_tipo_menu,
+            'id_comedor' => $id_comedor
+        );
         $this->db->insert('menu', $data);
+   
+      
+        //precio
+        $id_menu = $this->db->insert_id();
+        $now = date('Y-m-d');
+
+        $data2 = array(
+            'precio' => $precio,
+            'fecha_inicio' => $now,
+            'id_tipo_menu' => $id_tipo_menu,
+            'id_menu' => $id_menu
+
+        );
+        $this->db->insert('precio', $data2);
+        
+
     } 
 
     public function update($id, $nombre,$descripcion,$id_tipo_menu,$id_comedor){
@@ -31,7 +49,6 @@ class Menu_model extends CI_Model {
     public function delete($id){
             $this->db->where('id_menu', $id);
             $this->db->delete('menu');
-        
     }
 
     //busqueda por comedor
@@ -64,8 +81,7 @@ class Menu_model extends CI_Model {
     public function findById($id){
         $this->db->select('*');
         $this->db->from('menu as m');
-        //$this->db->join('tipo_menu as tm', 'm.id_tipo_menu = tm.id_tipo_menu');
-      //  $this->db->join('comedor', 'menu.id_comedor = comedor.id_comedor');
+        $this->db->join('precio as p', '(m.id_menu = p.id_menu and p.fecha_fin is null)');
         $this->db->where('m.id_menu', $id);
         $query = $this->db->get();
         return $query->row(0,'Menu_model');
@@ -74,10 +90,11 @@ class Menu_model extends CI_Model {
 
     //retorn todos los menus de una comedor
     public function findAllByIdComedor($id_comedor){
-        $this->db->select("m.id_menu, m.nombre, m.descripcion, tm.nombre as 'nombre_tipo_menu', c.nombre as nombre_comedor");
+        $this->db->select("m.id_menu, m.nombre, m.descripcion, tm.nombre as 'nombre_tipo_menu', c.nombre as nombre_comedor, p.precio");
         $this->db->from('menu as m');
         $this->db->join('tipo_menu as tm', 'm.id_tipo_menu = tm.id_tipo_menu');
         $this->db->join('comedor as c', 'm.id_comedor = c.id_comedor');
+        $this->db->join('precio as p', 'm.id_menu = p.id_menu and p.fecha_fin is null');
         $this->db->where('m.id_comedor',$id_comedor);
         $query = $this->db->get();
        
@@ -153,6 +170,30 @@ class Menu_model extends CI_Model {
         $this->db->where('stock.cantidad >',0);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function updatePrecio($id_menu, $id_tipo_menu, $precio){
+        
+        //Actualizar precio viejo
+        $now = date('Y-m-d');
+        $data = array(
+            'fecha_fin' => $now
+        );
+        $this->db->where('id_menu', $id_menu);
+        $this->db->where('fecha_fin', 'IS NULL');
+        $this->db->update('precio', $data);
+
+       
+        //agregar nuevo precio historico
+        $data2 = array(
+            'fecha_inicio' => $now,
+            'id_tipo_menu' => $id_tipo_menu,
+            'id_menu' => $id_menu,
+            'precio' => $precio
+
+        );
+        $this->db->insert('precio', $data2);
+
     }
 
     public function check($menu, $id_tipo_menu,$id_comedor){

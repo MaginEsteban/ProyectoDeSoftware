@@ -32,6 +32,15 @@
                         <textarea class="form-control" id="exampleInputEmail1" rows="3" placeholder="Ingrese una descripcion..." name="descripcion"></textarea>
                     </div>
 
+                    <!-- Precio -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Precio $ </label>
+
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Ingrese el precio del menu..." name="precio">
+                        
+                    </div>
+
                     <!-- Tipo De Menu -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Tipo De Menu</label>

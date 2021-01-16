@@ -18,8 +18,9 @@
                             <th scope="col">Nro Menu</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripcion</th>
+                            <th scope="col">Precio</th>
                             <th scope="col">Tipo de Menu</th>
-                            <th scope="col">Comedor</th>
+                          
                             <th scope="col" width="100px">Acciones</th>
                         </tr>
                     </thead>
@@ -29,13 +30,14 @@
                             <td scope="row"><?php echo $menu->id_menu; ?></th>
                             <td scope="row"><?php echo $menu->nombre; ?></th>
                             <td scope="row"><?php echo $menu->descripcion; ?></th>
+                            <td scope="row"><?php echo $menu->precio; ?></th>
                             <td scope="row"><?php echo $menu->nombre_tipo_menu; ?></th>
-                            <td scope="row"><?php echo $menu->nombre_comedor; ?></th>
+                            
                             <td>
-                                <a href="<?= base_url('menu/edit/').$menu->id_menu; ?>" role="button" class="btn btn-primary">
+                                <a href="<?= base_url('menu/edit/').$menu->id_menu; ?>" role="button" class="btn btn-primary" data-toggle="tooltip" title="Actualizar">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
-                                <a onClick="confirmDelete()" role="button" class="btn btn-danger">
+                                <a onClick="confirmDelete()" role="button" class="btn btn-danger" data-toggle="tooltip" title="Borrar">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
