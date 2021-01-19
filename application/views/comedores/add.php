@@ -13,7 +13,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto card">
+            <div class="col-10 col-md-6 mx-auto card">
+             <?php echo validation_errors(); ?>
 
                 <form action="<?= base_url('comedor/crearComedor'); ?>" method="POST" class="m-2">
                     <!-- Nombre -->
@@ -30,12 +31,12 @@
                        
                         <select class="form-control" id="exampleFormControlSelect1" name="ciudades">
                             <?php foreach ($ciudades as $ciudad): ?>
-                            <option value="<?php echo $ciudad->id_ciudad; ?>"><?php echo $ciudad->nombre; ?></option> 
+                                <option value="<?php echo $ciudad->id_ciudad; ?>"><?php echo $ciudad->nombre; ?></option> 
                             <?php endforeach; ?>
                         </select>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
             </div>
 

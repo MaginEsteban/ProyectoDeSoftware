@@ -9,7 +9,10 @@ class Comedor extends Security {
         parent::__construct();
         $this->load->model('Comedor_model');
         $this->load->model('Ciudad_model');
-        $this->load->helper('url_helper');
+        $this->load->helper(array('url','html','form'));
+        $this->load->library(array('form_validation','session'));
+        
+
     }
 
     public function add()
@@ -45,18 +48,76 @@ class Comedor extends Security {
     }
 
     public function crearComedor(){
-        $nombreCiudad = $this->input->post('nombre');
-        $idCiudad = $this->input->post('ciudades');
-        $this->Comedor_model->insert($nombreCiudad,$idCiudad);
-        redirect(base_url('comedor/listing'));
+        //validacion formulario
+        
+        $this->form_validation->set_rules('nombre', 'nombre comedor', 'required|callback_unicidad_comedor_check',
+            array('required' => 'Ingresar el nombre del comedor...',
+                  'unicidad_comedor_check' => 'Los datos ingresado ya pertenecen a otro comedor...'));
+        
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['ciudades'] = $this->Ciudad_model->findAll();
+            $this->load->view('comedores/add',$data);
+        }
+        else{
+
+            //paso la validacion
+
+            $nombreComedor = $this->input->post('nombre');
+            $idCiudad = $this->input->post('ciudades');
+            $this->Comedor_model->insert($nombreComedor,$idCiudad);
+            redirect(base_url('comedor/listing'));
+        }
+       
     }
 
-    public function modificarComedor(){
-        $nombreCiudad = $this->input->post('nombre');
+    function unicidad_comedor_check(){
+       
+        $nombreComedor = $this->input->post('nombre');
         $idCiudad = $this->input->post('ciudades');
+       
+        if ($this->Comedor_model->check($nombreComedor,$idCiudad) === 0 )
+            return TRUE;
+               
+        return FALSE;
+    }
+
+
+    public function modificarComedor(){
+        $nombreComedor = $this->input->post('nombre');
+        $nombreComedorOld = $this->input->post('nombre');
+        $idCiudad = $this->input->post('ciudades');
+        $ciudad_old = $this->input->post('ciudad_old');
         $idComedor = $this->input->post('id');
-        $this->Comedor_model->update($idComedor,$nombreCiudad,$idCiudad);
-        redirect(base_url('comedor/listing'));
+
+
+        $this->form_validation->set_rules('nombre', 'nombre', 'required',
+                array('required' => 'Ingresar el nombre del comedor...'));
+
+        //los datos ingresados cambiaron, se verifica la unicidad
+        if( ! ( ($nombreComedor==$nombreComedorOld) and ($idCiudad==$ciudad_old) ) ){ 
+           
+            $this->form_validation->set_rules('nombre', 'nombre', 'callback_unicidad_comedor_check',
+                array('unicidad_comedor_check' => 'Los datos ingresado ya pertenecen a otro comedor...'));
+        }
+
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data = array(
+                'comedor' => $this->Comedor_model->findById($idComedor),
+                'ciudades' => $this->Ciudad_model->findAll()
+            );
+            $this->load->view('comedores/edit',$data);
+        }
+        else{ 
+
+            $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad);
+            redirect(base_url('comedor/listing'));
+        }
     }
 
     public function esUserComedor(){

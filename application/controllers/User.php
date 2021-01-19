@@ -44,20 +44,24 @@ class User extends Security {
 
     
      public function store(){
+
+        //falta validacion de formulario
+        
         
         $legajo = $this->input->post('legajo');
         if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
 
-        $email= $this->input->post('email');
-        $idTipoUsuario = $this->input->post('tipos');
-        $idComedor = $this->input->post('comedores');
-        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
+            $email= $this->input->post('email');
+            $idTipoUsuario = $this->input->post('tipos');
+            $idComedor = $this->input->post('comedores');
+           
+            $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
 
-       //Si es admin. Comedor entra al if
-        if($idTipoUsuario == '3'){
-           $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
-        }  
-        redirect(base_url('user/listing'));
+             //Si es admin. Comedor 
+            if($idTipoUsuario == '3'){
+                $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
+            }  
+            redirect(base_url('user/listing'));
         }
         redirect(base_url('user/add'));
      }

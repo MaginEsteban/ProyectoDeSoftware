@@ -37,7 +37,7 @@
                         <select class="form-control" id="selectTypeUser" name="tipos" >
                             <option value="1">USUARIO</option>
                             <?php if(!empty($comedores)){ ?>
-                            <option value="3">ADMINISTRADOR DE COMEDORES</option>
+                                <option value="3">ADMINISTRADOR DE COMEDORES</option>
                             <?php } ?>
                         </select>   
                     </div>
