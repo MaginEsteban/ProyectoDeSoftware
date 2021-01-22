@@ -25,9 +25,17 @@ class Detalle_Comedores extends Security {
                 $comedor->esFavorito = 0;
             }
         }
+       
+        foreach ($comedores as $comedor) {
+            print_r( $comedor);  print_r('<br><br>');
+        }
+      
+
         $data['comedores'] = $comedores;
         $data['user'] = $user;
-		$this->load->view('detalle_comedores', $data);
+        print_r('<br><br><br>');
+        print_r($data['user']);
+		//$this->load->view('detalle_comedores', $data);
     }
     
     public function findAllMenuByTurnos(){

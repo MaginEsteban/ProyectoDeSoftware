@@ -15,12 +15,14 @@
         <div class="row align-items-center">
             
             <div class="col-10 col-md-6 mx-auto card">
+            <?php echo validation_errors();?>
+
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
                     <!-- Legajo -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Legajo </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            placeholder="Ingrese el legajo..." name="legajo" required>
+                            placeholder="Ingrese el legajo..." name="legajo">
                         
                     </div>
                     
@@ -47,7 +49,7 @@
                         <select class="form-control" name="comedores" >
                             
                             <?php foreach ($comedores as $comedor): ?>
-                            <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor;?></option>
+                            <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor. ' - ' .$comedor->nombre_ciudad;?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

@@ -89,11 +89,15 @@ class Turno extends Security {
             array(  'required' => 'Ingresar el nombre del turno...',
                     'unicidad_turno_check' => 'Los datos ingresados le pertenecen a otro turno...'));
         
-        $this->form_validation->set_rules('hora_inicio', 'hora_inicio', 'required',
-            array('required' => 'Ingresar la hora de inicio del turno...'));
-        
-        $this->form_validation->set_rules('hora_fin', 'hora_fin', 'required',
-            array('required' => 'Ingresar la hora de fin del turno...'));
+        $this->form_validation->set_rules('hora_inicio', 'hora_inicio', 'trim|required|callback_is_valid_time',
+            array(  'trim' => 'Ingresar la hora de inicio del turno...',
+                    'required' => 'Ingresar la hora de inicio del turno...',
+                    'is_valid_time' => 'El formato del hora inicio no es valido..'));//para que se corrompra rapido
+
+        $this->form_validation->set_rules('hora_fin', 'hora_fin', 'trim|required|callback_is_valid_time|callback_horario_superpuesto_check',
+            array(  'trim' => 'Ingresar la hora de fin del turno...',
+                    'required' => 'Ingresar la hora de fin del turno...',
+                    'is_valid_time' => 'El formato del hora fin no es valido..'));
 
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
@@ -123,4 +127,49 @@ class Turno extends Security {
        
         
     }
+
+    function horario_superpuesto_check(){
+        $hora_inicio = $this->input->post('hora_inicio');
+        $hora_fin = $this->input->post('hora_fin');
+
+        if($this->input->post('hora_inicio') == "" || $this->input->post('hora_fin')== "" ){ 
+            
+            $this->form_validation->set_message('horario_superpuesto_check', 'Los horarios ingresados no son validos...');
+            return false;
+        }
+
+        $this->form_validation->set_message('horario_superpuesto_check', 'El horario no pueden ser superpuestos...');
+       
+        //son superpuestos los horario
+        list($hh_inicio, $mm_inicio) = explode(':', $hora_inicio);
+        list($hh_fin, $mm_fin) = explode(':', $hora_fin);
+           
+        if( (int)$hh_inicio < (int)$hh_fin){
+            return true;
+        }
+         elseif((int)$hh_inicio == (int)$hh_fin){
+            
+            if((int)$mm_inicio < (int)$mm_fin){
+                return true;
+            }
+        }else if((int)$hh_inicio <= 12 &&  (int)$hh_fin >= 12){
+            if( (int)$hh_inicio > ((int)$hh_fin)-12 ){
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+
+      
+
+    }
+    
+    function is_valid_time( $date)
+    {
+      
+        $dateObj = DateTime::createFromFormat('H:i', (string)$date);
+        return $dateObj && $dateObj->format('H:i') == (string)$date;
+    }
+
 }

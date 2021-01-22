@@ -44,6 +44,8 @@ class Comedor extends Security {
     public function delete(){
         $id_comedor = $this->uri->segment(3);
         $this->Comedor_model->delete($id_comedor);
+      
+      
         redirect(base_url('comedor/listing'));
     }
 

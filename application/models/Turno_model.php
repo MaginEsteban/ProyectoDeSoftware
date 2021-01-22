@@ -30,16 +30,19 @@ class Turno_model extends CI_Model {
     }
 
     public function delete($id){
-            $this->db->where('id_turno', $id);
-            $this->db->delete('turno');
-        
+        $data = array(
+            'activado' => 0
+         );
+        $this->db->where('id_turno', $id);
+        $this->db->update('turno', $data);
+           
     }
     public function findAll(){
         $this->db->select('t.id_turno, t.nombre, t.hora_inicio, t.hora_fin, c.nombre as nombre_comedor, ciu.nombre as nombre_ciudad');
         $this->db->from('turno as t');
         $this->db->join('comedor as c', 't.id_comedor = c.id_comedor');
         $this->db->join('ciudad as ciu', 'c.id_ciudad = ciu.id_ciudad');
-       
+        $this->db->where('t.activado',1);
          $query = $this->db->get();
         
         return $query->result();
@@ -49,6 +52,7 @@ class Turno_model extends CI_Model {
         $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad');
         $this->db->from('comedor as com');
         $this->db->join('ciudad as c', 'com.id_ciudad = c.id_ciudad');
+        $this->db->where('com.activado', 1);
         $query = $this->db->get();
         return $query->result();
     }
@@ -67,6 +71,7 @@ class Turno_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('turno');
         $this->db->where('id_comedor',$id_comedor);
+        $this->db->where('activado',1);
         $query = $this->db->get();
         return $query->result();
     }

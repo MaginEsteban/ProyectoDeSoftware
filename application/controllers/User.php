@@ -8,7 +8,9 @@ class User extends Security {
     public function __construct(){
         parent::__construct();
         $this->load->model(array('User_model','Comedor_model','Login_model'));
-        $this->load->helper('url_helper');
+        $this->load->library(array('form_validation','session'));
+		$this->load->helper(array('url','html','form'));
+       
     }
 
     /**
@@ -45,26 +47,56 @@ class User extends Security {
     
      public function store(){
 
-        //falta validacion de formulario
+       
+        $this->form_validation->set_rules('legajo', 'legajo', 'required|callback_person_exist',
+            array(  'required' => 'Ingresar el legago del usuario...'));
         
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+            array(  'required' => 'Ingresar el email del usuario...',
+                    'valid_email' =>'El email ingresado no es valido...'));
         
-        $legajo = $this->input->post('legajo');
-        if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
-
-            $email= $this->input->post('email');
-            $idTipoUsuario = $this->input->post('tipos');
-            $idComedor = $this->input->post('comedores');
-           
-            $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
-
-             //Si es admin. Comedor 
-            if($idTipoUsuario == '3'){
-                $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
-            }  
-            redirect(base_url('user/listing'));
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+        
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data ['comedores'] = $this->Comedor_model->findAllNotAsigned();
+            $this->load->view('users/add',$data);
         }
-        redirect(base_url('user/add'));
+        else
+        {
+           
+             //if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
+                $legajo = $this->input->post('legajo');
+                $email= $this->input->post('email');
+                $idTipoUsuario = $this->input->post('tipos');
+                $idComedor = $this->input->post('comedores');
+            
+                $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
+
+                //Si es admin. Comedor 
+                if($idTipoUsuario == '3'){
+                    $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
+                }  
+                redirect(base_url('user/listing'));
+            //}
+       
+            redirect(base_url('user/add'));
+            
+        }
+        
      }
+
+     function person_exist(){
+
+        $legajo = $this->input->post('legajo');
+
+        return TRUE;//borar provisorio
+               
+        if ($this->Menu_model->check($menu, $id_tipo_menu,$id_comedor) === 0 )//cambiar
+            return TRUE;
+               
+        return FALSE;
+     } 
      
      public function modificarUsuario(){
         

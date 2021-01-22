@@ -153,8 +153,8 @@
                                     <i class="fa fa-star <?php if($comedor->esFavorito > 0 ) echo 'text-warning'; else echo 'text-black'; ?> " aria-hidden="true" onclick="agregarFavorito(<?=$user->id_usuario?>,<?=$comedor->id_comedor?>)"></i>
                                 </h1>
                                 <p class="text-black-75 font-weight-light mb-5">Ubicado en:
-                                    <?php echo $comedor->nombre; ?></p>
-                                <hr class="divider my-4">
+                                    <?php echo $comedor->nombre_ciudad; ?></p>
+                                
 
                             </div>
                         </div>
