@@ -25,15 +25,17 @@
                 <li class="header">ACCIONES DISPONIBLES</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="treeview">
-                    <?php if ($user->id_tipo_usuario == 4) : ?>
+                    <?php if ( $user->id_tipo_usuario == 4 || $user->id_tipo_usuario == 3) : ?>
                         <a href="#"><i class="fa fa-user-circle-o"></i> <span>Usuarios</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a class="user-menu" href="<?= base_url("user/add"); ?>"><i
-                                        class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
+                            <?php if ( $user->id_tipo_usuario == 4 ) : ?>
+                                <li class="active"><a class="user-menu" href="<?= base_url("user/add"); ?>"><i
+                                            class="fa fa-plus"></i> <span>Agregar Usuario</span></a></li>
+                            <?php endif; ?>
                             <li class="active"><a class="user-menu" href="<?= base_url("user/listing"); ?>"><i
                                         class="fa fa-list-ul"></i> <span>Listado Usuarios</span></a></li>
                         </ul>

@@ -40,16 +40,31 @@ class User extends Security {
     }
 
     public function listing(){
+
+        $tipo_usuario = $this->session->userdata('user')->id_tipo_usuario;
+
+        //es admin de comedor
+       if( $tipo_usuario == 3){
+           //solo ve los usuario USER_CLIENTE
+           $data['usuarios'] = $this->User_model->findAllAdminComedor();
+           $this->load->view('users/list',$data);
+       }
+       else
+       {
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);
+       }
+
+       
     }
 
     
      public function store(){
-
-       
-        $this->form_validation->set_rules('legajo', 'legajo', 'required|callback_person_exist',
-            array(  'required' => 'Ingresar el legago del usuario...'));
+        
+        $this->form_validation->set_rules('legajo', 'legajo', 'required|callback_user_unicidad|callback_person_exist',
+            array(  'required' => 'Ingresar el legago del usuario...',
+                    'user_unicidad' => 'Los datos ingresados pertenecen a otro usuario ya registrado...',
+                    'person_exist' => 'El legajo indicado no pertenece a ninguna persona...' ));
         
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
             array(  'required' => 'Ingresar el email del usuario...',
@@ -65,7 +80,6 @@ class User extends Security {
         else
         {
            
-             //if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
                 $legajo = $this->input->post('legajo');
                 $email= $this->input->post('email');
                 $idTipoUsuario = $this->input->post('tipos');
@@ -86,18 +100,20 @@ class User extends Security {
         
      }
 
-     function person_exist(){
+     function person_exist($legajo){
+  
+         if(!is_null($this->User_model->find_person_by_legajo($legajo)))
+             return true;
+        
+        return false;
 
-        $legajo = $this->input->post('legajo');
-
-        return TRUE;//borar provisorio
-               
-        if ($this->Menu_model->check($menu, $id_tipo_menu,$id_comedor) === 0 )//cambiar
-            return TRUE;
-               
-        return FALSE;
-     } 
+     }
      
+     function user_unicidad($legajo){
+        $result = $this->User_model->exists($legajo);
+        return  !$result;
+     }
+
      public function modificarUsuario(){
         
         $email = $this->input->post('email');

@@ -63,7 +63,7 @@ function reservaTicket(menu,dia,turno) {
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/ticket/add/",
+				url: "http://localhost/ProyectoDeSoftware/ticket/add/",
 				data: {
 					menu: menu,
 					dia: dia,
@@ -129,7 +129,7 @@ function actualizarDashboard(idComedor) {
 
 	//peticon ajax para obtener todo los menus de un comedor dado
 	$.ajax({
-		url: "http://localhost/proyectodesoftware/detalle_comedores/findAllMenuByTurnos",
+		url: "http://localhost/ProyectoDeSoftware/detalle_comedores/findAllMenuByTurnos",
 		data: {
 			comedor: idComedor
 		},
@@ -174,7 +174,7 @@ function agregarFavorito(usuario,comedor){
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/detalle_comedores/add_favorito/",
+				url: "http://localhost/ProyectoDeSoftware/detalle_comedores/add_favorito/",
 				data: {
 					usuario: usuario,
 					comedor: comedor

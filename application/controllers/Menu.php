@@ -112,13 +112,12 @@ class Menu extends Security {
         $this->form_validation->set_rules('nombre', 'nombre', 'required|callback_unicidad_menu_check',
             array('required' => 'Ingresar el nombre del menu...',
                   'unicidad_menu_check' => 'El menu ya existe en el comedor...'));
-        $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
         
-        array('required' => 'Ingresar la descripcion del menu...'));
+        $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
+            array('required' => 'Ingresar la descripcion del menu...'));
        
         $this->form_validation->set_rules('precio_new', 'precio', 'required',
-        
-        array('required' => 'Ingresar la descripcion del menu...'));
+            array('required' => 'Ingresar la descripcion del menu...'));
         
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
@@ -174,8 +173,10 @@ class Menu extends Security {
         $id_tipo_menu = $this->input->post('tiposdemenues');
         $id_comedor = $this->input->post('comedores');
 
-        if ($this->Menu_model->check($menu, $id_tipo_menu,$id_comedor) === 0 )
+        if ($this->Menu_model->check($menu, $id_tipo_menu,$id_comedor) === 0 ){
             return TRUE;
+        }
+           
                
         return FALSE;
     }

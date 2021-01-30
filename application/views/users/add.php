@@ -20,8 +20,8 @@
                 <form action="<?= base_url('user/store'); ?>" method="POST" class="m-2">
                     <!-- Legajo -->
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Legajo </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <label for="exampleInputLegajo">Legajo </label>
+                        <input type="text" class="form-control" id="exampleInputLegajo" aria-describedby="emailHelp"
                             placeholder="Ingrese el legajo..." name="legajo">
                         
                     </div>

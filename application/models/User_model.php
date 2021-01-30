@@ -67,6 +67,18 @@ class User_model extends CI_Model{
         return $query->result();
     }
 
+    
+    public function findAllAdminComedor(){
+        $this->db->select('usuario.id_usuario,usuario.nombre,usuario.email,persona.numero_legajo,tipo_usuario.tipo');
+        $this->db->from('usuario');
+        $this->db->join('persona', 'usuario.id_persona = persona.id_persona');
+        $this->db->join('tipo_usuario', 'usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario');
+        $this->db->where('usuario.id_tipo_usuario', 1);
+         $query = $this->db->get();
+        
+        return $query->result();
+    }
+
     public function find_by_id($id){
         $this->db->select('*');
         $this->db->from('usuario');
@@ -132,8 +144,18 @@ class User_model extends CI_Model{
     }
       
      public function find_person_by_legajo($legajo){
-         $persona = $this->db->get_where('persona',array('numero_legajo' => $legajo))->row();
-         return $persona->id_persona;
+         $persona = 
+         
+         $this->db->select('*');
+         $this->db->from('persona');
+         $this->db->where('numero_legajo',$legajo);
+
+      
+         $query = $this->db->limit(1)->get();    
+         if($query->num_rows() > 0)
+             return $query->result()[0]->id_persona;//->id_persona;
+        else
+            return null;     
      }
 
      public function update_my_user($id,$id_pers,$nombre,$email,$su_nombre,$su_apellido,$contraseña){
