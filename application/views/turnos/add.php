@@ -11,7 +11,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto card">
+            <div class="col-10 col-md-6 mx-auto card">
+            <?php echo validation_errors();?>
                 <form action="<?= base_url('turno/crearTurno'); ?>" method="POST" class="m-2">
                 
                     <!-- Nombre -->
@@ -23,11 +24,11 @@
                     </div>
 
                     <!-- Comedores -->
-                    <div class="form-group">
+                    <div class="form-group" >
                         <label for="exampleFormControlSelect1">Comedor</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="comedores">
                             <?php foreach ($comedores as $comedor): ?>
-                            <option value="<?php echo $comedor->id_comedor; ?>"><?php echo $comedor->nombre_comedor; ?></option> 
+                            <option value="<?php echo $comedor->id_comedor; ?>"><?php echo $comedor->nombre_comedor.' - '; echo  $comedor->nombre_ciudad?>  </option> 
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -35,8 +36,8 @@
                     <!-- Hora inicio -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Hora de Inicio </label>
-                        <div class="input-group clock">
-                            <input type="text" class="form-control" value="" placeholder="Ingrese hora de inicio del turno" name="hora_inicio">
+                        <div class="input-group clock" data-placement="center" data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de inicio del turno" name="hora_inicio">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
@@ -46,14 +47,14 @@
                     <!-- Hora fin -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Hora de Fin </label>
-                        <div class="input-group clock">
-                            <input type="text" class="form-control" value="" placeholder="Ingrese hora de fin del turno" name="hora_fin">
+                        <div class="input-group clock" data-placement="center" data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de fin del turno" name="hora_fin">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
             </div>
         </div>

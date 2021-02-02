@@ -33,7 +33,7 @@ function render_menu(menu) {
 
 }
 
-function actualizarDashboard(idComedor,url) {
+function actualizarDashboard(idComedor) {
 
 	var menus;
 
@@ -42,7 +42,7 @@ function actualizarDashboard(idComedor,url) {
 
 	//peticon ajax para obtener todo los menus de un comedor dado
 	$.ajax({
-		url: url,
+		url: url+"programacion/menusAllTurnos",
 		data: {
 			comedor: idComedor
 		},
@@ -96,7 +96,7 @@ function eliminarMenu(idProgramacionMenu) {
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/programacion/delete_menu_programacion/",
+				url: url + '/programacion/delete_menu_programacion/',
 				data: {
 					programacion_menu: idProgramacionMenu
 				},
@@ -130,6 +130,8 @@ function agregarMenu(idComedor, idTurno) {
 	var menu_seleccionados = [];
 	var dias = [];
 
+
+
 	event.preventDefault();
 
 		var Toast = Swal.mixin({
@@ -141,12 +143,12 @@ function agregarMenu(idComedor, idTurno) {
 
 	$.when( 
 		$.ajax({ 
-			url: "http://localhost/proyectodesoftware/programacion/menus",
+			url:url + 'programacion/menus',
 			method: "POST",
 			data: {comedor:idComedor},
 		} ),
 		$.ajax(
-			 "http://localhost/proyectodesoftware/programacion/days"
+			 url+'programacion/days'
 		 )
 	
 	).then(function( htmlMenusResult, htmlDaysResult ) {
@@ -198,7 +200,7 @@ function agregarMenu(idComedor, idTurno) {
 					//mensaje add menu
 
 					$.ajax({
-						url: "http://localhost/proyectodesoftware/programacion/add_programacion_menu/",
+						url: url +"programacion/add_programacion_menu/",
 						method: "POST",
 						data: {menu:menu_seleccionados[0],turno:idTurno,dias:dias},
 						success: () => {
@@ -270,7 +272,7 @@ function cancelTickets(idComedor){
 
 			//realiza la peticion
 			$.ajax({
-				url: "http://localhost/proyectodesoftware/programacion/cancelarTicketOutDate/",
+				url: url + "programacion/cancelarTicketOutDate/",
 				data: {
 					comedor: idComedor
 				},

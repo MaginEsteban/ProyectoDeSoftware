@@ -122,7 +122,7 @@ class Programacion extends Security
         $menus = [];
 
         foreach ($turnos as $turno) {
-            $menu_aux = $this->Menu_model->findAllByIdTurno($turno->id_turno);
+            $menu_aux = $this->Menu_model->findAllByIdTurno($turno->id_turno,$id_comedor);
             $menus = array_merge($menus, $menu_aux);
         }
 

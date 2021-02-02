@@ -47,8 +47,14 @@ class Menu_model extends CI_Model {
     }
 
     public function delete($id){
-            $this->db->where('id_menu', $id);
-            $this->db->delete('menu');
+
+        $data = array(
+            'activado' => 0
+         );
+
+        $this->db->where('id_menu', $id);
+        $this->db->update('menu', $data);
+
     }
 
     //busqueda por comedor
@@ -96,6 +102,8 @@ class Menu_model extends CI_Model {
         $this->db->join('comedor as c', 'm.id_comedor = c.id_comedor');
         $this->db->join('precio as p', 'm.id_menu = p.id_menu and p.fecha_fin is null');
         $this->db->where('m.id_comedor',$id_comedor);
+        $this->db->where('m.activado',1);
+        
         $query = $this->db->get();
        
         return $query->result();
@@ -145,13 +153,15 @@ class Menu_model extends CI_Model {
 
 
     //retorna todo los menus asignados a los turnos
-    public function findAllByIdTurno($id_Turno){
+    public function findAllByIdTurno($id_Turno,$id_comedor){
         $this->db->select('m.id_menu,m.nombre as nombre_menu,dp.id_dia_programacion, programacion.id_turno,programacion_menu.id_programacion_menu');
         $this->db->from('programacion');
-        $this->db->where('programacion.id_turno',$id_Turno);
+       
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
         $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');
         $this->db->join('dia_programacion as dp','dp.id_dia_programacion=programacion.id_dia_programacion');
+        $this->db->where('programacion.id_turno',$id_Turno);
+        $this->db->where('m.id_comedor',$id_comedor);
         $query = $this->db->get();
         return $query->result();
     }
@@ -160,7 +170,7 @@ class Menu_model extends CI_Model {
 
     //para reserva  de munu
     public function findAllByIdTurnoReserva($id_Turno){
-        $this->db->select('m.id_menu,m.nombre,dp.id_dia_programacion as dia,dp.name as nombre_dia, programacion.id_turno');
+        $this->db->select('m.id_menu,m.nombre,dp.id_dia_programacion as dia,dp.nombre as nombre_dia, programacion.id_turno');
         $this->db->from('programacion');
         $this->db->join('programacion_menu','programacion_menu.id_programacion=programacion.id_programacion');
         $this->db->join('menu as m','m.id_menu=programacion_menu.id_menu');

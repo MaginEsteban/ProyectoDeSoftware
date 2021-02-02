@@ -25,14 +25,14 @@
                 <!-- Nombre -->
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nombre </label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"
                         placeholder="" name="nombre" value="<?php echo $menu->nombre; ?>">
                 </div>
 
                 <!-- Descripcion -->
                 <div class="form-group">
                     <label for="exampleInputEmail1">Descripcion </label>
-                    <textarea class="form-control" id="exampleInputEmail1" rows="3"
+                    <textarea class="form-control" id="descripcion" rows="3"
                         placeholder="Ingrese una descripcion..."
                         name="descripcion"><?php echo $menu->descripcion; ?> </textarea>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Precio $ </label>
 
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="text" class="form-control" id="precio_nuevo" aria-describedby="emailHelp"
                         placeholder="Ingrese el precio del menu..." name="precio_new"
                         value="<?php echo $menu->precio; ?>">
 
@@ -49,7 +49,7 @@
 
                 <!-- Precio viejo-->
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="hidden" class="form-control" id="precio_viejo" aria-describedby="emailHelp"
                         placeholder="Ingrese el precio del menu..." name="precio_old"
                         value="<?php echo $menu->precio; ?>">
 
@@ -58,7 +58,7 @@
                 <!-- Tipo De Menu -->
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Tipo De Menu</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="tiposdemenues">
+                    <select class="form-control" id="tipo_menu" name="tiposdemenues">
 
                         <?php foreach ($tiposdemenu as $tpm): ?>
                         <option value="<?php echo $tpm->id_tipo_menu; ?>"
@@ -71,7 +71,7 @@
                 </div>
 
                 <!-- Comedor -->
-                <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <input type="hidden" class="form-control" id="comedor" aria-describedby="emailHelp"
                     name="comedores" value="<?php echo $comedor->id_comedor; ?>">
 
                     <a onClick="confirmUpdate()" role="button" class="btn btn-primary" >Modificar </a>                      
@@ -102,16 +102,15 @@
         })
         .then((result) => {
             if (result.value) {
-                console.log('ok...')
-            
+                
                 $.ajax({
                     type:'POST',
                     data: $( "#form" ).serialize(),
                     url: "<?= base_url('menu/modificarMenu'); ?>",
                     success: function() {
                         Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
+                            'Actualizado!',
+                            'El menu ha sido actualizado...',
                             'success'
                         )
 

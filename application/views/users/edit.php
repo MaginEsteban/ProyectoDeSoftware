@@ -52,11 +52,11 @@
                         <label for="exampleFormControlSelect1">Comedor </label>
                         <select class="form-control" id="exampleFormControlSelect1" name="numero_comedor_seleccionado" required>
                             <?php foreach ($comedores as $comedor): ?>
-                            <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor;?></option>
+                            <option value="<?php echo $comedor->id_comedor;?>"><?php echo $comedor->nombre_comedor. ' - ' .$comedor->nombre_ciudad;?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
 
             </div>

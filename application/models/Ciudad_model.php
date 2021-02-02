@@ -8,9 +8,9 @@ class Ciudad_model extends CI_Model {
     }
     
     public function findAll(){
-        $this->db->select('*');
-        $this->db->from('ciudad');
-        $this->db->join('sede', 'ciudad.id_sede = sede.id_sede');
+        $this->db->select('c.id_ciudad, c.nombre as nombre, s.id_sede, s.nombre as nombre_sede');
+        $this->db->from('ciudad as c');
+        $this->db->join('sede as s', 'c.id_sede = s.id_sede');
         $query = $this->db->get();
         return $query->result();
     }
