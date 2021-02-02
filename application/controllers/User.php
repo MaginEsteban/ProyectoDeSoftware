@@ -8,7 +8,9 @@ class User extends Security {
     public function __construct(){
         parent::__construct();
         $this->load->model(array('User_model','Comedor_model','Login_model'));
-        $this->load->helper('url_helper');
+        $this->load->library(array('form_validation','session'));
+		$this->load->helper(array('url','html','form'));
+       
     }
 
     /**
@@ -38,30 +40,80 @@ class User extends Security {
     }
 
     public function listing(){
+
+        $tipo_usuario = $this->session->userdata('user')->id_tipo_usuario;
+
+        //es admin de comedor
+       if( $tipo_usuario == 3){
+           //solo ve los usuario USER_CLIENTE
+           $data['usuarios'] = $this->User_model->findAllAdminComedor();
+           $this->load->view('users/list',$data);
+       }
+       else
+       {
         $data['usuarios'] = $this->User_model->findAll();
         $this->load->view('users/list',$data);
+       }
+
+       
     }
 
     
      public function store(){
         
-        $legajo = $this->input->post('legajo');
-        if(!is_null($this->User_model->find_person_by_legajo($legajo)) && !($this->User_model->exists($legajo))){
-
-        $email= $this->input->post('email');
-        $idTipoUsuario = $this->input->post('tipos');
-        $idComedor = $this->input->post('comedores');
-        $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
-
-       //Si es admin. Comedor entra al if
-        if($idTipoUsuario == '3'){
-           $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
-        }  
-        redirect(base_url('user/listing'));
+        $this->form_validation->set_rules('legajo', 'legajo', 'required|callback_user_unicidad|callback_person_exist',
+            array(  'required' => 'Ingresar el legago del usuario...',
+                    'user_unicidad' => 'Los datos ingresados pertenecen a otro usuario ya registrado...',
+                    'person_exist' => 'El legajo indicado no pertenece a ninguna persona...' ));
+        
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+            array(  'required' => 'Ingresar el email del usuario...',
+                    'valid_email' =>'El email ingresado no es valido...'));
+        
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+        
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data ['comedores'] = $this->Comedor_model->findAllNotAsigned();
+            $this->load->view('users/add',$data);
         }
-        redirect(base_url('user/add'));
+        else
+        {
+           
+                $legajo = $this->input->post('legajo');
+                $email= $this->input->post('email');
+                $idTipoUsuario = $this->input->post('tipos');
+                $idComedor = $this->input->post('comedores');
+            
+                $id_user = $this->User_model->insert($legajo,$idTipoUsuario,$email);
+
+                //Si es admin. Comedor 
+                if($idTipoUsuario == '3'){
+                    $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
+                }  
+                redirect(base_url('user/listing'));
+            //}
+       
+            redirect(base_url('user/add'));
+            
+        }
+        
+     }
+
+     function person_exist($legajo){
+  
+         if(!is_null($this->User_model->find_person_by_legajo($legajo)))
+             return true;
+        
+        return false;
+
      }
      
+     function user_unicidad($legajo){
+        $result = $this->User_model->exists($legajo);
+        return  !$result;
+     }
+
      public function modificarUsuario(){
         
         $email = $this->input->post('email');

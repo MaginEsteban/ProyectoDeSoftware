@@ -41,6 +41,14 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <!-- Direccion -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Direccion </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Ingrese la direccion del comedor..." name="direccion"  value="<?php echo $comedor->direccion; ?>">
+                        
+                    </div>
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

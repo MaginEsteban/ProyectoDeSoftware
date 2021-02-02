@@ -159,6 +159,14 @@ class User_model extends CI_Model{
         $this->db->update('persona', $data);
     }
 
+    public function check($email){
+
+        $this->db->select('*');
+        $this->db->from('usuario as u');
+        $this->db->where('u.email',$email);
+
+        return $this->db->count_all_results();
+    }
 
 }
 
