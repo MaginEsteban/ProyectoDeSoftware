@@ -20,6 +20,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Ciudad</th>
                         <th scope="col">Sede</th>
+                        <th scope="col">Direccion</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                         <td scope="row"><?php echo $comedor->nombre_comedor; ?></th>
                         <td scope="row"><?php echo $comedor->nombre_ciudad; ?></th>
                         <td scope="row"><?php echo $comedor->sede; ?></th>
+                        <td scope="row"><?php echo $comedor->direccion; ?></th>
                         <td scope="row">
                             <!-- modificar comedor -->
                             <a href="<?= base_url('comedor/edit/').$comedor->id_comedor; ?>" role="button"

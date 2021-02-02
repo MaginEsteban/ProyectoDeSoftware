@@ -7,19 +7,21 @@ class Comedor_model extends CI_Model {
         $this->load->helper('url');
     }
     
-    public function insert ($nombre,$id_ciudad){
+    public function insert ($nombre,$id_ciudad,$direccion){
             $data = array(
-               'nombre' => $nombre,
-               'id_ciudad' => $id_ciudad
+               'nombre_comedor' => $nombre,
+               'id_ciudad' => $id_ciudad,
+               'direccion' => $direccion
             );
         $this->db->insert('comedor', $data);
     } 
 
-    public function update($id, $nombre,$id_ciudad){
+    public function update($id, $nombre,$id_ciudad,$direccion){
             $data = array(
-                
-                'nombre' => $nombre,
-                'id_ciudad' => $id_ciudad
+                'id_comedor' => $id,
+                'nombre_comedor' => $nombre,
+                'id_ciudad' => $id_ciudad,
+                'direccion' => $direccion
             );
         $this->db->where('id_comedor', $id);
         $this->db->update('comedor', $data);

@@ -4,7 +4,11 @@ $this->load->view('dashboard/header');
 <section class="content-header">
     <h3>
         Bienvenido <?php echo $user->nombre; ?> <br>
-        <small>Usted es <?php echo $user->tipo; ?></small>
+        <?php if ($user->id_tipo_usuario == 1): ?>
+        <small>Usted es COMENSAL</small>
+        <?php else: ?>
+        <small>Usted es ADMINISTRADOR</small>
+        <?php endif; ?>
     </h3>
 </section>
 <?php if ($user->id_tipo_usuario == 1): ?>
