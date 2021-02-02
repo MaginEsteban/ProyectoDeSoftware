@@ -94,6 +94,7 @@ class Ticket extends Security {
         //Calculo en base a ese dia lo formateo en una fecha y lo asigno a $fecha_retiro
         $turno = $this->input->post('turno');
         $id_comedor = $this->input->post('idComedor');
+        
         $horas = $this->Turno_model->findHoraTurno($turno);
         $hora_inicio = $horas->hora_inicio;
         $hora_fin = $horas->hora_fin;

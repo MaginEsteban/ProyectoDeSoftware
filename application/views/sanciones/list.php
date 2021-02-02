@@ -13,7 +13,7 @@
     </section>
     <section class="content container-fluid">
         <div class="row">
-            <div class="col mx-auto">
+            <div class="col mx-auto table-responsive-xl">
                 <table class="table table-striped" id="myTable"> Aqui se encuentran todos las sanciones hechas
                     <thead class="">
                         <tr class="bg-info">
@@ -24,7 +24,7 @@
                             <th scope="col">Nombre persona</th>
                             <th scope="col">Apellido persona</th>
                             <?php if($user->id_tipo_usuario == 3): ?>
-                            <th scope="col" style="width:150px">Acciones</th>
+                                <th scope="col" style="width:150px">Acciones</th>
                             <?php endif; ?>    
                         </tr>
                     </thead>
@@ -40,10 +40,10 @@
                             <?php if($user->id_tipo_usuario == 3): ?>
                             <td scope="row">
                                 <!-- modificar sancion -->
-                                <a href="<?= base_url('sancion/edit/').$sancion->id_sancion; ?>" role="button" class="btn btn-primary m-1">
+                                <a href="<?= base_url('sancion/edit/') . $sancion->id_sancion; ?>" role="button" class="btn btn-primary m-1">
                                     <i class="fa fa-pencil-square-o"></i> 
                                 </a>
-                                <a onClick="confirmDelete()" role="button" class="btn btn-danger m-1">
+                                <a onClick="confirmDelete(<?= $sancion->id_sancion; ?>)" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             </td>
@@ -58,7 +58,7 @@
         </div>
     </section>
     <script>
-        function confirmDelete(){
+        function confirmDelete(sancion){
         event.preventDefault();
             Swal.fire({
                 title: 'Estas seguro?',
@@ -72,9 +72,9 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                    url: "http://localhost/proyectodesoftware/sancion/delete/<?php echo $sancion->id_sancion ?>",
+                    url: "<?= base_url('/sancion/delete/'); ?>"+sancion,
                     success: function() {
-                        location.href = "http://localhost/proyectodesoftware/sancion/listing";
+                        location.href = "<?= base_url('/sancion/listing'); ?>";
                     }
                 })
                 }

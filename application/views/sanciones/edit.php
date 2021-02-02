@@ -13,8 +13,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto card">
-
+            <div class="col-10 col-sm-6 mx-auto card">
+            <?php echo validation_errors();?>
                 <form action="<?= base_url('sancion/modificarSancion'); ?>" method="POST" class="m-2">
                     
 
@@ -39,8 +39,9 @@
                      <!-- Descripcion -->
                      <div class="form-group">
                         <label for="exampleInputEmail1">Descripcion </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                            placeholder="<?php echo $sancion->descripcion ?>" name="descripcion" value="<?php echo $sancion->descripcion ?>" >
+                        <textarea class="form-control" id="descripcion" rows="3"  placeholder="Ingrese la razon de la sancion..." name="descripcion" ><?php echo $sancion->descripcion ?></textarea>
+                        
+                       
                     </div>
 
 
@@ -48,7 +49,7 @@
                    
                     
                     
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </div>
 

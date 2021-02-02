@@ -1,12 +1,15 @@
 <?php
-//use Restserver\Libraries\REST_Controller;
+use Restserver\Libraries\REST_Controller;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//require APPPATH . 'libraries/REST_Controller.php';
+require APPPATH . 'libraries/REST_Controller.php';
 //require APPPATH . 'libraries/Format.php';
 
-class Detalle_Comedores extends CI_Controller {
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Headers: X-Requested-With');
+header('Content-Type:application/json');
+class Detalle_Comedores extends REST_Controller {
 
     public function __construct(){
         parent::__construct();
@@ -16,7 +19,6 @@ class Detalle_Comedores extends CI_Controller {
         $this->load->model('Turno_model');
         $this->load->model('Menu_model');
         $this->load->model('DetalleComedor_model');
-        
         $this->load->helper('url_helper');
     }
     
@@ -43,10 +45,7 @@ class Detalle_Comedores extends CI_Controller {
 		$this->load->view('detalle_comedores', $data);
     }
     
-    public function findAllMenuByTurnos($id_comedor){
-
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
+    public function findAllMenuByTurnos_get($id_comedor){
 
          //se obtiene todos los turnos de un comedor
          $turnos =  $this->DetalleComedor_model->findTurnosByIdComedor($id_comedor);
@@ -93,52 +92,55 @@ class Detalle_Comedores extends CI_Controller {
 
     }
 
-    public function add_favorito(){
-        $id_user = $this->input->post('usuario');
-        $id_comedor = $this->input->post('comedor');
+    public function add_favorito_post(){
+        header("Access-Control-Allow-Origin: *");
+
+        header('Content-Type: application/x-www-form-urlencoded');
+
+
+        $id_user = $this->post('usuario');
+        $id_comedor = $this->post('comedor');
+
         $this->Comedor_model->add_comedor_favorito($id_user,$id_comedor);
+
+        $this->response(['comedor successfully.'], REST_Controller::HTTP_OK);
     }
 
-    public function delete_favorito(){
+    public function delete_favorito_post(){
+       
+       
         $id_user = $this->input->post('usuario');
         $id_comedor = $this->input->post('comedor');
         $this->Comedor_model->delete_comedor_favorito($id_user,$id_comedor);
     }
 
-    public function sedes(){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
+    public function sedes_get(){ 
 
         $sedes = $this->DetalleComedor_model->findAllSedes();
        
-        echo json_encode($sedes);
-        //$this->response($sedes, REST_Controller::HTTP_OK); 
+        $this->response($sedes, REST_Controller::HTTP_OK); 
     }
 
-    public function ciudades($id_sede){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
+    public function ciudades_get($id_sede){
+        
 
-        $sedes = $this->DetalleComedor_model->findAllCiudades($id_sede);
+        $ciudades = $this->DetalleComedor_model->findAllCiudades($id_sede);
        
-        echo json_encode($sedes);
+        $this->response($ciudades, REST_Controller::HTTP_OK); 
     }
 
-    public function comedores($id_ciudad){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
-
+    public function comedores_get($id_ciudad){
+        
         $comedores = $this->DetalleComedor_model->findAllComedores($id_ciudad);
-       
-        echo json_encode($comedores);
+        
+        $this->response($comedores, REST_Controller::HTTP_OK); 
+     
     }
 
-    
-    public function ver($id_comedor){
-
+    public function user_get(){
+      
+        $usuario = $this->session->userdata('user');
+        $this->response($usuario , REST_Controller::HTTP_OK); 
        
-        $this->DetalleComedor_model->ver(2,1,$id_comedor);
-            
     }
-
 }

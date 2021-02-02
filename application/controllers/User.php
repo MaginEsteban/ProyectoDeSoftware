@@ -52,6 +52,7 @@ class User extends Security {
        else
        {
         $data['usuarios'] = $this->User_model->findAll();
+      
         $this->load->view('users/list',$data);
        }
 

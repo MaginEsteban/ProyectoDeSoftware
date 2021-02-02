@@ -13,7 +13,8 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-6 mx-auto card">
+            <div class="col-10 col-sm-6 mx-auto card">
+            <?php echo validation_errors();?>
 
                 <form action="<?= base_url('sancion/crearSancion'); ?>" method="POST" class="m-2">
                     <!-- Fecha -->
@@ -33,8 +34,8 @@
                      <!-- Descripcion -->
                      <div class="form-group">
                         <label for="exampleInputEmail1">Descripcion </label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                            placeholder="Ingrese la razon de la sancion..." name="descripcion" >
+                        <textarea class="form-control" id="descripcion" rows="3"  placeholder="Ingrese la razon de la sancion..." name="descripcion" ></textarea>
+                           
                     </div>
 
                     <?php if ($persona->id_persona != null): ?>
@@ -43,7 +44,7 @@
                    
                     
                     
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Sancionar</button>
                 </form>
             </div>
 
