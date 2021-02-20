@@ -9,9 +9,9 @@ class Comedor_model extends CI_Model {
     
     public function insert ($nombre,$id_ciudad,$direccion){
             $data = array(
-               'nombre_comedor' => $nombre,
+               'nombre' => $nombre,
                'id_ciudad' => $id_ciudad,
-               'direccion' => $direccion
+               'direccion_comedor' => $direccion
             );
         $this->db->insert('comedor', $data);
     } 
@@ -19,9 +19,9 @@ class Comedor_model extends CI_Model {
     public function update($id, $nombre,$id_ciudad,$direccion){
             $data = array(
                 'id_comedor' => $id,
-                'nombre_comedor' => $nombre,
+                'nombre' => $nombre,
                 'id_ciudad' => $id_ciudad,
-                'direccion' => $direccion
+                'direccion_comedor' => $direccion
             );
         $this->db->where('id_comedor', $id);
         $this->db->update('comedor', $data);
@@ -39,7 +39,7 @@ class Comedor_model extends CI_Model {
     }
 
     public function findAll(){
-        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad, s.nombre as sede');
+        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad, s.nombre as sede,com.direccion_comedor as direccion');
         $this->db->from('comedor as com');
         $this->db->join('ciudad as c', 'com.id_ciudad = c.id_ciudad');
         $this->db->join('sede as s', 'c.id_sede = s.id_sede');
@@ -72,7 +72,7 @@ class Comedor_model extends CI_Model {
     }
 
     public function findById($id){
-        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad');
+        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad, com.direccion_comedor as direccion');
         $this->db->from('comedor as com');
         $this->db->join('ciudad as c', 'com.id_ciudad = c.id_ciudad');
         $this->db->where('com.id_comedor', $id);
@@ -96,10 +96,10 @@ class Comedor_model extends CI_Model {
 
     public function findByIdAdminComedor($id_usuario){
        
-        $this->db->select('*');
-        $this->db->from('comedor');
-        $this->db->join('ciudad','comedor.id_ciudad = ciudad.id_ciudad');
-        $this->db->where('id_usuario',$id_usuario);
+        $this->db->select('*, com.nombre as nombre_comedor');
+        $this->db->from('comedor as com');
+        $this->db->join('ciudad as c','com.id_ciudad = c.id_ciudad');
+        $this->db->where('com.id_usuario',$id_usuario);
          $query = $this->db->get();
          return $query->row(0);
     }
@@ -115,31 +115,41 @@ class Comedor_model extends CI_Model {
         return $query->result();
     }
 
-    public function es_favorito($id_usuario,$id_comedor)
+    public function es_favorito($email,$id_comedor)
     {
+
+        $persona = $this->find_person_by_email_user($email);
+        
+        if($persona == null)
+            return false;
+
         $this->db->select('id_comedor_favorito');
         $this->db->from('comedor_favorito');
-        $this->db->where('comedor_favorito.id_usuario',$id_usuario);
+        $this->db->where('comedor_favorito.id_usuario',$persona->id_usuario);
         $this->db->where('comedor_favorito.id_comedor',$id_comedor);
         $query = $this->db->get();
-        return $query->result();
+
+        return $query->num_rows() > 0 ;
     }
 
-    public function add_comedor_favorito($usuario,$comedor)
+    public function add_comedor_favorito($id_usuario,$comedor)
     {
+        
         $data = array(
-            'id_usuario' => $usuario,
+            'id_usuario' => $id_usuario,
             'id_comedor' => $comedor
          );
-     $this->db->insert('comedor_favorito', $data);
+
+        $this->db->insert('comedor_favorito', $data);
+        return true;
         
     }
 
     public function delete_comedor_favorito($id_usuario,$id_comedor)
     {
-        $this->db->where('id_comedor', $id_usuario);
-        $this->db->where('id_usuario', $id_comedor);
-        $this->db->delete('comedor');
+        $this->db->where('id_comedor', $id_comedor);
+        $this->db->where('id_usuario', $id_usuario);
+        $this->db->delete('comedor_favorito');
     }
     
     public function esUserAdminComedor($id_user){
@@ -159,6 +169,14 @@ class Comedor_model extends CI_Model {
         $this->db->where('com.id_ciudad',$idCiudad);
 
         return $this->db->count_all_results();
+    }
+
+    public function find_person_by_email_user($email){
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->where('usuario.email',$email);
+        $query = $this->db->get();
+        return $query->row(0);
     }
 
 }

@@ -80,7 +80,8 @@ class Comedor extends Security {
         $nombreComedor = $this->input->post('nombre');
         $idCiudad = $this->input->post('ciudades');
         $direccionComedor = $this->input->post('direccion');
-        $this->Comedor_model->insert($nombreCiudad,$idCiudad,$direccionComedor);
+       
+        $this->Comedor_model->insert($nombreComedor,$idCiudad,$direccionComedor);
         redirect(base_url('comedor/listing'));
        
         if ($this->Comedor_model->check($nombreComedor,$idCiudad) === 0 )
@@ -97,7 +98,7 @@ class Comedor extends Security {
         $ciudad_old = $this->input->post('ciudad_old');
         $idComedor = $this->input->post('id');
         $direccionComedor = $this->input->post('direccion');
-        $this->Comedor_model->update($idComedor,$nombreCiudad,$idCiudad,$direccionComedor);
+        $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad,$direccionComedor);
         redirect(base_url('comedor/listing'));
 
 

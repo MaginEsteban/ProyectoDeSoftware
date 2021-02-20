@@ -112,35 +112,20 @@ class User_model extends CI_Model{
     /**
      * Permite reestablecer la contraseña
     */
-    public function update_password(){
-        $pass_act =  $this->input->post('pass_act');
-        $pass_act2 =  $this->input->post('pass_act2');
-        $nro_legajo = $this->input->post('nro_legajo');
-        $email =  $this->input->post('email');
-        
-        //compara si las contraseña ingresadas son iguales
-        if(! ( $pass_act == $pass_act2 ) )
-            return false;
-
+    public function update_password($legajo,$pass, $email ){
+            
         $data = array(
             'email' => $email,
-            'contraseña' => $pass_act,
-        );
+            'contraseña' => $pass );
+
         //busca la persona en base a al legajo
-      $id_persona = $this->find_person_by_legajo($nro_legajo);
+        $id_persona = $this->find_person_by_legajo($legajo);
 
-        $this->db->where(   array(
-            'id_persona' => $id_persona,
-            'email' => $email ) );
-
+        $this->db->where('id_persona', $id_persona);
+        $this->db->where('email', $email);
         $this->db->update('usuario', $data );
 
-        if($this->db->affected_rows() == 0){
-            return false;
-
-        }
-        else
-            return true;
+        return ( ! ($this->db->affected_rows() == 0));//ok?
     }
       
      public function find_person_by_legajo($legajo){
@@ -158,13 +143,12 @@ class User_model extends CI_Model{
             return null;     
      }
 
-     public function update_my_user($id,$id_pers,$nombre,$email,$su_nombre,$su_apellido,$contraseña){
+     public function update_my_user($id,$id_pers,$nombre,$email,$su_nombre,$su_apellido){
         $data = array(
             'id_usuario' => $id,
             'id_persona' => $id_pers,
             'nombre' => $nombre,
-            'email' => $email,
-            'contraseña' => $contraseña
+            'email' => $email
         );
         $this->db->where('id_usuario', $id);
         $this->db->update('usuario', $data);

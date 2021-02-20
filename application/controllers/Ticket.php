@@ -98,13 +98,16 @@ class Ticket extends Security {
         $horas = $this->Turno_model->findHoraTurno($turno);
         $hora_inicio = $horas->hora_inicio;
         $hora_fin = $horas->hora_fin;
+       
         $fecha_retiro = date('Y-m-d',strtotime("$nombreDia"));
         $fecha_retiro_as_number = strtotime($fecha_retiro);
-        $fecha_now = date('Y-m-d H:i:s');
-        $fecha_now_as_number = strtotime($fecha_now);
+     
+        $fecha_now_as_number = strtotime(date('Y-m-d H:i:s'));
+      
         $hora_now = date("H:i:s",$fecha_now_as_number);
         $dia_now = date("d",$fecha_now_as_number);
         $dia_retiro = date("d",$fecha_retiro_as_number);
+      
         if($dia_now == $dia_retiro){
             //SI EL DIA ES EL MISMO QUE SELECCIONO PARA EL PEDIDO
             //Y SI ESTA DENTRO DEL HORARIO
@@ -130,8 +133,10 @@ class Ticket extends Security {
 
         //Realizo el insert de un ticket y obtengo el id de la bd
         $id_ticket = $this->Ticket_model->insert($code,$id_menu,$user->id_persona,$turno,$fecha_final,$fecha_now);
+        
         //Utilizo el id del ticket creado para hacer un insert en estado_ticket
         $this->Ticket_model->insert_ticket_estado($fecha_now,null,$id_ticket,2);
+        
         redirect(base_url('ticket/listing_client'));
     }
 

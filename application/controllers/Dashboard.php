@@ -26,12 +26,14 @@ class Dashboard extends Security {
 					'user' => $user,
 					'comedor'=> $this->Comedor_model->findByIdAdminComedor($user->id_usuario),
 				);
+				//print_r($data['comedor']);
 			}else {
 				$data = array(
 					'user' => $user,
 				);
 			};
 		};
+
 		$this->load->view('dashboard/main_template',$data);
 	}
 

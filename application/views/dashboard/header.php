@@ -9,19 +9,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous">    
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
     </script>
-    
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="<?= base_url('recursos')?>/css/util.css">
 
     <link rel="stylesheet" href="<?= base_url('recursos')?>/css/main.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
@@ -82,17 +81,23 @@
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                <div class="row mr-1 ">
-                    <div class="col text-white"><li style="width: 60px;">
-                            <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>" class="fa fa-cogs text-white"></a> User 
-                        </li></div>
-                    <div class="col text-white" style=" font-family:Helvetica Neue, Helvetica, Arial, sans-serif;"><li>
-                            <a onClick="close_session()" class="fa fa-sign-out text-white"> </a> Salir
-                        </li></div>
-                </div>
-                        
-                        
+                    <ul class="nav navbar-nav">
+                        <div class="row mr-1 ">
+                            <div class="col text-white">
+                                <li style="width: 60px;">
+                                    <a href="<?= base_url("user/edit_my_user/").$user->id_usuario; ?>"
+                                        class="fa fa-cogs text-white"></a> User
+                                </li>
+                            </div>
+                            <div class="col text-white" onClick="close_session()"
+                                style=" font-family:Helvetica Neue, Helvetica, Arial, sans-serif;">
+                                <li>
+                                    <i class="fa fa-sign-out text-white"> </i> Salir
+                                </li>
+                            </div>
+                        </div>
+
+
                     </ul>
                 </div>
             </nav>
@@ -114,11 +119,11 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                        url: "http://localhost/ProyectoDeSoftware/login/cerrar_sesion",
-                        success: function() {
-                            location.href = "http://localhost/ProyectoDeSoftware/";
-                        }
-                    })
+                            url: "<?= base_url("login/cerrar_sesion"); ?>",
+                            success: function() {
+                                location.href ="<?= base_url(); ?>";
+                            }
+                        })
                     }
                 })
             }
