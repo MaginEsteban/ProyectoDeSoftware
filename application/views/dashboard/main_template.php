@@ -84,7 +84,7 @@ $this->load->view('dashboard/header');
         <div class="card p-3 mx-auto">
             <h4><b><?=$comedor->nombre_comedor?></b></h4>
             <small>Ubicado en: <b><?= $comedor->nombre ?></b> </small>
-            <small>Foto del comedor o campus: <br><img src="<?= $comedor->imagen ?>" style="width: 600px;"></small> <br>
+            <!-- E<small>Foto del comedor o campus: <br><img src="<?= $comedor->imagen ?>" style="width: 600px;"></small> <br> -->
             <a href="<?= base_url("detalle_comedores")?>" type="button" class="btn btn-dark">Ver Programacion</a>
         </div>
     </div>

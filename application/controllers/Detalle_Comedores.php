@@ -1,144 +1,229 @@
 <?php
-//use Restserver\Libraries\REST_Controller;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//require APPPATH . 'libraries/REST_Controller.php';
-//require APPPATH . 'libraries/Format.php';
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('content-type: application/json; charset=utf-8');
 class Detalle_Comedores extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
 
-
         $this->load->model('Comedor_model');
         $this->load->model('Turno_model');
+        $this->load->model('Ticket_model');
         $this->load->model('Menu_model');
         $this->load->model('DetalleComedor_model');
-        
+
         $this->load->helper('url_helper');
     }
-    
-	public function index()
-	{
-        $user = $this->session->userdata('user');
-        $comedores = $this->Comedor_model->findAll();
 
-        foreach ($comedores as $comedor) {
-            $turnos = $this->Turno_model->findTurnosByIdComedor($comedor->id_comedor);
-            $comedor->turnos = $turnos;  
-            $comedor->esFavorito = $this->Comedor_model->es_favorito($user->id_usuario,$comedor->id_comedor); 
-            if (! $comedor->esFavorito) {
-                $comedor->esFavorito = 0;
-            }
-        }
-       
-        
-      
-
-        $data['comedores'] = $comedores;
-        $data['user'] = $user;
-       
-		$this->load->view('detalle_comedores', $data);
-    }
-    
     public function findAllMenuByTurnos($id_comedor){
-
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
 
          //se obtiene todos los turnos de un comedor
          $turnos =  $this->DetalleComedor_model->findTurnosByIdComedor($id_comedor);
  
          foreach($turnos as $turno){
             
-            
             $turno->lunes = new stdClass;
-            $turno->lunes->id = 1;
-            $turno->lunes->menus = new stdClass;
-            $turno->lunes->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,1,$id_comedor);
-            
+            $this->menusDelDia($turno->lunes, $turno->id_turno, 1, "monday", $id_comedor );
+           
             $turno->martes = new stdClass;
-            $turno->martes->id = 2;
-            $turno->martes->menus = new stdClass;
-            $turno->martes->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,2,$id_comedor);
-             
+            $this->menusDelDia($turno->martes, $turno->id_turno, 2, "tuesday", $id_comedor );
+           
             $turno->miercoles = new stdClass;
-            $turno->miercoles->id = 3;
-            $turno->miercoles->menus = new stdClass;
-            $turno->miercoles->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,3,$id_comedor);
-            
+            $this->menusDelDia($turno->miercoles, $turno->id_turno, 3, "wednesday", $id_comedor );
+
             $turno->jueves = new stdClass;
-            $turno->jueves->id = 4;
-            $turno->jueves->menus = new stdClass;
-            $turno->jueves->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,4,$id_comedor);
+            $this->menusDelDia($turno->jueves, $turno->id_turno, 4, "thursday", $id_comedor );
            
             $turno->viernes = new stdClass;
-            $turno->viernes->id = 5;
-            $turno->viernes->menus = new stdClass;
-            $turno->viernes->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,5,$id_comedor);
-             
+            $this->menusDelDia($turno->viernes, $turno->id_turno, 5, "friday", $id_comedor );
+
+           
             $turno->sabado = new stdClass;
-            $turno->sabado->id = 6;
-            $turno->sabado->menus = new stdClass;
-            $turno->sabado->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($turno->id_turno,6,$id_comedor);
-         }
+            $this->menusDelDia($turno->sabado, $turno->id_turno, 6, "saturday", $id_comedor );
+
+        }
          
+        echo json_encode($turnos);
+    }
 
-
-         echo json_encode($turnos);
-
+    private function menusDelDia(&$turno_obj,$id_Turno,$dia,$nombre_dia,$id_comedor){
+        
+        $turno_obj->id = $id_Turno;
+        $turno_obj->nombre_dia = $nombre_dia;
+        $turno_obj->menus = new stdClass;
+        $turno_obj->menus = $this->DetalleComedor_model->findAllByIdTurnoReserva($id_Turno,$dia,$id_comedor);
        
-
+        
     }
 
-    public function add_favorito(){
-        $id_user = $this->input->post('usuario');
-        $id_comedor = $this->input->post('comedor');
-        $this->Comedor_model->add_comedor_favorito($id_user,$id_comedor);
-    }
-
-    public function delete_favorito(){
-        $id_user = $this->input->post('usuario');
-        $id_comedor = $this->input->post('comedor');
-        $this->Comedor_model->delete_comedor_favorito($id_user,$id_comedor);
-    }
-
-    public function sedes(){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
+    public function sedes(){ 
 
         $sedes = $this->DetalleComedor_model->findAllSedes();
        
         echo json_encode($sedes);
-        //$this->response($sedes, REST_Controller::HTTP_OK); 
-    }
+        }
 
     public function ciudades($id_sede){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
-
-        $sedes = $this->DetalleComedor_model->findAllCiudades($id_sede);
-       
-        echo json_encode($sedes);
+        
+        $ciudades = $this->DetalleComedor_model->findAllCiudades($id_sede);
+        echo json_encode($ciudades);
     }
 
     public function comedores($id_ciudad){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
-
+        
         $comedores = $this->DetalleComedor_model->findAllComedores($id_ciudad);
-       
-        echo json_encode($comedores);
+        
+        echo json_encode($comedores);    
     }
 
+    public function favorito($comedor, $email){
+        
+        $persona = $this->Comedor_model->find_person_by_email_user($email);
+
+
+        if($persona == null)
+            echo json_encode(array('error' => '¡El correo ingresado no pertecene a ninguna persona!'));
+
+        else{
+            $data = array(
+                'favorito' => $this->Comedor_model->es_favorito($email,$comedor)
+            );
+                    
+            echo json_encode($data);    
+        }
+         
+    }
+
+
+    //ok
+    public function add_favorito(){
+       
+        $JSONData = file_get_contents("php://input");
+        $dataObject = json_decode($JSONData);
+
+        $email = $dataObject->email;
+        $id_comedor = $dataObject->comedor;
+
+        $persona = $this->Comedor_model->find_person_by_email_user($email);
+
+        if($persona == null)
+            echo json_encode(array('error' => '¡El correo ingresado no pertecene a ninguna persona!')); 
+
+        $this->Comedor_model->add_comedor_favorito($persona->id_usuario, $id_comedor);
+
+
+        echo json_encode(['comedor successfully.']);
+    }
+
+    //ok
+    public function delete_favorito(){
+              
+        $JSONData = file_get_contents("php://input");
+        $dataObject = json_decode($JSONData);
+
+        $email = $dataObject->email;
+        $id_comedor = $dataObject->comedor;
+
+        $persona = $this->Comedor_model->find_person_by_email_user($email);
+
+        if($persona == null)
+        echo json_encode(array('error' => '¡El correo ingresado no pertecene a ninguna persona!')); 
+
+
+        $this->Comedor_model->delete_comedor_favorito($persona->id_usuario, $id_comedor);
+        echo json_encode(array('mensaje' => 'Comedor eliminado como favorito'));
+    }
+
+
+    public function ticket_add(){
+
+        $JSONData = file_get_contents("php://input");
+        $dataObject = json_decode($JSONData);
+
+        //Obtengo el nombre del dia en ingles 
+        $nombreDia = $dataObject->nombre_dia;
+        //Calculo en base a ese dia lo formateo en una fecha y lo asigno a $fecha_retiro
+        $turno = $dataObject->id_turno;//id turno
+        $id_comedor = $dataObject->id_comedor;
+        $email = $dataObject->email;
+        
+        $horas = $this->Turno_model->findHoraTurno($turno);
+        
+        $fecha_final = $this->fechaFinal($nombreDia,$horas);
+       
+        $fecha_inicio_semana = $this->inicio_semana($fecha_final);
+        
+        $code = $this->Ticket_model->get_random_code() + 1;
+        $id_menu = $dataObject->id_menu;
+        $persona = $this->Comedor_model->find_person_by_email_user($email);
+        $fecha_now = date('Y-m-d H:i:s');
+        
+        //Realizo el insert de un ticket y obtengo el id de la bd
+        $id_ticket = $this->Ticket_model->insert($code,$id_menu,$persona->id_persona,$turno,$fecha_final,$fecha_now);
+        
+        //Utilizo el id del ticket creado para hacer un insert en estado_ticket
+        $this->Ticket_model->insert_ticket_estado($fecha_now,null,$id_ticket,2);
+        
+
+        //hacer insert tabla reserva
+        $this->Ticket_model->reserva($id_ticket,$persona->id_persona,$turno,$fecha_inicio_semana);
+
+        echo json_encode(array('mensaje' => 'ticket agregado...'));
+    }
+   
+    public function inicio_semana($fecha){
+
+        $diaInicio="Monday";
+        $strFecha = strtotime($fecha);
     
-    public function ver($id_comedor){
-
+        $fechaInicio = date('Y-m-d',strtotime('last '.$diaInicio,$strFecha));
+    
+        if(date("l",$strFecha)==$diaInicio){
+            $fechaInicio= date("Y-m-d",$strFecha);
+        }
        
-        $this->DetalleComedor_model->ver(2,1,$id_comedor);
-            
+        return $fechaInicio;
     }
 
+    private function fechaFinal($nombreDia,$horas){
+        
+        $fecha_now_as_number = strtotime(date('Y-m-d H:i:s'));
+
+        $hora_inicio = $horas->hora_inicio;
+        $hora_fin = $horas->hora_fin;
+       
+        $fecha_retiro = date('Y-m-d',strtotime("$nombreDia"));
+        $fecha_retiro_as_number = strtotime($fecha_retiro);
+       
+        $hora_now = date("H:i:s",$fecha_now_as_number);
+        $dia_now = date("d",$fecha_now_as_number);
+        $dia_retiro = date("d",$fecha_retiro_as_number);
+
+        if($dia_now == $dia_retiro){
+            //SI EL DIA ES EL MISMO QUE SELECCIONO PARA EL PEDIDO
+            //Y SI ESTA DENTRO DEL HORARIO
+            //DEJO LA FECHA ACTUAL
+
+           if($hora_now > $hora_inicio && $hora_now < $hora_fin){
+             $fecha_final = $fecha_retiro;
+           }
+           else{
+            //EN CASO DE QUE EL DIA DE LA FECHA ACTUAL SEA 
+            //EL MISMO QUE LA FECHA SELECCIONADA PARA EL TICKET Y YA NO ESTE 
+            //PERMITIDO EMITIRSE PORQUE SE ESTA FUERA DE HORARIO
+            //EN ESE CASO SE DEBEN SUMAR 7 DIAS A FECHA RETIRO
+            $fecha_final = date('Y-m-d',strtotime($fecha_retiro."+ 7 days"));
+            }
+        }
+        else{
+            $fecha_final = $fecha_retiro;
+        }
+        return $fecha_final;
+    }
 }

@@ -176,8 +176,7 @@ class Menu extends Security {
         if ($this->Menu_model->check($menu, $id_tipo_menu,$id_comedor) === 0 ){
             return TRUE;
         }
-           
-               
+                
         return FALSE;
     }
 

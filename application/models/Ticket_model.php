@@ -111,7 +111,11 @@ class Ticket_model extends CI_Model{
         $this->db->select('max(ticket.codigo) as maximo');
         $this->db->from('ticket');
         $query = $this->db->get();
-        return $query->row(0,'Ticket_model')->maximo;
+
+        if($query->num_rows() == 0)
+            return 0;
+
+        return $query->row(0)->maximo;
     }
 
     public function get_estados(){
@@ -198,6 +202,22 @@ class Ticket_model extends CI_Model{
     $data = array('idTurno' => $turno);
     
     $result = $this->db->query($stored_proc, $data);
+  }
+
+
+  public function reserva($id_ticket,$id_persona,$turno,$fecha_inicio_semana){
+    
+    $hora = date('H:i:s');
+
+    $data = array(
+       'id_persona' => $id_persona,
+       'id_turno' => $turno,
+       'id_ticket' => $id_ticket,
+       'fecha' => $fecha_inicio_semana,
+       'hora' => $hora
+    );
+
+    $this->db->insert('reserva', $data);
   }
 
 }

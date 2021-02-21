@@ -107,7 +107,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a class="user-menu" href="<?= base_url("detalle_comedores/"); ?>"><i
+                            <li class="active"><a class="user-menu" href="http://localhost:4200/seleccionar-comedor"><i
                                         class="fa fa-plus"></i> <span>Comprar Ticket</span></a></li>
                             <li class="active"><a class="user-menu" href="<?= base_url("ticket/listing_client"); ?>"><i
                                         class="fa fa-list-ul"></i> <span>Mis Tickets</span></a></li>
@@ -154,11 +154,14 @@
                     </li>
                 <?php endif; ?>
                
-                <li>
-                    <a href="<?= base_url('user/restore_password');?>">
-                        <i class="fa fa-key"></i> <span>Reestablecer Contraseña</span>
-                    </a>
-                </li>
+                <?php if ($user->id_tipo_usuario == 4) : ?>
+                    <li>
+                        <a href="<?= base_url('user/restore_password');?>">
+                            <i class="fa fa-key"></i> <span>Reestablecer Contraseña</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <?php if ($user->id_tipo_usuario == 3) : ?>
                     
                     <li>

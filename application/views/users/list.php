@@ -25,23 +25,30 @@
                 </thead>
                 <tbody>
                     <?php foreach ($usuarios as $usuario): ?>
-                    <?php if($usuario->tipo != "ADMINISTRADOR"){?>
+                        <!-- No se agregan los user admin -->
+                    <?php if($usuario->tipo != "ADMINISTRADOR"){?> 
                     <tr>
                         <td scope="row"><?php echo $usuario->numero_legajo; ?></th>
                         <td scope="row"><?php echo $usuario->nombre; ?></th>
                         <td scope="row"><?php echo $usuario->email; ?></th>
                         <td scope="row"><?php echo $usuario->tipo; ?></th>
                         <td>
-                            <!-- modificar usuario -->
-                            <a href="<?= base_url('user/edit/').$usuario->id_usuario; ?>" data-toggle="tooltip"
-                                title="Modificar Usuario" role="button" class="btn btn-primary m-1">
-                                <i class="fa fa-pencil-square-o"></i>
-                            </a>
-                            <!-- eliminar usuario -->
-                            <a onClick="confirmDelete()" data-toggle="tooltip" title="Eliminar Usuario" role="button"
-                                class="btn btn-danger m-1">
-                                <i class="fa fa-remove"></i>
-                            </a>
+
+                            <!-- Solo el admin puede borrar y modificar los usuario -->
+                            <?php if( $this->session->userdata('user')->id_tipo_usuario == 4) : ?>
+                                <!-- modificar usuario -->
+                                <a href="<?= base_url('user/edit/').$usuario->id_usuario; ?>" data-toggle="tooltip"
+                                    title="Modificar Usuario" role="button" class="btn btn-primary m-1">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>
+                                
+                                <!-- eliminar usuario -->
+                                <a onClick="confirmDelete()" data-toggle="tooltip" title="Eliminar Usuario" role="button"
+                                    class="btn btn-danger m-1">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            <?php endif; ?>
+
                             <!-- Sancionar usuario -->
                             <a href="<?= base_url('sancion/add/').$usuario->id_usuario; ?>" data-toggle="tooltip"
                                 title="Sancionar Usuario" role="button" class="btn btn-primary m-1">

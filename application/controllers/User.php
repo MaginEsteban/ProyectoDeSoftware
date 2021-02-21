@@ -52,6 +52,7 @@ class User extends Security {
        else
        {
         $data['usuarios'] = $this->User_model->findAll();
+      
         $this->load->view('users/list',$data);
        }
 
@@ -181,6 +182,20 @@ class User extends Security {
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
             array('required' => 'Ingresar el nombre...');
+        $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
+        array(  'required' => 'Ingresar el numero de legajo...',
+                'numeric' => 'El numero de legajo no es valido...'));
+                
+        $su_nombre = $this->input->post('su_nombre');
+        $su_apellido = $this->input->post('su_apellido');
+        $id_persona = $this->input->post('id_persona');
+        $email = $this->input->post('email');
+        $nombre = $this->input->post('nombre');
+        $id_usuario = $this->input->post('id_usuario');
+       
+
+       
+        $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido);
         
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
@@ -231,7 +246,7 @@ class User extends Security {
 	}	
 
 
- /**
+    /**
      * Vista reestablecer la contraseña
     */
     public function restore_password(){
@@ -242,24 +257,59 @@ class User extends Security {
      * Permiter reestablecer la contraseña de un usuario
     */
     public function check_password(){
+        
+        $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
+            array(  'required' => 'Ingresar el numero de legajo...',
+                    'numeric' => 'El numero de legajo no es valido...'));
+       
+        $this->form_validation->set_rules('email', 'email', 'required',
+            array('required' => 'Ingresar el email...'));
+
+        $this->form_validation->set_rules('pass_act', 'contraseña', 'required',
+            array('required' => 'Ingresar la contraseña nueva...'));
+        
+        $this->form_validation->set_rules('pass_act2', 'contraseña', 'required|callback_contraseña_check',
+            array('required' => 'Ingresar contraseña de confirmacion nueva...',
+              'contraseña_check' => 'Las contraseñas indicadas no son iguales...'));
             
-        $ok = $this->User_model->update_password();
+        $pass_act =  $this->input->post('pass_act');
+        $pass_act2 =  $this->input->post('pass_act2');
+        $nro_legajo = $this->input->post('nro_legajo');
+        $email =  $this->input->post('email');
+
+          //compara si las contraseña ingresadas son iguales
+        
+        $ok =  $this->form_validation->run() && $this->User_model->update_password($nro_legajo,$pass_act,$email);
                 
         $response;
         if($ok){
             $response = array(
-                'mensaje' => 'La contraseña se cambio con exito',
+                'mensaje' => 'La contraseña se cambio con exito...',
                 'class' => 'alert-primary'
             );  
         }
         else{
+            if( empty(validation_errors()))
+                $mensaje = "Error al actualizar la contraseña..."; //error modelo
+            else
+                $mensaje = validation_errors();//error del formulario, dato mal ingresado
+           
             $response = array(
-                'mensaje' => 'Los datos ingresado son incorrento...no se reestablecio la contraseña',
+                'mensaje' => $mensaje,
                 'class' => 'alert-danger'
             );                   
         }
        
         $this->load->view('users/restore_password',$response);
+    }
+
+    function contraseña_check(){
+
+        $pass_act =  $this->input->post('pass_act');
+        $pass_act2 =  $this->input->post('pass_act2');
+
+        return ( $pass_act == $pass_act2 );
+      
     }
 
 }
