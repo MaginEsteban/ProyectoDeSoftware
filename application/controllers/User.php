@@ -93,9 +93,6 @@ class User extends Security {
                     $this->Comedor_model->updateUserComedor($id_user,$idComedor);     
                 }  
                 redirect(base_url('user/listing'));
-            //}
-       
-            redirect(base_url('user/add'));
             
         }
         
@@ -116,32 +113,75 @@ class User extends Security {
      }
 
      public function modificarUsuario(){
+
+        $this->form_validation->set_rules('nombre', 'nombre', 'required',
+        array('required' => 'Ingresar el nombre...');
+    
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+            array('required' => 'Ingresar un email...'),
+                'valid_email' =>'El email ingresado no es valido...'));
+    
+        $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
+            array('required' => 'Ingresar la constraseña...'));
         
-        $email = $this->input->post('email');
-        $nombre = $this->input->post('nombre');
-        $contraseña = $this->input->post('contraseña');
-        $tipo = $this->input->post('tipo_seleccionado');
-        if($tipo != 1){
-        $comedor_new = $this->input->post('numero_comedor_seleccionado');
-        }
-        else{
-            $comedor_new = -1;
-        }
-        $comedor_old = $this->input->post('id_comedor');
-        $id_user = $this->input->post('id_usuario');
-        $id_pers = $this->input->post('id_persona');
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $id_usuario = $this->uri->segment(3);
+            $data = array(
+                'usuario' => $this->User_model->find_by_id($id_usuario),
+                'comedores' => $this->Comedor_model->findAll(),
+                'comedor'=> $this->Comedor_model->find_comedor_by_id_user($id_usuario),
+                'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
+            );
+
+            $this->load->view('users/edit',$data)
+        }else{
+              //paso la validacion
+
+              $email = $this->input->post('email');
+              $nombre = $this->input->post('nombre');
+              $contraseña = $this->input->post('contraseña');
+              $tipo = $this->input->post('tipo_seleccionado');
+              if($tipo != 1){
+              $comedor_new = $this->input->post('numero_comedor_seleccionado');
+              }
+              else{
+                  $comedor_new = -1;
+              }
+              $comedor_old = $this->input->post('id_comedor');
+              $id_user = $this->input->post('id_usuario');
+              $id_pers = $this->input->post('id_persona');
+                    
               
+              $this->User_model->update($id_user,$id_pers,$tipo,$nombre,$contraseña,$email);
+              
+              // verifica si se cambio el comedor
+               if( !($comedor_new == $comedor_old)){
+                  $this->Comedor_model->updateUserComedor($id_user,$comedor_new);
+               }
+              redirect(base_url('user/listing'));
+        }
         
-        $this->User_model->update($id_user,$id_pers,$tipo,$nombre,$contraseña,$email);
-        
-        // verifica si se cambio el comedor
-         if( !($comedor_new == $comedor_old)){
-            $this->Comedor_model->updateUserComedor($id_user,$comedor_new);
-         }
-        redirect(base_url('user/listing'));
     }
 
     public function modificarMiUsuario(){
+        $this->form_validation->set_rules('su_nombre', 'su_nombre', 'required',
+        array('required' => 'Ingresar el nombre...');
+
+        $this->form_validation->set_rules('su_apellido', 'su_apellido', 'required',
+        array('required' => 'Ingresar el apellido...');
+    
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+        array('required' => 'Ingresar un email...'),
+            'valid_email' =>'El email ingresado no es valido...'));
+    
+        $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
+            array('required' => 'Ingresar la constraseña...'));
+
+        $this->form_validation->set_rules('nombre', 'nombre', 'required',
+            array('required' => 'Ingresar el nombre...');
         $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
         array(  'required' => 'Ingresar el numero de legajo...',
                 'numeric' => 'El numero de legajo no es valido...'));
@@ -157,9 +197,32 @@ class User extends Security {
        
         $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido);
         
-        $user = $this->Login_model->find_by_id($id_usuario);
-        $this->recargar_sesion($user);
-        redirect(base_url('dashboard'));
+        $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE) {
+            $id_usuario = $this->uri->segment(3);
+            $data = array(
+                'usuario' => $this->User_model->find_by_id($id_usuario),
+                'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
+                'user' => $this->session->userdata('user')
+            );
+        $this->load->view('users/edit_my_user',$data);
+        }else{
+
+            $su_nombre = $this->input->post('su_nombre');
+            $su_apellido = $this->input->post('su_apellido');
+            $id_persona = $this->input->post('id_persona');
+            $email = $this->input->post('email');
+            $contraseña = $this->input->post('contraseña');
+            $nombre = $this->input->post('nombre');
+            $id_usuario = $this->input->post('id_usuario');
+            $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
+            
+            $user = $this->Login_model->find_by_id($id_usuario);
+            $this->recargar_sesion($user);
+            redirect(base_url('dashboard'));
+        }
+
     }
 
     public function edit_my_user(){

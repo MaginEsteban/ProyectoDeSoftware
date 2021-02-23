@@ -50,7 +50,7 @@ class Comedor_model extends CI_Model {
 
     public function findAllNotAsigned(){
        
-        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, c.id_ciudad, c.nombre as nombre_ciudad');
+        $this->db->select('com.id_comedor, com.nombre as nombre_comedor, com.direccion_comedor, c.id_ciudad, c.nombre as nombre_ciudad');
         $this->db->from('comedor as com');
         $this->db->join('ciudad as c', 'com.id_ciudad = c.id_ciudad');
         $this->db->where('com.activado', 1);
