@@ -8,9 +8,9 @@ class User extends Security {
     public function __construct(){
         parent::__construct();
         $this->load->model(array('User_model','Comedor_model','Login_model'));
+        $this->load->helper(array('url','html','form'));
         $this->load->library(array('form_validation','session'));
-		$this->load->helper(array('url','html','form'));
-       
+	
     }
 
     /**
@@ -115,11 +115,11 @@ class User extends Security {
      public function modificarUsuario(){
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
-        array('required' => 'Ingresar el nombre...');
+            array('required' => 'Ingresar el nombre...'));
     
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
-            array('required' => 'Ingresar un email...'),
-                'valid_email' =>'El email ingresado no es valido...'));
+            array('required' => 'Ingresar un email...',
+                'valid_email' => 'El email ingresado no es valido...'));
     
         $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
             array('required' => 'Ingresar la constraseña...'));
@@ -136,8 +136,9 @@ class User extends Security {
                 'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
             );
 
-            $this->load->view('users/edit',$data)
-        }else{
+            $this->load->view('users/edit',$data);
+        }
+        else{
               //paso la validacion
 
               $email = $this->input->post('email');
@@ -168,23 +169,18 @@ class User extends Security {
 
     public function modificarMiUsuario(){
         $this->form_validation->set_rules('su_nombre', 'su_nombre', 'required',
-        array('required' => 'Ingresar el nombre...');
+        array('required' => 'Ingresar el nombre...'));
 
         $this->form_validation->set_rules('su_apellido', 'su_apellido', 'required',
-        array('required' => 'Ingresar el apellido...');
+        array('required' => 'Ingresar el apellido...'));
     
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
-        array('required' => 'Ingresar un email...'),
+        array('required' => 'Ingresar un email...',
             'valid_email' =>'El email ingresado no es valido...'));
     
-        $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
-            array('required' => 'Ingresar la constraseña...'));
-
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
-            array('required' => 'Ingresar el nombre...');
-        $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
-        array(  'required' => 'Ingresar el numero de legajo...',
-                'numeric' => 'El numero de legajo no es valido...'));
+            array('required' => 'Ingresar el nombre...'));
+
                 
         $su_nombre = $this->input->post('su_nombre');
         $su_apellido = $this->input->post('su_apellido');
@@ -192,7 +188,7 @@ class User extends Security {
         $email = $this->input->post('email');
         $nombre = $this->input->post('nombre');
         $id_usuario = $this->input->post('id_usuario');
-       
+        $contraseña = $this->input->post('contraseña');
 
        
         $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido);
@@ -200,22 +196,15 @@ class User extends Security {
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
         if ($this->form_validation->run() == FALSE) {
-            $id_usuario = $this->uri->segment(3);
+            //$id_usuario = $this->uri->segment(3);
             $data = array(
                 'usuario' => $this->User_model->find_by_id($id_usuario),
                 'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
                 'user' => $this->session->userdata('user')
             );
-        $this->load->view('users/edit_my_user',$data);
+            $this->load->view('users/edit_my_user',$data);
         }else{
 
-            $su_nombre = $this->input->post('su_nombre');
-            $su_apellido = $this->input->post('su_apellido');
-            $id_persona = $this->input->post('id_persona');
-            $email = $this->input->post('email');
-            $contraseña = $this->input->post('contraseña');
-            $nombre = $this->input->post('nombre');
-            $id_usuario = $this->input->post('id_usuario');
             $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido,$contraseña);
             
             $user = $this->Login_model->find_by_id($id_usuario);
@@ -232,6 +221,7 @@ class User extends Security {
             'persona'=> $this->User_model->find_person_by_id_user($id_usuario),
             'user' => $this->session->userdata('user')
         );
+
         $this->load->view('users/edit_my_user',$data);
     }
 
