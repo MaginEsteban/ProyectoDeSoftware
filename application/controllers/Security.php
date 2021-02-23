@@ -10,7 +10,7 @@ class Security extends CI_Controller {
     public $rol_no_puede = array(
        'USUARIO_CLIENTE' 
             => array(
-                'User','Turno','Programacion'
+                'User/add','User/listing','Turno','Programacion'
                ),
        'USUARIO_NO_REGISTRADO' 
             => array(

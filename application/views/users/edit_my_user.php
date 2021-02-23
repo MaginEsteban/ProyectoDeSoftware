@@ -14,8 +14,10 @@
     <div class="row">
         <div class="col-10 col-sm-6 mx-auto card">
 
+            <?php echo validation_errors();?>
+
             <form action="<?= base_url('user/modificarMiUsuario'); ?>" method="POST" class="m-2">
-                <input type="hidden" name="id_persona" value="<?php echo $usuario->id_persona ?>" />
+                <input type="hidden" name="id_persona" value="<?php echo $persona->id_persona ?>" />
                 <!-- Identificador -->
                 <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                     name="id_usuario" value="<?php echo $usuario->id_usuario; ?>">

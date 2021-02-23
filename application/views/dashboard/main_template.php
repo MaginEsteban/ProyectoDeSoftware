@@ -26,51 +26,57 @@ $this->load->view('dashboard/header');
         <?php endforeach; ?>
         <div class="card p-3 ">
             <h5><b>Tus Sanciones:</b></h5>
-            <table class="table table-striped" id="myTable">
-                <thead class="">
-                    <tr class="bg-info">
-                        <th scope="col" style="width:100px">Fecha</th>
-                        <th scope="col">Hora</th>
-                        <th scope="col">Descripcion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($sanciones as $sancion): ?>
-                    <tr>
-                        <td scope="row"><?php echo $sancion->fecha; ?></th>
-                        <td scope="row"><?php echo $sancion->hora; ?></th>
-                        <td scope="row"><?php echo $sancion->descripcion; ?></th>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <div class="table-responsive-xl">
+                <table class="table table-striped" id="myTable">
+                    <thead class="">
+                        <tr class="bg-info">
+                            <th scope="col" style="width:100px">Fecha</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($sanciones as $sancion): ?>
+                        <tr>
+                            <td scope="row"><?php echo $sancion->fecha; ?></th>
+                            <td scope="row"><?php echo $sancion->hora; ?></th>
+                            <td scope="row"><?php echo $sancion->descripcion; ?></th>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
             <a href="<?= base_url("sancion/listing_client")?>" type="button" class="btn btn-dark">Ver Detalles</a>
         </div>
     </div>
     <div class="card p-3 ">
         <h5><b>Tus tickets:</b></h5>
-        <table class="table table-striped" id="myTable2">
-            <thead class="">
-                <tr class="bg-info">
-                    <th scope="col">Estado de Pago</th>
-                    <th scope="col">Estado de Ticket</th>
-                    <th scope="col">Menu</th>
-                    <th scope="col">Fecha de Retiro</th>
-                    <th scope="col">Turno</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($tickets as $ticket): ?>
-                <tr>
-                    <td scope="row"><?php if($ticket->id_estado_pago == 1){echo "PENDIENTE DE PAGO";}else{echo "PAGADO";} ?></th>
-                    <td scope="row"><?php echo $ticket->nombre_estado; ?></th>
-                    <td scope="row"><?php echo $ticket->nombre_menu; ?></th>
-                    <td scope="row"><?php echo $ticket->fecha_retiro_ticket; ?></th>
-                    <td scope="row"><?php echo $ticket->nombre_turno; ?></th>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="table-responsive-xl">
+            <table class="table table-striped" id="myTable2">
+                <thead class="">
+                    <tr class="bg-info">
+                        <th scope="col">Estado de Pago</th>
+                        <th scope="col">Estado de Ticket</th>
+                        <th scope="col">Menu</th>
+                        <th scope="col">Fecha de Retiro</th>
+                        <th scope="col">Turno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tickets as $ticket): ?>
+                    <tr>
+                        <td scope="row">
+                            <?php if($ticket->id_estado_pago == 1){echo "PENDIENTE DE PAGO";}else{echo "PAGADO";} ?>
+                            </th>
+                        <td scope="row"><?php echo $ticket->nombre_estado; ?></th>
+                        <td scope="row"><?php echo $ticket->nombre_menu; ?></th>
+                        <td scope="row"><?php echo $ticket->fecha_retiro_ticket; ?></th>
+                        <td scope="row"><?php echo $ticket->nombre_turno; ?></th>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         <a href="<?= base_url("ticket/listing_client")?>" type="button" class="btn btn-dark">Ver Detalles</a>
     </div>
 
@@ -85,7 +91,8 @@ $this->load->view('dashboard/header');
             <h4><b><?=$comedor->nombre_comedor?></b></h4>
             <small>Ubicado en: <b><?= $comedor->nombre ?></b> </small>
             <!-- E<small>Foto del comedor o campus: <br><img src="<?= $comedor->imagen ?>" style="width: 600px;"></small> <br> -->
-            <a href="<?= $this->config->item('base_url_angular'); ?>" type="button" class="btn btn-dark">Ver Programacion</a>
+            <a href="<?= $this->config->item('base_url_angular'); ?>" type="button" class="btn btn-dark">Ver
+                Programacion</a>
         </div>
     </div>
 

@@ -36,7 +36,7 @@
                     <!-- Hora inicio -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Hora de Inicio </label>
-                        <div class="input-group clock" data-placement="center" data-align="top" data-autoclose="true">
+                        <div class="input-group clock"  data-autoclose="true">
                             <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de inicio del turno" name="hora_inicio">
                                 <i class="far fa-clock"></i>
                             </input>
@@ -46,7 +46,7 @@
                     <!-- Hora fin -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Hora de Fin </label>
-                        <div class="input-group clock" data-placement="center" data-align="top" data-autoclose="true">
+                        <div class="input-group clock"  data-autoclose="true">
                             <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de fin del turno" name="hora_fin">
                                 <i class="far fa-clock"></i>
                             </input>

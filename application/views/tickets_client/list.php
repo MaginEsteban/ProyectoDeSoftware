@@ -35,7 +35,7 @@
                             <td scope="row"><?php echo $ticket->fecha_retiro_ticket; ?></th>
                             <td scope="row"><?php echo $ticket->nombre_turno; ?></th>
                             <td>
-                            <?php if($ticket->nombre_estado != "CANCELADO" && !isset($ticket->fecha_fin)){?>
+                            <?php if($ticket->nombre_estado != "CANCELADO" && ($ticket->id_estado_pago == 1)  && !isset($ticket->fecha_fin)){?>
                                 <!-- eliminar ticket -->
                                 <a href="<?= base_url('ticket/delete/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cancelar Ticket" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-remove"></i>

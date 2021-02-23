@@ -11,7 +11,7 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-            <div class="col mx-auto">
+            <div class="col mx-auto table-responsive-xl">
                 <table class="table table-striped" id="myTable"> Aqui se encuentran todos los tickets                   
                 <thead class="">
                         <tr class="bg-info">
@@ -45,7 +45,7 @@
                                     <i class="fa fa-share"></i>
                                 </a>
                             
-                            <?php if($ticket->nombre_estado != "CANCELADO" && $ticket->nombre_estado != "ENTREGADO" && !isset($ticket->fecha_fin)){ ?>
+                            <?php if($ticket->nombre_estado != "CANCELADO" && $ticket->nombre_estado != "ENTREGADO" && ($ticket->id_estado_pago == 1) && !isset($ticket->fecha_fin)){ ?>
                                 <!-- eliminar ticket -->
                                 <a href="<?= base_url('ticket/delete/').$ticket->id_ticket; ?>" data-toggle="tooltip" title="Cancelar Ticket" role="button" class="btn btn-danger m-1">
                                     <i class="fa fa-times"></i>
