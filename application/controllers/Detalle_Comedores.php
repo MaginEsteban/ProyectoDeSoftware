@@ -159,22 +159,33 @@ class Detalle_Comedores extends CI_Controller {
        
         $fecha_inicio_semana = $this->inicio_semana($fecha_final);
         
-        $code = $this->Ticket_model->get_random_code() + 1;
-        $id_menu = $dataObject->id_menu;
-        $persona = $this->Comedor_model->find_person_by_email_user($email);
-        $fecha_now = date('Y-m-d H:i:s');
+       //validacion cantidad de sanciones
+       $cantidad_sanciones = $this->DetalleComedor_model->cantidad_sanciones($email);
         
-        //Realizo el insert de un ticket y obtengo el id de la bd
-        $id_ticket = $this->Ticket_model->insert($code,$id_menu,$persona->id_persona,$turno,$fecha_final,$fecha_now);
-        
-        //Utilizo el id del ticket creado para hacer un insert en estado_ticket
-        $this->Ticket_model->insert_ticket_estado($fecha_now,null,$id_ticket,2);
-        
+       if($cantidad_sanciones > 2) // alcanzo las 3 sanciones
+       {
+           echo json_encode(array('error' => 'No es posible, debido a que posee 3 sanciones...'));
+       }
+       else{
+            $code = $this->Ticket_model->get_random_code() + 1;
+            $id_menu = $dataObject->id_menu;
+            $persona = $this->Comedor_model->find_person_by_email_user($email);
+            $fecha_now = date('Y-m-d H:i:s');
+            
+            //Realizo el insert de un ticket y obtengo el id de la bd
+            $id_ticket = $this->Ticket_model->insert($code,$id_menu,$persona->id_persona,$turno,$fecha_final,$fecha_now);
+            
+            //Utilizo el id del ticket creado para hacer un insert en estado_ticket
+            $this->Ticket_model->insert_ticket_estado($fecha_now,null,$id_ticket,2);
+            
+            //hacer insert tabla reserva
+            $this->Ticket_model->reserva($id_ticket,$persona->id_persona,$turno,$fecha_inicio_semana);
 
-        //hacer insert tabla reserva
-        $this->Ticket_model->reserva($id_ticket,$persona->id_persona,$turno,$fecha_inicio_semana);
+            echo json_encode(array('mensaje' => 'ticket agregado...'));
+       }
 
-        echo json_encode(array('mensaje' => 'ticket agregado...'));
+
+       
     }
    
     public function inicio_semana($fecha){
@@ -226,4 +237,5 @@ class Detalle_Comedores extends CI_Controller {
         }
         return $fecha_final;
     }
+
 }

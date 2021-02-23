@@ -110,10 +110,7 @@ class Comedor extends Security {
         $ciudad_old = $this->input->post('ciudad_old');
         $idComedor = $this->input->post('id');
         $direccionComedor = $this->input->post('direccion');
-        $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad,$direccionComedor);
-
-      
-
+       
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
                 array('required' => 'Ingresar el nombre del comedor...'));

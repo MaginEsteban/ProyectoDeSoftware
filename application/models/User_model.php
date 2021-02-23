@@ -129,7 +129,7 @@ class User_model extends CI_Model{
     }
       
      public function find_person_by_legajo($legajo){
-         $persona = 
+      
          
          $this->db->select('*');
          $this->db->from('persona');

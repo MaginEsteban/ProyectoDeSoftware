@@ -137,12 +137,7 @@ class User extends Security {
             );
 
             $this->load->view('users/edit',$data);
-<<<<<<< HEAD
         }else{
-=======
-        }
-        else{
->>>>>>> 618fb6e41adba29f809017bc9acdc85f3d0abade
               //paso la validacion
 
               $email = $this->input->post('email');
@@ -185,12 +180,7 @@ class User extends Security {
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
             array('required' => 'Ingresar el nombre...'));
 
-<<<<<<< HEAD
-        $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
-        array(  'required' => 'Ingresar el numero de legajo...',
-                'numeric' => 'El numero de legajo no es valido...'));
-=======
->>>>>>> 618fb6e41adba29f809017bc9acdc85f3d0abade
+     
                 
         $su_nombre = $this->input->post('su_nombre');
         $su_apellido = $this->input->post('su_apellido');
@@ -199,9 +189,6 @@ class User extends Security {
         $nombre = $this->input->post('nombre');
         $id_usuario = $this->input->post('id_usuario');
         $contraseña = $this->input->post('contraseña');
-
-       
-        $this->User_model->update_my_user($id_usuario,$id_persona,$nombre,$email,$su_nombre,$su_apellido);
         
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 

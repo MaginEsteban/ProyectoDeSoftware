@@ -56,12 +56,14 @@ class Register extends CI_Controller {
 
 	public function validacionFormulario(){
 		
-		$this->form_validation->set_rules('legajo', 'Legajo', 'required|numeric|greater_than[0]|!is_unique[persona.legajo]',
+		$this->form_validation->set_rules('legajo', 'Legajo', 'required|numeric|greater_than[0]|callback_legajo_existe|callback_legajo_no_asociado',
 			array(	'required' => 'Ingresar el legajo...',
 					'greater_than' => 'Ingresar un numero de legajo mayor a 0',
 					'numeric' => 'El legajo debe ser numerico',
-					'!is_unique' => 'El legajo ingresado no pertenece a ninguna persona...'));
-
+					'legajo_no_asociado' => 'El legajo ingresado se encuentra asociado a un usuario...',
+					'legajo_existe' => 'El legajo ingresado no existe en el sistema...'));
+		
+					// agregar callback de validacion de legajo
 		//falta validacion de legajo valido
 		//  ??
 		$this->form_validation->set_rules('username', 'nombre', 'required');
@@ -74,5 +76,13 @@ class Register extends CI_Controller {
 		$this->form_validation->set_message('rule', 'Ingresar {field}');
 		
 		return $this->form_validation->run() === TRUE;
+	}
+
+	public function legajo_no_asociado($str){
+		return !$this->User_model->exists($str);
+	}
+
+	public function legajo_existe($str){
+		return $this->User_model->find_person_by_legajo($str) != null;
 	}
 }

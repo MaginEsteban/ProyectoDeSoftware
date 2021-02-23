@@ -16,36 +16,42 @@ $this->load->view('dashboard/header');
     <h6>Aqui se mostrarán algunos datos de su usuario:</h6>
     <div class="row p-3">
         <?php foreach ($comedores as $comedor): ?>
-        <div class="card p-3 ">
-            <h6><b><?=$comedor->nombre_comedor?></b></h6>
-            <small>Ubicado en: <b><?= $comedor->nombre ?></b> </small>
-            <small>Foto del comedor o campus: <br><br><img class="row mx-auto" src="<?= $comedor->imagen ?>"
-                    style="width: 250px;"></small> <br>
-            <a href="<?= base_url("detalle_comedores")?>" type="button" class="btn btn-dark">Ver Programacion</a>
-        </div>
-        <?php endforeach; ?>
-        <div class="card p-3 ">
-            <h5><b>Tus Sanciones:</b></h5>
-            <div class="table-responsive-xl">
-                <table class="table table-striped" id="myTable">
-                    <thead class="">
-                        <tr class="bg-info">
-                            <th scope="col" style="width:100px">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Descripcion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($sanciones as $sancion): ?>
-                        <tr>
-                            <td scope="row"><?php echo $sancion->fecha; ?></th>
-                            <td scope="row"><?php echo $sancion->hora; ?></th>
-                            <td scope="row"><?php echo $sancion->descripcion; ?></th>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="card p-3 mx-auto col-6 col-md-3 ">
+                <h6><b><?=$comedor->nombre_comedor?></b></h6>
+                <small>Ubicado en: <b><?= $comedor->nombre ?></b> </small>
+                <br>
+                <a href="<?= $this->config->item('base_url_angular'). 'programacion/'.$comedor->id_comedor?>" type="button"
+                    class="btn btn-dark">Ver Programacion</a>
             </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="row p-3">
+
+        <div class="card p-3 col-10 col-sm-6 mx-auto">
+            
+                <h5><b>Tus Sanciones:</b></h5>
+                <div class="table-responsive-xl">
+                    <table class="table table-striped" id="myTable">
+                        <thead class="">
+                            <tr class="bg-info">
+                                <th scope="col" style="width:100px">Fecha</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Descripcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($sanciones as $sancion): ?>
+                            <tr>
+                                <td scope="row"><?php echo $sancion->fecha; ?></th>
+                                <td scope="row"><?php echo $sancion->hora; ?></th>
+                                <td scope="row"><?php echo $sancion->descripcion; ?></th>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+          
+
             <a href="<?= base_url("sancion/listing_client")?>" type="button" class="btn btn-dark">Ver Detalles</a>
         </div>
     </div>

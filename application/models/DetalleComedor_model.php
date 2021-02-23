@@ -88,4 +88,13 @@ class DetalleComedor_model extends CI_Model {
 
 
     }
+    
+    public function cantidad_sanciones($email){
+ 
+        $sql = "SELECT * FROM sancion JOIN usuario on sancion.id_persona = usuario.id_persona JOIN persona on usuario.id_persona = persona.id_persona where usuario.email =" ."'". $email . "'";
+        $query= $this->db->query($sql);
+        
+        return $query->num_rows();
+
+    }
 }
