@@ -25,6 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/ProyectoDeSoftware';
 
+$config['base_url_angular'] = 'http://localhost:4200/';
+
+
 /*
 |--------------------------------------------------------------------------
 | Index File

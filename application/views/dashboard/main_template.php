@@ -44,7 +44,7 @@ $this->load->view('dashboard/header');
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <a href="<?= base_url("sancion/listing")?>" type="button" class="btn btn-dark">Ver Detalles</a>
+            <a href="<?= base_url("sancion/listing_client")?>" type="button" class="btn btn-dark">Ver Detalles</a>
         </div>
     </div>
     <div class="card p-3 ">
@@ -85,7 +85,7 @@ $this->load->view('dashboard/header');
             <h4><b><?=$comedor->nombre_comedor?></b></h4>
             <small>Ubicado en: <b><?= $comedor->nombre ?></b> </small>
             <!-- E<small>Foto del comedor o campus: <br><img src="<?= $comedor->imagen ?>" style="width: 600px;"></small> <br> -->
-            <a href="<?= base_url("detalle_comedores")?>" type="button" class="btn btn-dark">Ver Programacion</a>
+            <a href="<?= $this->config->item('base_url_angular'); ?>" type="button" class="btn btn-dark">Ver Programacion</a>
         </div>
     </div>
 

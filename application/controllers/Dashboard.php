@@ -13,6 +13,8 @@ class Dashboard extends Security {
     public function index()
 	{
 		$user = $this->session->userdata('user');
+		
+		//usuario cliente
 		if($user->id_tipo_usuario == 1){
 			$data = array(
 				'user' => $user,
@@ -21,12 +23,14 @@ class Dashboard extends Security {
 				'sanciones'=> $this->Sancion_model->find_by_id_persona($user->id_persona),
 			);
 		}else {
+
+			//admin de comedor
 			if($user->id_tipo_usuario == 3){
 				$data = array(
 					'user' => $user,
 					'comedor'=> $this->Comedor_model->findByIdAdminComedor($user->id_usuario),
 				);
-				//print_r($data['comedor']);
+				
 			}else {
 				$data = array(
 					'user' => $user,

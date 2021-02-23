@@ -114,10 +114,16 @@ i {
     </div>
 </div>
 
-
+<div class="d-flex justify-content-center">
+    <div class="spinner-border text-warning" role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 
 <!-- Cuadro de programacion -->
 <div class="row m-3">
+
+
     <div class="col table-responsive-xl">
         <table class="table table-bordered">
             <tr>
@@ -179,9 +185,6 @@ i {
 </div>
 
 
-<div class="spinner-grow text-danger" role="status" id="loading">
-    <span class="sr-only">Loading...</span>
-</div>
 
 
 <script>

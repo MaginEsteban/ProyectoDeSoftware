@@ -48,7 +48,7 @@
             <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<?= base_url('detalle_comedores')?>">Conoce Comedores y Menus</a>
+            <a class="nav-link js-scroll-trigger" href="<?= $this->config->item('base_url_angular'); ?>">Conoce Comedores y Menus</a>
           </li>
         </ul>
       </div>

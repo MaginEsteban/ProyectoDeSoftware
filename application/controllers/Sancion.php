@@ -49,7 +49,7 @@ class Sancion extends Security {
         $this->form_validation->set_rules('descripcion', 'descripcion', 'required',
             array('required' => 'Ingresar la descripcion de la sancion...'));
     
-    $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
+     $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
        
        //validacion formulario
        if ($this->form_validation->run() == FALSE)

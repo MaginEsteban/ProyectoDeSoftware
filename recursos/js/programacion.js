@@ -2,7 +2,7 @@
 
 function clean_dashboard() {
 
-	$('#turno').siblings('td').empty();
+	$("div").filter("#menu-container").remove()
 
 }
 
@@ -42,7 +42,7 @@ function actualizarDashboard(idComedor) {
 
 	//peticon ajax para obtener todo los menus de un comedor dado
 	$.ajax({
-		url: url+"programacion/menusAllTurnos",
+		url: url + "programacion/menusAllTurnos",
 		data: {
 			comedor: idComedor
 		},
@@ -134,26 +134,26 @@ function agregarMenu(idComedor, idTurno) {
 
 	event.preventDefault();
 
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000
-		});
+	var Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000
+	});
 
-	$.when( 
-		$.ajax({ 
-			url:url + 'programacion/menus',
+	$.when(
+		$.ajax({
+			url: url + 'programacion/menus',
 			method: "POST",
-			data: {comedor:idComedor},
-		} ),
+			data: { comedor: idComedor },
+		}),
 		$.ajax(
-			 url+'programacion/days'
-		 )
+			url + 'programacion/days'
+		)
+
+	).then(function (htmlMenusResult, htmlDaysResult) {
 	
-	).then(function( htmlMenusResult, htmlDaysResult ) {
-		console.log(htmlMenusResult);
-		
+
 		Swal.mixin({
 			confirmButtonText: 'Siguiente &rarr;',
 			showCancelButton: true,
@@ -161,32 +161,32 @@ function agregarMenu(idComedor, idTurno) {
 			progressSteps: ['1', '2'],
 
 		}).queue([{
-				title: 'Menus',
-				html: htmlMenusResult[0],
-				preConfirm: () => {
-					id_menu = $('#menus_comedor').find(":selected").val();
-					nombre_menu = $('#menus_comedor').find(":selected").text();
+			title: 'Menus',
+			html: htmlMenusResult[0],
+			preConfirm: () => {
+				id_menu = $('#menus_comedor').find(":selected").val();
+				nombre_menu = $('#menus_comedor').find(":selected").text();
 
-					menu_seleccionados.push(id_menu, nombre_menu);
-				}
-			},
-			{
-				title: 'Dias de la Programacion',
-				text: 'Seleccione los dias...',
-				html: htmlDaysResult[0],
-				preConfirm: () => {
-
-					$("input[type=checkbox]:checked").each(function () {
-
-						//text del checkbox
-						var nombre = $(this).siblings('label').text();
-
-						dias.push(this.value);
-					});
-
-					console.log(dias);
-				}
+				menu_seleccionados.push(id_menu, nombre_menu);
 			}
+		},
+		{
+			title: 'Dias de la Programacion',
+			text: 'Seleccione los dias...',
+			html: htmlDaysResult[0],
+			preConfirm: () => {
+
+				$("input[type=checkbox]:checked").each(function () {
+
+					//text del checkbox
+					var nombre = $(this).siblings('label').text();
+
+					dias.push(this.value);
+				});
+
+				console.log(dias);
+			}
+		}
 		]).then((result) => {
 
 			if (result.value) {
@@ -194,43 +194,45 @@ function agregarMenu(idComedor, idTurno) {
 					title: 'Datos Ingresados',
 					confirmButtonText: 'Confirmar',
 					html: `
-						nombre menu :${menu_seleccionados[1]} 				
+						Nombre menu :${menu_seleccionados[1]}<br>
+						Dias: ${dias.toString()} 				
 					`
 				}).then((data) => {
 					//mensaje add menu
+					//se confirmo en las dos etapas del formulario
+					if (result.value[0] == result.value[1]) {
+						$.ajax({
+							url: url + "programacion/add_programacion_menu/",
+							method: "POST",
+							data: { menu: menu_seleccionados[0], turno: idTurno, dias: dias },
+							success: () => {
 
-					$.ajax({
-						url: url +"programacion/add_programacion_menu/",
-						method: "POST",
-						data: {menu:menu_seleccionados[0],turno:idTurno,dias:dias},
-						success: () => {
+								//limpia el dashboard 
+								clean_dashboard();
 
-							//limpia el dashboard 
-							clean_dashboard();
+								//vuelve a renderizar los datos
+								actualizarDashboard(idComedor);
 
-							//vuelve a renderizar los datos
-							actualizarDashboard(idComedor);
+								setTimeout(function () {
+									Toast.fire({
+										type: 'success',
+										title: 'Menu agregado...'
+									})
 
-							setTimeout(function () {
-								Toast.fire({
-									type: 'success',
-									title: 'Menu agregado...'
+								}, 1250);
+
+							},
+							error: (response) => {
+								Swal.fire({
+									type: 'error',
+									title: 'Oops...',
+									text: 'No se ha podido agregar el menu'
 								})
+								console.log(response.responseText);
+							}
 
-							}, 1250);
-
-						},
-						error: (response) => {
-							Swal.fire({
-								type: 'error',
-								title: 'Oops...',
-								text: 'No se ha podido agregar el menu'
-							})
-							console.log(response.responseText);
-						}
-
-					});
-
+						});
+					}
 
 
 				})
@@ -239,14 +241,14 @@ function agregarMenu(idComedor, idTurno) {
 
 	});
 
-	
+
 }
 
 
-function cancelTickets(idComedor){
-	
+function cancelTickets(idComedor) {
+
 	event.preventDefault();
-	
+
 	console.log(idComedor);
 
 	var Toast = Swal.mixin({
@@ -267,7 +269,7 @@ function cancelTickets(idComedor){
 		cancelButtonText: 'Cancelar'
 
 	}).then((result) => {
-		
+
 		if (result.value) {
 
 			//realiza la peticion
