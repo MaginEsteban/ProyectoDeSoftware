@@ -43,28 +43,27 @@ class Register extends CI_Controller {
 				// validacion de unicidad
 				if ($this->db->error() == 1062){
 					
-					$this->session->set_flashdata('error','EL usuario ya existe');
+					$this->session->set_flashdata('error','El usuario ya existe');
 
 					$this->load->view('register');
 				}else
 				{
 					redirect( base_url('login') ); 
-				}
-
-				
-			
-        }
- 
-         
+				}	
+        }     
 	}
 	
 
 	public function validacionFormulario(){
 		
-		$this->form_validation->set_rules('legajo', 'Legajo', 'required|numeric|greater_than[0]',
+		$this->form_validation->set_rules('legajo', 'Legajo', 'required|numeric|greater_than[0]|!is_unique[persona.legajo]',
 			array(	'required' => 'Ingresar el legajo...',
 					'greater_than' => 'Ingresar un numero de legajo mayor a 0',
-					'numeric' => 'El legajo debe ser numerico'));
+					'numeric' => 'El legajo debe ser numerico',
+					'!is_unique' => 'El legajo ingresado no pertenece a ninguna persona...'));
+
+		//falta validacion de legajo valido
+		//  ??
 		$this->form_validation->set_rules('username', 'nombre', 'required');
 		$this->form_validation->set_rules('email', 'email', 'required|is_unique[usuario.email]|valid_email', array('is_unique' => "El correo ya le pertenece a otra persona"));
 		$this->form_validation->set_rules('pass', 'contraseña', 'required');

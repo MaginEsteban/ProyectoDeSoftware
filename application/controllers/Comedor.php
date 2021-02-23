@@ -24,6 +24,8 @@ class Comedor extends Security {
         $this->load->view('comedores/list',$data);
     }
 
+
+    //pagina principal para editar
     public function edit(){ 
         $id_comedor = $this->uri->segment(3);
         $data = array(
@@ -33,11 +35,14 @@ class Comedor extends Security {
         $this->load->view('comedores/edit',$data);
     }
 
+    //accion de editar
     public function update(){
         $id_user = $this->uri->segment(3);
         $this->Comedor_model->update_user_comedor($id_user);
         redirect(base_url('user/listing'));
     }
+
+
     public function delete(){
         $id_comedor = $this->uri->segment(3);
         $this->Comedor_model->delete($id_comedor);
@@ -106,7 +111,8 @@ class Comedor extends Security {
         $idComedor = $this->input->post('id');
         $direccionComedor = $this->input->post('direccion');
         $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad,$direccionComedor);
-        redirect(base_url('comedor/listing'));
+
+      
 
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
@@ -118,6 +124,9 @@ class Comedor extends Security {
             $this->form_validation->set_rules('nombre', 'nombre', 'callback_unicidad_comedor_check',
                 array('unicidad_comedor_check' => 'Los datos ingresado ya pertenecen a otro comedor...'));
         }
+
+        $this->form_validation->set_rules('direccion', 'direccion', 'required',
+        array('required' => 'Ingresar la direccion del comedor...'));
 
         $this->form_validation->set_error_delimiters('<p class="text-center text-danger">', '</p>');
 
@@ -131,7 +140,7 @@ class Comedor extends Security {
         }
         else{ 
 
-            $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad);
+            $this->Comedor_model->update($idComedor,$nombreComedor,$idCiudad,$direccionComedor);
             redirect(base_url('comedor/listing'));
         }
     }

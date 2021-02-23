@@ -42,12 +42,11 @@
 				 <?php 
 				
 					if($this->session->flashdata('error')){
-						echo 'hola muno';
 						echo '<p class="text-center text-danger">' . $this->session->flashdata('error') . '</p>';
 					}
 				?> 
 
-				<form class="login100-form validate-form" action="<?php echo base_url('register/post_register') ?>" method="post" >
+				<form class="login100-form" action="<?php echo base_url('register/post_register') ?>" method="post" >
 
 
 					
@@ -55,13 +54,13 @@
 						<p class="lead m-2 text-center">Datos personales</p>
                     </div>
                     -->
-				    <div class="wrap-input100 validate-input m-b-26" data-validate="Legajo requerido">
+				    <div class="wrap-input100  m-b-26">
 						<span class="label-input100">Legajo</span>
 						<input class="input100" type="text" name="legajo" placeholder="Ingrese su legajo">
 						<span class="focus-input100"></span>
                     </div>
 
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Email requerido">
+					<div class="wrap-input100  m-b-26">
 						<span class="label-input100">Email</span>
 						<input class="input100" type="email" name="email" placeholder="Ingrese su email">
 						<span class="focus-input100"></span>
@@ -72,19 +71,19 @@
                     </div> -->
 					<!-- Datos del usuario -->
 
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username requerido">
+					<div class="wrap-input100 m-b-26">
 						<span class="label-input100">Nombre de Usuario</span>
 						<input class="input100" type="text" name="username" placeholder="Ingrese su nombre de usuario">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-26" data-validate = "Contraseña requerida">
+					<div class="wrap-input100 m-b-26">
 						<span class="label-input100">Contraseña</span>
 						<input class="input100" type="password" name="pass" placeholder="Ingrese su contraseña">
 						<span class="focus-input100"></span>
                     </div>
                     
-                    <div class="wrap-input100 validate-input m-b-26" data-validate = "Contraseña requerida">
+                    <div class="wrap-input100 m-b-26">
 						<span class="label-input100">Confirmar contraseña</span>
 						<input class="input100" type="password" name="cpass" placeholder="Ingrese su contraseña">
 						<span class="focus-input100"></span>
