@@ -38,9 +38,8 @@
                         <label for="exampleInputEmail1">Hora de Inicio </label>
                         <div class="input-group clock"  data-autoclose="true">
                             <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de inicio del turno" name="hora_inicio">
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
+                                <i class="far fa-clock"></i>
+                            </input>
                         </div>
                     </div>
 
@@ -49,9 +48,8 @@
                         <label for="exampleInputEmail1">Hora de Fin </label>
                         <div class="input-group clock"  data-autoclose="true">
                             <input type="text" class="form-control" autocomplete="off" value="" placeholder="Ingrese hora de fin del turno" name="hora_fin">
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                            </span>
+                                <i class="far fa-clock"></i>
+                            </input>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Agregar</button>
