@@ -52,7 +52,7 @@ class Comedor extends Security {
     public function crearComedor(){
         //validacion formulario
         
-        $this->form_validation->set_rules('nombre', 'nombre comedor', 'required|callback_unicidad_comedor_check',
+        $this->form_validation->set_rules('nombre', 'nombre', 'required|callback_unicidad_comedor_check',
             array('required' => 'Ingresar el nombre del comedor...',
                   'unicidad_comedor_check' => 'Los datos ingresado ya pertenecen a otro comedor...'));
         

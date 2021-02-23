@@ -1,7 +1,6 @@
 <?php   
     $this->load->view('dashboard/header');  
 ?>
-<!-- Main content -->
 
 <section class="content-header">
     <h1>
@@ -10,9 +9,10 @@
     </h1>
 
 </section>
+<!-- Main content -->
 <section class="content container-fluid">
     <div class="row">
-        <div class="col-10 mx-auto">
+        <div class="col mx-auto table-responsive-xl">
             <table class="table table-striped" id="myTable"> Aqui se encuentran todos los comedores disponibles
                 <thead class="">
                     <tr class="bg-info">
@@ -48,9 +48,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-
         </div>
-
     </div>
 </section>
 <script>

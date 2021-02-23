@@ -115,10 +115,10 @@ class User extends Security {
      public function modificarUsuario(){
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
-        array('required' => 'Ingresar el nombre...');
+        array('required' => 'Ingresar el nombre...'));
     
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
-            array('required' => 'Ingresar un email...'),
+            array('required' => 'Ingresar un email...',
                 'valid_email' =>'El email ingresado no es valido...'));
     
         $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
@@ -136,7 +136,7 @@ class User extends Security {
                 'persona'=> $this->User_model->find_person_by_id_user($id_usuario)
             );
 
-            $this->load->view('users/edit',$data)
+            $this->load->view('users/edit',$data);
         }else{
               //paso la validacion
 
@@ -168,20 +168,21 @@ class User extends Security {
 
     public function modificarMiUsuario(){
         $this->form_validation->set_rules('su_nombre', 'su_nombre', 'required',
-        array('required' => 'Ingresar el nombre...');
+        array('required' => 'Ingresar el nombre...'));
 
         $this->form_validation->set_rules('su_apellido', 'su_apellido', 'required',
-        array('required' => 'Ingresar el apellido...');
+        array('required' => 'Ingresar el apellido...'));
     
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
-        array('required' => 'Ingresar un email...'),
+        array('required' => 'Ingresar un email...',
             'valid_email' =>'El email ingresado no es valido...'));
     
         $this->form_validation->set_rules('contraseña', 'contraseña', 'required',
             array('required' => 'Ingresar la constraseña...'));
 
         $this->form_validation->set_rules('nombre', 'nombre', 'required',
-            array('required' => 'Ingresar el nombre...');
+            array('required' => 'Ingresar el nombre...'));
+
         $this->form_validation->set_rules('nro_legajo', 'nro_legajo', 'required|numeric',
         array(  'required' => 'Ingresar el numero de legajo...',
                 'numeric' => 'El numero de legajo no es valido...'));
